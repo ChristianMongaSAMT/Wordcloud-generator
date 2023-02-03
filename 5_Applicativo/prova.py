@@ -13,18 +13,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 from kivy.core.window import Window
 
-
-
-class TestRead():   
-
-    def __init__(self, path):
-        logging.debug(path.__class__)
-
-        self.p = Path(path)
-
-    def printData(self):
-        logging.debug(f'{self.p.read_text()}')
-
 ########################DragNDrop############################
 class WindowFileDropExampleApp(App):
     def build(self):
@@ -33,11 +21,24 @@ class WindowFileDropExampleApp(App):
 
     def _on_file_drop(self, window, file_path, x, y):
         logging.debug(f'file: {file_path}, drop location ({x};{y})')
-        test = TestRead(file_path.decode("utf-8") )
-        test.printData()
-        return
 
+        print(Path(file_path.decode("utf-8")).read_text())
+
+        return
 ####################################################################
+class FontFam(BoxLayout):
+    pass
+
+class fontfamilyApp(App):
+    def build(self):
+        return FontFam()
+    def getText(self):
+        return self.ids['fontLabel'].text      
+
+
 if __name__ == '__main__':
-    logmanager.get_configured_logger()
-    WindowFileDropExampleApp().run()
+    #logmanager.get_configured_logger()
+    #WindowFileDropExampleApp().run()
+    f = fontfamilyApp()
+    print(f.getText())
+    #fontfamilyApp().run()
