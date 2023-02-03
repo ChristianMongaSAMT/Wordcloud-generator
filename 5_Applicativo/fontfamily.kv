@@ -1,0 +1,16 @@
+#:kivy 1.0.9
+
+
+<FontFam>:
+    canvas.before:
+        Color:
+            rgb: 200, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text:"cane"
+            id: fontLabel
+
