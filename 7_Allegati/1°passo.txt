@@ -6,3 +6,30 @@ output:
 pip install -r requirements.txt
 
 aprire un progetto tramite code (Worldcloud-generator\5_Applicativo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+config.ini¨
+[kivy]
+log:level = debug
+log_enable = 1
+log_dir = logs
+log_name = kivy_%y-%m-&d_%_.txt
+log_maxfiles = 100
+
+
+Config.read file di config
