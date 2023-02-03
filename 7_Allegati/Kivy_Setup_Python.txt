@@ -10,3 +10,5 @@ set https_proxy=http://localhost:5865
 set http_proxy=http://localhost:5865
 
 pip install "kivy[base]" kivy_examples
+
+C:\Users\christian.monga\AppData\Local\Programs\Python\Python310
