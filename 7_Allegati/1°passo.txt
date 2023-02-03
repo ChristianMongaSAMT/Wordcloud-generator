@@ -1,0 +1,8 @@
+Worldcloud-generator\5_Applicativo>.\venv\Scripts\activate
+
+output:
+(venv) E:\....\5_Applicativo
+
+pip intall -r requirements.txt
+
+aprire un progetto tramite code (Worldcloud-generator\5_Applicativo)
