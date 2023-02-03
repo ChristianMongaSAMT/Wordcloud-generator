@@ -1,16 +1,42 @@
 #:kivy 1.0.9
 
-
+<Container>:
+    
 <WordCloudGUI>:
+    canvas.before:
+        Color:
+            rgb: 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
     BoxLayout:
-        orientation: 'vertical'
-        padding: 20
-        spacing: 10
-    Button:
-        text: "Button 1"
-        size_hint: 1, None
-    Button:
-        text: "Button 2"
-        size_hint: 1, 0.5
-    Button:
-        text: "Button 3"
+        orientation: "vertical"
+        Label:
+            text: "Input type:"
+        Spinner:
+            size_hint: 1, None
+            text: "Choose"
+            values: "File", "Simple text", "URL"
+        Label:
+            text: "Important words"
+        TextInput:
+            text: "Text Input"
+        Label:
+            text: "Font Family"
+        Spinner:
+            text: "Choose"
+            values: "1","2"
+        BoxLayout:
+            orientation: "horizontal"
+            Switch:
+            Label:
+                text: "Border"
+    BoxLayout:
+        orientation: "vertical"
+        Button:
+            text: "Button 1"
+        Label:
+            text: "Label 1"
+        Image:
+            source: "./pictures/class.png"
+    
