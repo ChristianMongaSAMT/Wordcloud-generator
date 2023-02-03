@@ -1,13 +1,27 @@
-
+import kivy
 import logging
 import logmanager
-import kivy
+
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.widget import Widget
+
+
+
 
 logmanager.get_configured_logger()
 
+class WordCloudGUI(Widget):
+    pass
+
+class WordCloudApp(App):
+    def build(self):
+        return WordCloudGUI()
+
+"""
 class Coso():
 
-    b = None
+     b = None
 
     _c = None
 
@@ -24,29 +38,9 @@ class Coso():
     def set_fkljdsjfkls(self, v1, v2='0000'):
         self.v1 = v1
         self.v2 = v2
-
-def run():
-
-    coso = Coso('mip parametro')
-
-    coso.a = 'asfjka'
-
-    a = 'ciao'
-    logging.debug(f'stringa di log: {a} lunghezza: {len(a)}')
-
-    a = ['ciao', 'bella', 'ciao', 81247981]
-    logging.debug(f'list di log: {a} lunghezza: {len(a)}')
-
-    a = {
-        'chiave1':9324902, 
-        'chiave2':'ciao',
-        'chiave3':[1,'20',[3,6,4]]
-     }
-    a['chiave4']='bla'
-    logging.debug(f'list di log: {a} lunghezza: {len(a)}')    
-
-    logging.debug(f'valore: {a["chiave4"]}')
-
+"""
+# def run():
+    
 
 if __name__ == '__main__':
-    run()
+    WordCloudApp().run()
