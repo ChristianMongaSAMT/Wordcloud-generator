@@ -1,6 +1,4 @@
 #:kivy 1.0.9
-
-<Container>:
     
 <WordCloudGUI>:
     canvas.before:
@@ -33,10 +31,38 @@
                 text: "Border"
     BoxLayout:
         orientation: "vertical"
-        Button:
-            text: "Button 1"
         Label:
-            text: "Label 1"
+            text: ""
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "Excluded words"
+            TextInput:
+                text: "Text Input"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "Border Size"
+            Slider:
+                id: border_slider
+                max: 50
+                value: 10
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            canvas.before:
+                Color:
+                    rgba: 1, 0, 0, 1
+                Line:
+                    width: 1
+                    rectangle: self.x, self.y, self.width, self.height
+            orientation: "vertical"
+            Label:
+                text: "WORDCLOUD GENERATOR"
+            Label:
+                text: "percorso"
         Image:
             source: "./pictures/class.png"
+        Button:
+            text: "Download"
     

@@ -7,10 +7,20 @@ from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-
+from kivy.core.window import Window
 
 
 logmanager.get_configured_logger()
+# __drag and drop__ 
+class DragAndDrop():
+    def build(self):
+        Window.bind(on_drop_file=self._on_file_drop)
+        return Label(text = "Drag and Drop File here")
+
+    def _on_file_drop(self, window, file_path,x ,y):
+        fp = open(file_path, 'r')
+        print(fp.read())
+        return
 
 class WordCloudGUI(BoxLayout):
     pass
@@ -19,27 +29,6 @@ class WordCloudApp(App):
     def build(self):
         return WordCloudGUI()
 
-"""
-class Coso():
-
-     b = None
-
-    _c = None
-
-    def __init__(self, params):
-        self.a = params
-
-    def get_a(self) -> str:
-        return self.a
-
-    def set_a(self, value):
-        self.a = value
-
-
-    def set_fkljdsjfkls(self, v1, v2='0000'):
-        self.v1 = v1
-        self.v2 = v2
-"""
 # def run():
     
 
