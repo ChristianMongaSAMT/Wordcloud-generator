@@ -1,6 +1,7 @@
 
 import logging
 import logmanager
+import kivy
 
 logmanager.get_configured_logger()
 
