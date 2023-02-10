@@ -1,5 +1,6 @@
 import kivy
 import logging
+import os
 
 from kivy.properties import StringProperty
 from kivy.core.window import Window
@@ -11,6 +12,9 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.textinput import TextInput
+from kivy.uix.widget import Widget
+
 
 Config.read('./config.ini')
 
@@ -60,12 +64,26 @@ class WordCloudGUI(BoxLayout, Screen):
 
 
 class WordCloudApp(App):
+    path = "./pictures/class.png"
+
     def build(self):
         sm = ScreenManager()
         sm.add_widget(WordCloudGUI(name='gui'))
         sm.add_widget(DownloadScreen(name='download'))
         
         return sm
+
+    def process(self):
+        self.path = self.root.get_screen('gui').ids.path.text
+        print(os.getcwd())
+        
+        print(self.path)
+
+    def visualizer(self):
+        self.process()
+        if(os.path.exists(self.path)):
+            self.root.get_screen('gui').ids.image.source = self.path
+
 
 class DownloadScreen(Screen):
     pass

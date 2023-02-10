@@ -60,10 +60,13 @@
             Label:
                 id: l1
                 text: "WORDCLOUD GENERATOR"
-            Label:
-                text: 'prova'
+            TextInput:
+                id: path
+                hint_text:'Enter text'
+                on_text: app.visualizer()
         Image:
-            source: "./pictures/class.png"
+            id: image
+            source: app.path
         Button:
             text: "Download"
             on_release: root.manager.current = "download"
@@ -74,12 +77,16 @@
         orientation: "vertical"
         Label:
             text: "Resolution"
+            size_hint: 0.1, 0.2
         Label:
             text: "Extension"
+            size_hint: 0.1, 0.2
         Button:
             text: "Download"
             on_release: root.downloadImage()
+            size_hint: 0.1, 0.2
         Button:
             text: "Exit"
             on_release: root.manager.current = "gui"
+            size_hint: 0.1, 0.2
     
