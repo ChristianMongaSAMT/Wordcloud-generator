@@ -9,25 +9,69 @@ from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from pathlib import Path
 from kivy.config import Config
+import re
 import os
-
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+import requests
 
 Config.read('./config.ini')
-
-
 
 class CurialeGUI(BoxLayout): 
     pass
 
 class CurialeApp(App):
     path = "./pictures/class.png"
+    words = ""
+    excludedWords = open("./text/excludedWords.txt", "r").read().rsplit(",")
+    isWordValid = True
+
+
+    
+    def remove_tags(html):
+        soup = BeautifulSoup(html, "html.parser")
+        for data in soup(['style', 'script']):
+            data.decompose()
+        return ' '.join(soup.stripped_strings)
+ 
+    link = "https://stackoverflow.com/questions/15138614/how-can-i-read-the-contents-of-an-url-with-python"
+    f = urlopen(link)
+    myfile = f.read()
+    print(remove_tags(myfile))
 
     def build(self):
         return CurialeGUI()
 
+    def getWords(self):
+        self.wordFile = self.root.ids.path.text
+        if(os.path.isfile(self.wordFile)):
+            self.words = open(self.wordFile, "r").read()
+            
+
+    def generateListWord(self):
+        self.getWords()
+        for character in self.words:
+            #isalpha accetta anche i caratteri speiali come "?", "!", "@"
+            #isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
+            if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
+                self.words = self.words.replace(character, " ")
+        if(len(self.words) > 0):
+            print = ""
+            self.words = self.words.rsplit(" ")
+            for word in self.words:
+                if(word != ""):
+                    for excludedWord in self.excludedWords:
+                        if(word.lower() == excludedWord.lower()):
+                            self.isWordValid = False
+                    if(self.isWordValid):
+                        print += word + "\n"
+                self.isWordValid = True
+            self.root.ids.label.text = print
+
+
     def process(self):
         self.path = self.root.ids.path.text
-        print(self.path)
+        print(os.path.abspath(self.path))
 
     def visualizer(self):
         self.process()
