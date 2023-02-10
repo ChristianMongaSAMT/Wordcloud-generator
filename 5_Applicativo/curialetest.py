@@ -9,6 +9,7 @@ from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from pathlib import Path
 from kivy.config import Config
+import os
 
 
 Config.read('./config.ini')
@@ -29,7 +30,9 @@ class CurialeApp(App):
         print(self.path)
 
     def visualizer(self):
-        self.root.ids.image.source = self.path
+        self.process()
+        if(os.path.exists(self.path)):
+            self.root.ids.image.source = self.path
 
 if __name__ == '__main__':
     CurialeApp().run()
