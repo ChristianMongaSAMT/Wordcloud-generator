@@ -61,10 +61,25 @@
                 id: l1
                 text: "WORDCLOUD GENERATOR"
             Label:
-                text: root.pTemp
+                text: 'prova'
         Image:
             source: "./pictures/class.png"
         Button:
             text: "Download"
+            on_release: root.manager.current = "download"
 
+
+<DownloadScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Resolution"
+        Label:
+            text: "Extension"
+        Button:
+            text: "Download"
+            on_release: root.downloadImage()
+        Button:
+            text: "Exit"
+            on_release: root.manager.current = "gui"
     
