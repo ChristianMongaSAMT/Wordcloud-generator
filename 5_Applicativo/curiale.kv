@@ -1,0 +1,23 @@
+#:kivy 1.0.9
+    
+<CurialeGUI>:
+    canvas.before:
+        Color:
+            rgb: 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        TextInput:
+            id: path
+            hint_text:'Enter text'
+            on_text: app.process()
+        Image:
+            id: image
+            source: app.path
+        Button:
+            id: btVisulizer
+            text: "Visualizza"
+            on_release: app.visualizer()
+
+    
