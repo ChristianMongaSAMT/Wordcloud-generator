@@ -21,19 +21,21 @@ class WindowFileDropExampleApp(App):
         return
 
     def _on_file_drop(self, window, file_path, x, y):
-        logging.debug(f'file: {file_path}, drop location ({x};{y})')
-
-        print(Path(file_path.decode("utf-8")).read_text())
-
-        return
+        #logging.debug(f'file: {file_path}, drop location ({x};{y})')
+        text = Path(file_path.decode("utf-8")).read_text() #testo del file
+        print(Path(file_path.decode("utf-8")))
 ####################################################################
 class FontFam(BoxLayout):
     pass
 
 class fontfamilyApp(App):
     
-    def build(self):
+    def build(self):      
         fontFam = FontFam()
+        
+        fL = fontFam.ids.fontLabel
+        fL.bind(on_drop_file=self._on_file_drop)
+        self._on_file_drop
         LabelBase.register(name='Cartoon',
                    fn_regular='E:/306/Worldcloud-generatorData/fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
         LabelBase.register(name='Borex',
@@ -47,14 +49,18 @@ class fontfamilyApp(App):
     def getText(self):
         text = self.root.ids.perro.text
         text = self.root.ids.fontLabel.text
-        print(_default_font_paths)
         print(text)
 
     def font_changed(self):
         font = self.root.ids.fontSpinner.text
         self.root.ids.fontLabel.font_name = font
 
+    def _on_file_drop(self, window, file_path, x, y):
+        #logging.debug(f'file: {file_path}, drop location ({x};{y})')
+        text = Path(file_path.decode("utf-8")).read_text() #testo del file
+        print(Path(file_path.decode("utf-8")))
+
 if __name__ == '__main__':
-    #WindowFileDropExampleApp().run()
+    WindowFileDropExampleApp().run()
     f = fontfamilyApp()
-    f.run()
+    #f.run()
