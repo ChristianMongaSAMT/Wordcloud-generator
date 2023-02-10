@@ -1,10 +1,10 @@
-
+from kivy.uix.button import Button
+from kivy.core.text import LabelBase
+from kivy.lang import Builder
+from kivy.properties import StringProperty
 import logging
-import logmanager
 import kivy
-from kivy.uix.label import Label
 from kivy.uix.widget import Widget
-from kivy.app import App
 from kivy.uix.behaviors import DragBehavior
 from kivy.lang import Builder
 from pathlib import Path
@@ -30,15 +30,36 @@ class FontFam(BoxLayout):
     pass
 
 class fontfamilyApp(App):
+    
     def build(self):
-        return FontFam()
-    def getText(self):
-        return self.ids['fontLabel'].text      
+        fontFam = FontFam()
+        fontFam.ids.fontSpinner.values = (
+            'Cartoon',
+            'Borex',
+            'Krinkes',
+            'Theaters')
+        LabelBase.register(name='Cartoon',
+                   fn_regular='E:/306/Worldcloud-generatorData/fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
+        LabelBase.register(name='Borex',
+                   fn_regular='E:/306/Worldcloud-generatorData/fonts/borex/BOREX-Regular.otf')
+        LabelBase.register(name='Krinkes',
+                   fn_regular='E:/306/Worldcloud-generatorData/fonts/krinkes/KrinkesRegularPERSONAL.ttf')
+        LabelBase.register(name='Theaters',
+                   fn_regular='E:/306/Worldcloud-generatorData/fonts/theaters/THEATERS DEMO REGULAR.ttf')
+        return fontFam
 
+    def getText(self):
+        text = self.root.ids.perro.text
+        text = self.root.ids.fontLabel.text
+        print(text)
+
+    def font_changed(self):
+        font = self.root.ids.fontSpinner.text
+        self.root.ids.fontLabel.font_name = font
 
 if __name__ == '__main__':
-    #logmanager.get_configured_logger()
     #WindowFileDropExampleApp().run()
     f = fontfamilyApp()
-    print(f.getText())
-    #fontfamilyApp().run()
+    d = FontFam()
+    f.run()
+    f.getText()

@@ -8,9 +8,25 @@
         Rectangle:
             pos: self.pos
             size: self.size
+            id: "rect"
     BoxLayout:
         orientation: "vertical"
         Label:
             text:"cane"
             id: fontLabel
-
+            font_name: "Cartoon"
+            font_size: 50
+        Button:
+            text:"manna"
+            id: perro
+            on_release: app.getText()
+        Spinner:
+            size_hint: None, None
+            size: 100, 44
+            text: 'Home'
+            #values: 'Home','Work','Other','Custom'
+            id: fontSpinner
+            on_text:
+                app.font_changed()
+                #print("The spinner {} has text {}".format(self, self.text))
+            
