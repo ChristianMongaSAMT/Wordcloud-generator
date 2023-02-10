@@ -1,6 +1,7 @@
 import kivy
 import logging
 import os
+import urllib.request
 
 from kivy.properties import StringProperty
 from kivy.core.window import Window
@@ -16,7 +17,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 from kivy.core.text import _default_font_paths
 from kivy.core.text import LabelBase
-
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
 Config.read('./config.ini')
 
@@ -97,6 +99,17 @@ class WordCloudApp(App):
     def font_changed(self):
         font = self.root.get_screen('gui').ids.fontSpinner.text
         self.root.get_screen('gui').ids.fontLabel.font_name = font
+
+    def remove_tags(html):
+        soup = BeautifulSoup(html, "html.parser")
+        for data in soup(['style', 'script']):
+            data.decompose()
+        return ' '.join(soup.stripped_strings)
+ 
+    link = "https://stackoverflow.com/questions/15138614/how-can-i-read-the-contents-of-an-url-with-python"
+    f = urlopen(link)
+    myfile = f.read()
+    print(remove_tags(myfile))
 
 
 class DownloadScreen(Screen):
