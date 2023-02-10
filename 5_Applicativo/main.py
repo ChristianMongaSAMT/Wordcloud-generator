@@ -73,14 +73,10 @@ class WordCloudApp(App):
         sm.add_widget(WordCloudGUI(name='gui'))
         sm.add_widget(DownloadScreen(name='download'))
 
-        LabelBase.register(name='Cartoon',
-                   fn_regular='./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
-        LabelBase.register(name='Borex',
-                   fn_regular='./fonts/borex/BOREX-Regular.otf')
-        LabelBase.register(name='Krinkes',
-                   fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
-        LabelBase.register(name='Theaters',
-                   fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
+        LabelBase.register(name='Cartoon', fn_regular='./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
+        LabelBase.register(name='Borex', fn_regular='./fonts/borex/BOREX-Regular.otf')
+        LabelBase.register(name='Krinkes', fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
+        LabelBase.register(name='Theaters', fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
         
         return sm
 
@@ -105,9 +101,6 @@ class WordCloudApp(App):
 
 class DownloadScreen(Screen):
     pass
-
-# def run():
-    
 
 if __name__ == '__main__':
     WordCloudApp().run()
