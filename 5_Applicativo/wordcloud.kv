@@ -1,46 +1,69 @@
 #:kivy 1.0.9
     
 <WordCloudGUI>:
-    canvas.before:
-        Color:
-            rgb: 0, 0, 0
-        Rectangle:
-            pos: self.pos
-            size: self.size
     BoxLayout:
         orientation: "vertical"
-        Label:
-            text: "Input type:"
-        Spinner:
-            size_hint: 1, None
-            text: "Choose"
-            values: "File", "Simple text", "URL"
-        Label:
-            text: "Important words"
-        TextInput:
-            text: "Text Input"
-        Label:
-            text: "Font Family"
-        Spinner:
-            text: "Choose"
-            values: "1","2"
+        padding: 10
         BoxLayout:
             orientation: "horizontal"
-            Switch:
+            size_hint: 1, 0.5
+            
+            BoxLayout:
+                orientation: "vertical"
+                Label:
+                    text: "Input type:"
+                    size_hint: 0.3, 0.2
+                    text_size: self.size
+                    halign: "left"
+                Spinner:
+                    size_hint: 0.5, 0.2
+                    text_size: self.size
+                    halign: "center"
+                    valign: "middle"
+                    text: "Choose"
+                    values: "File", "Simple text", "URL"
+        Label:
+            text: "Excluded words"
+            text_size: self.size
+            size_hint: 0.5, 0.3
+        TextInput:
+            text: "Text Input"
+            text_size: self.size
+            size_hint: 1, 0.15
+        Label:
+            text: "Important words"
+            text_size: self.size
+            size_hint: 0.5, 0.3
+        TextInput:
+            text: "Text Input"
+            text_size: self.size
+            size_hint: 1, 0.15
+        Label:
+            text: "Font Family"
+            id: fontLabel
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+            size_hint: 1, 0.3
+        Spinner:
+            size_hint: 0.5, 0.2
+            halign: "center"
+            valign: "middle"
+            text_size: self.size
+            text: 'Font'
+            values: 'Cartoon','Borex','Krinkes','Theaters','Calibri','Roboto'
+            id: fontSpinner
+            on_text:
+                app.font_changed()
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, 0.4
             Label:
                 text: "Border"
-    BoxLayout:
-        orientation: "vertical"
-        Label:
-            text: ""
+            Switch:
         BoxLayout:
-            orientation: "vertical"
-            Label:
-                text: "Excluded words"
-            TextInput:
-                text: "Text Input"
-        BoxLayout:
-            orientation: "vertical"
+            orientation: "horizontal"
+            size_hint: 1, 0.4
             Label:
                 text: "Border Size"
             Slider:
@@ -50,43 +73,63 @@
     BoxLayout:
         orientation: "vertical"
         BoxLayout:
-            canvas.before:
-                Color:
-                    rgba: 1, 0, 0, 1
-                Line:
-                    width: 1
-                    rectangle: self.x, self.y, self.width, self.height
+            padding: 10
+            size_hint: 1, 0.5
             orientation: "vertical"
             Label:
                 id: l1
                 text: "WORDCLOUD GENERATOR"
-            TextInput:
-                id: path
-                hint_text:'Enter text'
-                on_text: app.visualizer()
+                font_name: "Borex"
+                text_size: self.size
+                size_hint: 1, 0.5
+                halign: "center"
+                valign: "middle"
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, 0.5
+                Label:
+                    text: "Path"
+                    text_size: self.size
+                    size_hint: 0.2, 0.6
+
+                TextInput:
+                    id: path
+                    hint_text:'Enter text'
+                    on_text: app.visualizer()
+                    text_size: self.size
+                    size_hint: 1, 0.5
         Image:
             id: image
+            size_hint: 1, 0.5
             source: app.path
-        Button:
-            text: "Download"
-            on_release: root.manager.current = "download"
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, 0.2
+            padding: 20
+            Button:
+                text: "Download"
+                text_size: self.size
+                halign: "center"
+                valign: "middle"
+                on_release: root.manager.current = "download"
 
 
 <DownloadScreen>:
     BoxLayout:
         orientation: "vertical"
+        padding: 100
         Label:
             text: "Resolution"
-            size_hint: 0.1, 0.2
+            halign: "center"
         Label:
             text: "Extension"
-            size_hint: 0.1, 0.2
+            halign: "center"
         Button:
             text: "Download"
-            on_release: root.downloadImage()
-            size_hint: 0.1, 0.2
+            on_release: app.downloadImage()
+            halign: "center"
         Button:
             text: "Exit"
             on_release: root.manager.current = "gui"
-            size_hint: 0.1, 0.2
+            halign: "center"
     

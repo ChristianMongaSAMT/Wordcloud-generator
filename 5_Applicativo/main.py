@@ -14,6 +14,8 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
+from kivy.core.text import _default_font_paths
+from kivy.core.text import LabelBase
 
 
 Config.read('./config.ini')
@@ -70,6 +72,15 @@ class WordCloudApp(App):
         sm = ScreenManager()
         sm.add_widget(WordCloudGUI(name='gui'))
         sm.add_widget(DownloadScreen(name='download'))
+
+        LabelBase.register(name='Cartoon',
+                   fn_regular='./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
+        LabelBase.register(name='Borex',
+                   fn_regular='./fonts/borex/BOREX-Regular.otf')
+        LabelBase.register(name='Krinkes',
+                   fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
+        LabelBase.register(name='Theaters',
+                   fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
         
         return sm
 
@@ -83,6 +94,13 @@ class WordCloudApp(App):
         self.process()
         if(os.path.exists(self.path)):
             self.root.get_screen('gui').ids.image.source = self.path
+
+    def downloadImage(self):
+        print("DOWNLOAD")
+
+    def font_changed(self):
+        font = self.root.get_screen('gui').ids.fontSpinner.text
+        self.root.get_screen('gui').ids.fontLabel.font_name = font
 
 
 class DownloadScreen(Screen):
