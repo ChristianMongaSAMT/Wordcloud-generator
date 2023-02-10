@@ -12,6 +12,7 @@ from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.core.text import _default_font_paths
 
 ########################DragNDrop############################
 class WindowFileDropExampleApp(App):
@@ -33,11 +34,6 @@ class fontfamilyApp(App):
     
     def build(self):
         fontFam = FontFam()
-        fontFam.ids.fontSpinner.values = (
-            'Cartoon',
-            'Borex',
-            'Krinkes',
-            'Theaters')
         LabelBase.register(name='Cartoon',
                    fn_regular='E:/306/Worldcloud-generatorData/fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
         LabelBase.register(name='Borex',
@@ -51,6 +47,7 @@ class fontfamilyApp(App):
     def getText(self):
         text = self.root.ids.perro.text
         text = self.root.ids.fontLabel.text
+        print(_default_font_paths)
         print(text)
 
     def font_changed(self):
@@ -60,6 +57,4 @@ class fontfamilyApp(App):
 if __name__ == '__main__':
     #WindowFileDropExampleApp().run()
     f = fontfamilyApp()
-    d = FontFam()
     f.run()
-    f.getText()

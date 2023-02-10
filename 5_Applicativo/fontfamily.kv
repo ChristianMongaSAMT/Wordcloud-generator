@@ -14,17 +14,18 @@
         Label:
             text:"cane"
             id: fontLabel
-            font_name: "Arial Black"
+            font_name: "Cartoon"
             font_size: 50
         Button:
             text:"manna"
             id: perro
+            font_name: "Roboto"
             on_release: app.getText()
         Spinner:
             size_hint: None, None
             size: 100, 44
             text: 'Home'
-            #values: 'Home','Work','Other','Custom'
+            values:'Cartoon','Borex','Krinkes','Theaters','Calibri','Roboto'
             id: fontSpinner
             on_text:
                 app.font_changed()
