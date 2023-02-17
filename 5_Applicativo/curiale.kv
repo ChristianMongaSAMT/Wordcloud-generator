@@ -15,19 +15,19 @@
         TextInput:
             id: pathWords
             hint_text:'Enter path file words'
-            on_text: app.generateListWord(True)
+            on_text: app.generateListWord("FILE")
         TextInput:
             id: pathUri
-            hint_text:'Enter path Uri words'
+            hint_text:'Enter path URL words'
+            on_text: app.generateListWord("URL")
         TextInput:
             id: wordsList
             hint_text:'Enter words list'
-            on_text: app.generateListWord(False)
+            on_text: app.generateListWord("LIST")
         Image:
             id: image
             source: app.path
         Label:
             id: result
-            text: app.words
 
     
