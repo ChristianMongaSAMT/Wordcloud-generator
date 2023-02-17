@@ -106,24 +106,32 @@ class WordCloudApp(App):
         # Memorizza la nuova path
         self.getPathFromTextInput()
         if(os.path.exists(self.path)):
+            # Se la path esiste la usa per l'immagine
             self.root.get_screen('gui').ids.image.source = self.path
 
     def downloadImage(self):
         print("DOWNLOAD")
 
     def font_changed(self):
+        # Memorizza il nuovo font
         font = self.root.get_screen('gui').ids.fontSpinner.text
+
+        # (Test) Applica il font al label
         self.root.get_screen('gui').ids.fontLabel.font_name = font
 
-    def change(self):
+    def changeToImageModifier(self):
+        # Cambia scena impostanto quella dove si può scegliere cosa mantenere
+        # dell'immagine e cosa no
         self.sm.current = "image"
         ImageModifier.build(self.path, self)
 
     def getInputType(self):
+        # Ritorna il tipo di input selezionato
         return self.root.get_screen('gui').ids.inputType.text
 
     def generateListWord(self, type):
         self.words = ""
+        # Controlla il tipo di input e in base a quello memorizza le parole
         if(type == "FILE"):
             self.getWordsFromFile()
         elif(type == "URL"):
@@ -131,14 +139,20 @@ class WordCloudApp(App):
         else:
             self.words =  self.root.get_screen('gui').ids.pathWords.text
         
+        # Ciclo per escludere i carattero speciali
         for character in self.words:    
             #isalpha accetta anche i caratteri speiali come "?", "!", "@"
             #isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
             if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
                 self.words = self.words.replace(character, " ")
+        # Se words contiene qualcosa 
         if(len(self.words) > 0):
             printer = ""
+
+            # Separa le parole
             self.words = self.words.rsplit(" ")
+
+            # Controlla singolarmente ogni parola
             for word in self.words:
                 if(word != ""):
                     for excludedWord in self.excludedWords:
@@ -149,25 +163,33 @@ class WordCloudApp(App):
                 self.isWordValid = True
                 self.wordsOrderByEmphasis[word] = 0
             
+            # Memorizza l'enfasi delle parole
             self.orderByEmphasis()  
     
     def getWordsFromFile(self):
+        # Memorizza la path del file
         wordFile = self.root.get_screen('gui').ids.pathWords.text
 
+        # Controlla se la path è un file
         if(os.path.isfile(wordFile)):
+            # Legge e salva le parole contenute nel file
             self.words = open(wordFile, "r").read()
-        else:
-            pass
 
     def getWordsFromUrl(self):
+        # Controlla se deve essere impostato un proxy
         self.setProxyIfExist()
+
+        # Salva il link 
         link = self.root.get_screen('gui').ids.pathWords.text
+
+        # Se il link è valido salva le parole della pagina web
         if(validators.url(link)):
             webPage = urlopen(link)
             textFromWebPage = webPage.read()
             self.words = str(self.removeTags(textFromWebPage))
     
     def setProxyIfExist(self):
+        # Se non ci sono le variabili d'ambiente del proxy le aggiunge
         if(not(self.isProxySetup)):
             for name, value in os.environ.items():
                 if(name.upper() == "HTTP_PROXY" or name.upper() == "HTTPS_PROXY"):
@@ -176,6 +198,7 @@ class WordCloudApp(App):
             print(self.proxySetup)
 
     def removeTags(self, html):
+        # Tramite BeautifulSoup vengono rimossi tutti i tag della pagina web e viene formattato il testo
         pageParsed = BeautifulSoup(html, "html.parser")
         for data in pageParsed(['style', 'script']):
             data.decompose()
@@ -196,32 +219,33 @@ class DownloadScreen(Screen):
 
 class ImageModifier(Screen):
     def build(path, wcApp):
-        # Read the input image
+        # Legge l'immagine corrispondente alla path
         img = cv2.imread(path)
 
-        # convert the image to grayscale
+        # Converte l'immagine ad una scala di grigi
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        # Apply thresholding in the gray image to create a binary image
-        ret,thresh = cv2.threshold(gray,150,255,0)
+        # Applica il thresholding nell'immagine grigia per avere un'immagine binaria
+        thresh = cv2.threshold(gray,150,255,0)
 
-        # Find the contours using binary image
-        contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-        print("Number of contours in image:",len(contours))
+        # Trova il contorno usando l'immagine binaria
+        contours = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        #print("Number of contours in image:",len(contours))
         for cnt in contours:
-            # compute the area and perimeter
+            # Per ogni contorno calcola area e perimetro
             area = cv2.contourArea(cnt)
             perimeter = cv2.arcLength(cnt, True)
             perimeter = round(perimeter, 4)
 
+            # Se l'area è maggiore ad un determinato numero la disegna sull'immagine
             if(area > 1000):
-                print('Area:', area)
-                print('Perimeter:', perimeter)
+                #print('Area:', area)
+                #print('Perimeter:', perimeter)
                 cv2.drawContours(img, [cnt], -1, (0,0,255), 1)
                 #x1, y1 = cnt[0,0]
 
+        # Crea una nuova immagine che conterrà i bordi
         pathTempImage = path + '.png'
-
         cv2.imwrite(pathTempImage, img)
         wcApp.root.get_screen('image').ids.imageMod.source = pathTempImage
         

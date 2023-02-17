@@ -25,6 +25,8 @@
                     valign: "middle"
                     text: "LIST"
                     values: "FILE", "LIST", "URL"
+                    on_text: app.generateListWord(self.text)
+                    
             TextInput:
                 id: pathWords
                 hint_text:'Enter path file words'
@@ -132,7 +134,7 @@
                 text_size: self.size
                 halign: "center"
                 valign: "middle"
-                on_release: app.change()
+                on_release: app.changeToImageModifier()
 
 
 <DownloadScreen>:
