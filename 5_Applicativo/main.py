@@ -73,6 +73,13 @@ class WordCloudApp(App):
     path = "./pictures/class.png"
     sm = ScreenManager()
 
+    words = ""
+    excludedWords = open("./text/excludedWords.txt", "r").read().rsplit(",")
+    isWordValid = True
+    wordsOrderByEmphasis = {} #dizionario
+    proxySetup = []
+    isProxySetup = False
+
     def build(self):
         self.createScenes()
         self.registerFonts()
@@ -91,14 +98,13 @@ class WordCloudApp(App):
         LabelBase.register(name='Krinkes', fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
         LabelBase.register(name='Theaters', fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
 
-    def process(self):
+    def getPathFromTextInput(self):
+        # Prende la path per l'immagine dal text input
         self.path = self.root.get_screen('gui').ids.path.text
-        print(os.getcwd())
-        
-        print(self.path)
 
     def visualizer(self):
-        self.process()
+        # Memorizza la nuova path
+        self.getPathFromTextInput()
         if(os.path.exists(self.path)):
             self.root.get_screen('gui').ids.image.source = self.path
 
@@ -113,7 +119,77 @@ class WordCloudApp(App):
         self.sm.current = "image"
         ImageModifier.build(self.path, self)
 
+    def getInputType(self):
+        return self.root.get_screen('gui').ids.inputType.text
 
+    def generateListWord(self, type):
+        self.words = ""
+        if(type == "FILE"):
+            self.getWordsFromFile()
+        elif(type == "URL"):
+            self.getWordsFromUrl()
+        else:
+            self.words =  self.root.get_screen('gui').ids.pathWords.text
+        
+        for character in self.words:    
+            #isalpha accetta anche i caratteri speiali come "?", "!", "@"
+            #isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
+            if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
+                self.words = self.words.replace(character, " ")
+        if(len(self.words) > 0):
+            printer = ""
+            self.words = self.words.rsplit(" ")
+            for word in self.words:
+                if(word != ""):
+                    for excludedWord in self.excludedWords:
+                        if(word.lower() == excludedWord.lower()):
+                            self.isWordValid = False
+                    if(self.isWordValid):
+                        printer += word + "\n"
+                self.isWordValid = True
+                self.wordsOrderByEmphasis[word] = 0
+            
+            self.orderByEmphasis()  
+    
+    def getWordsFromFile(self):
+        wordFile = self.root.get_screen('gui').ids.pathWords.text
+
+        if(os.path.isfile(wordFile)):
+            self.words = open(wordFile, "r").read()
+        else:
+            pass
+
+    def getWordsFromUrl(self):
+        self.setProxyIfExist()
+        link = self.root.get_screen('gui').ids.pathWords.text
+        if(validators.url(link)):
+            webPage = urlopen(link)
+            textFromWebPage = webPage.read()
+            self.words = str(self.removeTags(textFromWebPage))
+    
+    def setProxyIfExist(self):
+        if(not(self.isProxySetup)):
+            for name, value in os.environ.items():
+                if(name.upper() == "HTTP_PROXY" or name.upper() == "HTTPS_PROXY"):
+                    self.proxySetup.append(f"{name}: {value}")
+            self.isProxySetup = True
+            print(self.proxySetup)
+
+    def removeTags(self, html):
+        pageParsed = BeautifulSoup(html, "html.parser")
+        for data in pageParsed(['style', 'script']):
+            data.decompose()
+        return ' '.join(pageParsed.stripped_strings)
+
+    def orderByEmphasis(self):
+        for word in self.words:
+            self.wordsOrderByEmphasis[word] += 1
+
+        #self.wordsOrderByEmphasis = sorted(self.wordsOrderByEmphasis) 
+        
+        for indice in self.wordsOrderByEmphasis:
+            print(f"{indice}: {self.wordsOrderByEmphasis[indice]}")
+        
 
 class DownloadScreen(Screen):
     pass
@@ -133,7 +209,6 @@ class ImageModifier(Screen):
         contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
         print("Number of contours in image:",len(contours))
         for cnt in contours:
-            print(cnt)
             # compute the area and perimeter
             area = cv2.contourArea(cnt)
             perimeter = cv2.arcLength(cnt, True)
