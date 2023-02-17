@@ -100,6 +100,7 @@ class WordCloudApp(App):
         font = self.root.get_screen('gui').ids.fontSpinner.text
         self.root.get_screen('gui').ids.fontLabel.font_name = font
 
+    '''
     def remove_tags(html):
         soup = BeautifulSoup(html, "html.parser")
         for data in soup(['style', 'script']):
@@ -110,6 +111,7 @@ class WordCloudApp(App):
     f = urlopen(link)
     myfile = f.read()
     print(remove_tags(myfile))
+    '''
 
 
 class DownloadScreen(Screen):

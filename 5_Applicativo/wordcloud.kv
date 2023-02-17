@@ -12,11 +12,13 @@
                 orientation: "vertical"
                 Label:
                     text: "Input type:"
-                    size_hint: 0.3, 0.2
+                    size_hint: 0.5, 0.5
+                    font_size: '20sp'
                     text_size: self.size
-                    halign: "left"
+                    align: "left"
+                   
                 Spinner:
-                    size_hint: 0.5, 0.2
+                    size_hint: 0.5, 0.5
                     text_size: self.size
                     halign: "center"
                     valign: "middle"
@@ -24,6 +26,7 @@
                     values: "File", "Simple text", "URL"
         Label:
             text: "Excluded words"
+            font_size: '20sp'
             text_size: self.size
             size_hint: 0.5, 0.3
         TextInput:
@@ -32,6 +35,7 @@
             size_hint: 1, 0.15
         Label:
             text: "Important words"
+            font_size: '20sp'
             text_size: self.size
             size_hint: 0.5, 0.3
         TextInput:
@@ -43,6 +47,7 @@
             id: fontLabel
             halign: 'left'
             valign: 'middle'
+            font_size: '20sp'
             text_size: self.size
             size_hint: 1, 0.3
         Spinner:
@@ -60,12 +65,14 @@
             size_hint: 1, 0.4
             Label:
                 text: "Border"
+                font_size: '20sp'
             Switch:
         BoxLayout:
             orientation: "horizontal"
             size_hint: 1, 0.4
             Label:
                 text: "Border Size"
+                font_size: '20sp'
             Slider:
                 id: border_slider
                 max: 50
@@ -80,6 +87,7 @@
                 id: l1
                 text: "WORDCLOUD GENERATOR"
                 font_name: "Borex"
+                font_size: '20sp'
                 text_size: self.size
                 size_hint: 1, 0.5
                 halign: "center"
@@ -89,6 +97,7 @@
                 size_hint: 1, 0.5
                 Label:
                     text: "Path"
+                    font_size: '20sp'
                     text_size: self.size
                     size_hint: 0.2, 0.6
 
