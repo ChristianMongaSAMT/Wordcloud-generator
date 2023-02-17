@@ -9,6 +9,20 @@ aprire un progetto tramite code (Worldcloud-generator\5_Applicativo)
 
 
 
+    '''
+    def remove_tags(html):
+        soup = BeautifulSoup(html, "html.parser")
+        for data in soup(['style', 'script']):
+            data.decompose()
+        return ' '.join(soup.stripped_strings)
+ 
+    link = "https://stackoverflow.com/questions/15138614/how-can-i-read-the-contents-of-an-url-with-python"
+    f = urlopen(link)
+    myfile = f.read()
+    print(remove_tags(myfile))
+    '''
+
+
 
 
 

@@ -3,6 +3,8 @@ import logging
 import os
 import cv2
 import urllib.request
+import validators
+from bs4 import BeautifulSoup
 
 from kivy.properties import StringProperty
 from kivy.core.window import Window
@@ -72,17 +74,22 @@ class WordCloudApp(App):
     sm = ScreenManager()
 
     def build(self):
-        
+        self.createScenes()
+        self.registerFonts()
+        return self.sm
+
+    def createScenes(self):
+        # Creazione scene
         self.sm.add_widget(WordCloudGUI(name='gui'))
         self.sm.add_widget(DownloadScreen(name='download'))
         self.sm.add_widget(ImageModifier(name='image'))
 
+    def registerFonts(self):
+        # Registrazione dei font
         LabelBase.register(name='Cartoon', fn_regular='./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
         LabelBase.register(name='Borex', fn_regular='./fonts/borex/BOREX-Regular.otf')
         LabelBase.register(name='Krinkes', fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
         LabelBase.register(name='Theaters', fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
-
-        return self.sm
 
     def process(self):
         self.path = self.root.get_screen('gui').ids.path.text
@@ -106,18 +113,6 @@ class WordCloudApp(App):
         self.sm.current = "image"
         ImageModifier.build(self.path, self)
 
-    '''
-    def remove_tags(html):
-        soup = BeautifulSoup(html, "html.parser")
-        for data in soup(['style', 'script']):
-            data.decompose()
-        return ' '.join(soup.stripped_strings)
- 
-    link = "https://stackoverflow.com/questions/15138614/how-can-i-read-the-contents-of-an-url-with-python"
-    f = urlopen(link)
-    myfile = f.read()
-    print(remove_tags(myfile))
-    '''
 
 
 class DownloadScreen(Screen):
@@ -138,6 +133,7 @@ class ImageModifier(Screen):
         contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
         print("Number of contours in image:",len(contours))
         for cnt in contours:
+            print(cnt)
             # compute the area and perimeter
             area = cv2.contourArea(cnt)
             perimeter = cv2.arcLength(cnt, True)
@@ -146,16 +142,14 @@ class ImageModifier(Screen):
             if(area > 1000):
                 print('Area:', area)
                 print('Perimeter:', perimeter)
-                cv2.drawContours(img, [cnt], -1, (0,0,255), 3)
+                cv2.drawContours(img, [cnt], -1, (0,0,255), 1)
                 #x1, y1 = cnt[0,0]
 
-        #wcApp.root.get_screen('image').ids.imageMod.texture = img
-        cv2.imwrite('modificata.png', img)
-        #wcApp.root.get_screen('image').ids.imageMod.source = 'prova.png'
-        wcApp.root.get_screen('image').ids.imageMod.source = 'modificata.png'
-        
+        pathTempImage = path + '.png'
 
-        #wcApp.root.get_screen('gui').ids.image.source = path
+        cv2.imwrite(pathTempImage, img)
+        wcApp.root.get_screen('image').ids.imageMod.source = pathTempImage
+        
         #cv2.imshow("Image", img)    
         #cv2.waitKey(0)
         #cv2.destroyAllWindows()
