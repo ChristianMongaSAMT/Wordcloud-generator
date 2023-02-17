@@ -17,7 +17,6 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 from kivy.core.text import _default_font_paths
 from kivy.core.text import LabelBase
-from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
 Config.read('./config.ini')
@@ -80,6 +79,16 @@ class WordCloudApp(App):
         LabelBase.register(name='Krinkes', fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
         LabelBase.register(name='Theaters', fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
         
+        for name, value in os.environ.items():
+            print("{0}: {1}".format(name, value))
+
+        # defining Env variable with 'HOME' as value
+        http_proxy = "HTTP_PROXY"
+
+        # invoking getenv() method
+        value = os.getenv(http_proxy, default=None)
+        print(f"Value of env variable key='http_proxy': {value}")
+
         return sm
 
     def process(self):
@@ -116,6 +125,7 @@ class WordCloudApp(App):
 
 class DownloadScreen(Screen):
     pass
+
 
 if __name__ == '__main__':
     WordCloudApp().run()
