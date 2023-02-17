@@ -25,6 +25,7 @@ class CurialeApp(App):
     words = ""
     excludedWords = open("./text/excludedWords.txt", "r").read().rsplit(",")
     isWordValid = True
+    wordsOrderByEmphasis = {} #dizionario
     proxySetup = []
     isProxySetup = False
 
@@ -74,10 +75,9 @@ class CurialeApp(App):
             if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
                 self.words = self.words.replace(character, " ")
         if(len(self.words) > 0):
-            printer = "ciao"
+            printer = ""
             self.words = self.words.rsplit(" ")
             for word in self.words:
-                print(word)
                 if(word != ""):
                     for excludedWord in self.excludedWords:
                         if(word.lower() == excludedWord.lower()):
@@ -85,8 +85,9 @@ class CurialeApp(App):
                     if(self.isWordValid):
                         printer += word + "\n"
                 self.isWordValid = True
+                self.wordsOrderByEmphasis[word] = 0
             self.root.ids.result.text = printer
-
+            self.orderByEmphasis()   
 
     def process(self):
         self.path = self.root.ids.path.text
@@ -97,6 +98,12 @@ class CurialeApp(App):
         if(os.path.exists(self.path)):
             self.root.ids.image.source = self.path
 
+    def orderByEmphasis(self):
+        for word in self.words:
+            self.wordsOrderByEmphasis[word] += 1
+        for indice in self.wordsOrderByEmphasis:
+            print(f"{indice}: {self.wordsOrderByEmphasis[indice]}")
+        #self.wordsOrderByEmphasis = sorted(self.wordsOrderByEmphasis)
 if __name__ == '__main__':
     CurialeApp().run()
     
