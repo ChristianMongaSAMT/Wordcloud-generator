@@ -21,6 +21,7 @@ from kivy.uix.widget import Widget
 from kivy.core.text import _default_font_paths
 from kivy.core.text import LabelBase
 from urllib.request import urlopen
+from collections import OrderedDict
 
 Config.read('./config.ini')
 
@@ -208,7 +209,7 @@ class WordCloudApp(App):
         for word in self.words:
             self.wordsOrderByEmphasis[word] += 1
 
-        #self.wordsOrderByEmphasis = sorted(self.wordsOrderByEmphasis) 
+        self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=True))
         
         for indice in self.wordsOrderByEmphasis:
             print(f"{indice}: {self.wordsOrderByEmphasis[indice]}")
@@ -226,10 +227,10 @@ class ImageModifier(Screen):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Applica il thresholding nell'immagine grigia per avere un'immagine binaria
-        thresh = cv2.threshold(gray,150,255,0)
+        ret,thresh = cv2.threshold(gray,150,255,0)
 
         # Trova il contorno usando l'immagine binaria
-        contours = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
         #print("Number of contours in image:",len(contours))
         for cnt in contours:
             # Per ogni contorno calcola area e perimetro
