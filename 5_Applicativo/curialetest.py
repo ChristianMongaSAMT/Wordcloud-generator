@@ -53,9 +53,6 @@ class CurialeApp(App):
             f = urlopen(link)
             myfile = f.read()
             self.words = str(self.remove_tags(myfile))
-        
-
-    #fflink = "https://stackoverflow.com/questions/15138614/how-can-i-read-the-contents-of-an-url-with-python"
 
     def getWords(self):
         self.wordFile = self.root.ids.pathWords.text
