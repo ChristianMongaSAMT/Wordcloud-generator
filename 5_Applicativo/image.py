@@ -1,7 +1,7 @@
 import cv2
 
 # Read the input image
-img = cv2.imread('./pictures/stellina.jpg')
+img = cv2.imread('./pictures/cubi.jpg')
 
 # convert the image to grayscale
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)

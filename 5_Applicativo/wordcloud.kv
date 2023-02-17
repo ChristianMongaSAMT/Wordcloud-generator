@@ -121,6 +121,12 @@
                 halign: "center"
                 valign: "middle"
                 on_release: root.manager.current = "download"
+            Button:
+                text: "Modify"
+                text_size: self.size
+                halign: "center"
+                valign: "middle"
+                on_release: root.manager.current = "image"
 
 
 <DownloadScreen>:
@@ -141,4 +147,14 @@
             text: "Exit"
             on_release: root.manager.current = "gui"
             halign: "center"
+
+<ImageModifier>:
+    Image:
+        id: imageMod
+        source: "./pictures/8k.jpg"
+    Button:
+        text: "Exit"
+        size_hint: 0.1,0.1
+        on_release: root.manager.current = "gui"
     
+
