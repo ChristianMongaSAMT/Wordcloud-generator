@@ -10,10 +10,24 @@
     BoxLayout:
         TextInput:
             id: path
-            hint_text:'Enter path'
+            hint_text:'Enter path image'
             on_text: app.visualizer()
+        TextInput:
+            id: pathWords
+            hint_text:'Enter path file words'
+            on_text: app.generateListWord(True)
+        TextInput:
+            id: pathUri
+            hint_text:'Enter path Uri words'
+        TextInput:
+            id: wordsList
+            hint_text:'Enter words list'
+            on_text: app.generateListWord(False)
         Image:
             id: image
             source: app.path
+        Label:
+            id: result
+            text: app.words
 
     

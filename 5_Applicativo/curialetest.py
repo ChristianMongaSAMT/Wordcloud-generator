@@ -34,22 +34,31 @@ class CurialeApp(App):
             data.decompose()
         return ' '.join(soup.stripped_strings)
  
+    
     link = "https://stackoverflow.com/questions/15138614/how-can-i-read-the-contents-of-an-url-with-python"
-    f = urlopen(link)
-    myfile = f.read()
-    print(remove_tags(myfile))
+    #proxy_env = os.environ['JAVA_HOME']
+    #print("ENV:", proxy_env)
+    for name, value in os.environ.items():
+        print("{0}: {1}".format(name, value))
+    #f = urlopen(link)
+    #myfile = f.read()
+    #print(remove_tags(myfile))
 
     def build(self):
         return CurialeGUI()
 
     def getWords(self):
-        self.wordFile = self.root.ids.path.text
+        self.wordFile = self.root.ids.pathWords.text
+        print(self.wordFile)
         if(os.path.isfile(self.wordFile)):
             self.words = open(self.wordFile, "r").read()
             
 
-    def generateListWord(self):
-        self.getWords()
+    def generateListWord(self, isFile):
+        if(isFile):
+            self.getWords()
+        else:
+            self.words =  self.root.ids.wordsList.text
         for character in self.words:
             #isalpha accetta anche i caratteri speiali come "?", "!", "@"
             #isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
@@ -66,7 +75,7 @@ class CurialeApp(App):
                     if(self.isWordValid):
                         print += word + "\n"
                 self.isWordValid = True
-            self.root.ids.label.text = print
+            self.root.ids.result.text = print
 
 
     def process(self):
