@@ -104,6 +104,7 @@
                 TextInput:
                     id: path
                     hint_text:'Enter text'
+
                     on_text: app.visualizer()
                     text_size: self.size
                     size_hint: 1, 0.5
@@ -126,7 +127,7 @@
                 text_size: self.size
                 halign: "center"
                 valign: "middle"
-                on_release: root.manager.current = "image"
+                on_release: app.change()
 
 
 <DownloadScreen>:
@@ -151,7 +152,7 @@
 <ImageModifier>:
     Image:
         id: imageMod
-        source: "./pictures/8k.jpg"
+        source: ''
     Button:
         text: "Exit"
         size_hint: 0.1,0.1

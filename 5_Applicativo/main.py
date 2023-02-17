@@ -69,29 +69,20 @@ class WordCloudGUI(BoxLayout, Screen):
 
 class WordCloudApp(App):
     path = "./pictures/class.png"
+    sm = ScreenManager()
 
     def build(self):
-        sm = ScreenManager()
-        sm.add_widget(WordCloudGUI(name='gui'))
-        sm.add_widget(DownloadScreen(name='download'))
-        sm.add_widget(ImageModifier(name='image'))
+        
+        self.sm.add_widget(WordCloudGUI(name='gui'))
+        self.sm.add_widget(DownloadScreen(name='download'))
+        self.sm.add_widget(ImageModifier(name='image'))
 
         LabelBase.register(name='Cartoon', fn_regular='./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
         LabelBase.register(name='Borex', fn_regular='./fonts/borex/BOREX-Regular.otf')
         LabelBase.register(name='Krinkes', fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
         LabelBase.register(name='Theaters', fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
-        
-        for name, value in os.environ.items():
-            print("{0}: {1}".format(name, value))
 
-        # defining Env variable with 'HOME' as value
-        http_proxy = "HTTP_PROXY"
-
-        # invoking getenv() method
-        value = os.getenv(http_proxy, default=None)
-        print(f"Value of env variable key='http_proxy': {value}")
-
-        return sm
+        return self.sm
 
     def process(self):
         self.path = self.root.get_screen('gui').ids.path.text
@@ -111,6 +102,10 @@ class WordCloudApp(App):
         font = self.root.get_screen('gui').ids.fontSpinner.text
         self.root.get_screen('gui').ids.fontLabel.font_name = font
 
+    def change(self):
+        self.sm.current = "image"
+        ImageModifier.build(self.path, self)
+
     '''
     def remove_tags(html):
         soup = BeautifulSoup(html, "html.parser")
@@ -129,37 +124,42 @@ class DownloadScreen(Screen):
     pass
 
 class ImageModifier(Screen):
-    
-    # Read the input image
-    img = cv2.imread('./pictures/cubi.jpg')
+    def build(path, wcApp):
+        # Read the input image
+        img = cv2.imread(path)
 
-    # convert the image to grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        # convert the image to grayscale
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Apply thresholding in the gray image to create a binary image
-    ret,thresh = cv2.threshold(gray,150,255,0)
+        # Apply thresholding in the gray image to create a binary image
+        ret,thresh = cv2.threshold(gray,150,255,0)
 
-    # Find the contours using binary image
-    contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    print("Number of contours in image:",len(contours))
-    for cnt in contours:
-        #cnt = contours[i]
-        # compute the area and perimeter
-        area = cv2.contourArea(cnt)
-        perimeter = cv2.arcLength(cnt, True)
-        perimeter = round(perimeter, 4)
+        # Find the contours using binary image
+        contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        print("Number of contours in image:",len(contours))
+        for cnt in contours:
+            # compute the area and perimeter
+            area = cv2.contourArea(cnt)
+            perimeter = cv2.arcLength(cnt, True)
+            perimeter = round(perimeter, 4)
 
-        if(area > 1000):
-            print('Area:', area)
-            print('Perimeter:', perimeter)
-            img1 = cv2.drawContours(img, [cnt], -1, (0,0,255), 3)
-            x1, y1 = cnt[0,0]
+            if(area > 1000):
+                print('Area:', area)
+                print('Perimeter:', perimeter)
+                cv2.drawContours(img, [cnt], -1, (0,0,255), 3)
+                #x1, y1 = cnt[0,0]
 
+        #wcApp.root.get_screen('image').ids.imageMod.texture = img
+        cv2.imwrite('modificata.png', img)
+        #wcApp.root.get_screen('image').ids.imageMod.source = 'prova.png'
+        wcApp.root.get_screen('image').ids.imageMod.source = 'modificata.png'
+        
 
-    cv2.imshow("Image", img)    
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    pass
+        #wcApp.root.get_screen('gui').ids.image.source = path
+        #cv2.imshow("Image", img)    
+        #cv2.waitKey(0)
+        #cv2.destroyAllWindows()
+        pass
 
 if __name__ == '__main__':
     WordCloudApp().run()
