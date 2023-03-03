@@ -1,4 +1,4 @@
-#:kivy 1.0.9
+#:kivy 2.1.0
     
 <WordCloudGUI>:
     BoxLayout:
@@ -157,12 +157,28 @@
             halign: "center"
 
 <ImageModifier>:
-    Image:
-        id: imageMod
-        source: ''
-    Button:
-        text: "Exit"
-        size_hint: 0.1,0.1
-        on_release: root.manager.current = "gui"
+    BoxLayout:
+        orientation: "vertical"
+        Image:
+            id: imageMod
+            source: ''
+        BoxLayout:
+            size_hint: 1, 0.2
+            orientation: "vertical"
+            Label:
+                text: "Select Tolerance"
+                font_size: "20sp"
+            Slider:
+                id: tolerance_slider
+                step: 10
+                max: 1000
+                min: 100
+                value: 100
+                on_touch_up: app.changeToImageModifier()
+        Button:
+            text: "Exit"
+            size_hint: 0.1,0.1
+            on_release: root.manager.current = "gui"
+        
     
 

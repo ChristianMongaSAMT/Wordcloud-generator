@@ -2,6 +2,7 @@ import kivy
 import logging
 import os
 import cv2
+import gc
 import urllib.request
 import validators
 from bs4 import BeautifulSoup
@@ -10,6 +11,7 @@ from kivy.properties import StringProperty
 from kivy.core.window import Window
 from pathlib import Path
 from kivy.config import Config
+from kivy.logger import Logger
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen
@@ -22,6 +24,7 @@ from kivy.core.text import _default_font_paths
 from kivy.core.text import LabelBase
 from urllib.request import urlopen
 from collections import OrderedDict
+from cachetools import TTLCache
 
 Config.read('./config.ini')
 
@@ -71,7 +74,7 @@ class WordCloudGUI(BoxLayout, Screen):
 
 
 class WordCloudApp(App):
-    path = "./pictures/class.png"
+    path = "./pictures/default.png"
     sm = ScreenManager()
 
     words = ""
@@ -102,11 +105,18 @@ class WordCloudApp(App):
     def getPathFromTextInput(self):
         # Prende la path per l'immagine dal text input
         self.path = self.root.get_screen('gui').ids.path.text
+        self.path = self.path.strip()
+        self.path = self.path.replace('"','')
 
+        #self.root.get_screen('gui').ids.path.text = self.path
+        
+        
     def visualizer(self):
         # Memorizza la nuova path
         self.getPathFromTextInput()
-        if(os.path.exists(self.path)):
+        if(not (os.path.exists(self.path) and os.path.isfile(self.path))):
+            self.root.get_screen('gui').ids.image.source = "./pictures/default.png"
+        else:
             # Se la path esiste la usa per l'immagine
             self.root.get_screen('gui').ids.image.source = self.path
 
@@ -123,8 +133,14 @@ class WordCloudApp(App):
     def changeToImageModifier(self):
         # Cambia scena impostanto quella dove si può scegliere cosa mantenere
         # dell'immagine e cosa no
-        self.sm.current = "image"
-        ImageModifier.build(self.path, self)
+        
+        #change current screen to "image"
+        self.sm.current = "image"   
+        tolerance = self.root.get_screen('image').ids.tolerance_slider.value
+        print(f'Tollerance: {tolerance}')
+
+        #get current screen (read only) as Object (not name) and since it is an intance of ImageModifier it contains the updateImage method
+        self.sm.current_screen.updateImage(self.path, self, tolerance)
 
     def getInputType(self):
         # Ritorna il tipo di input selezionato
@@ -218,10 +234,25 @@ class WordCloudApp(App):
 class DownloadScreen(Screen):
     pass
 
-class ImageModifier(Screen):
-    def build(path, wcApp):
+class ImageModifier(Screen, BoxLayout):
+    
+    def updateImage(self, path, wcApp, tollerance):
+        self.wcApp = wcApp
+        self.setPath(path)
+        self.createBorderImage(tollerance)
+
+    def setPath(self, path):
+        # TODO !!!ATTENZIONE CONTROLLARE SE IL FILE È UN IMMAGINE
+        if(not (os.path.exists(path) or os.path.isfile(path))):
+            self.imagepath = "./pictures/default.png"  
+        else:
+            self.imagepath = path      
+
+    def createBorderImage(self, tollerance):
+        #Logger.info(f'createBorderImage with: {tollerance} on image {self.imagepath}')
+
         # Legge l'immagine corrispondente alla path
-        img = cv2.imread(path)
+        img = cv2.imread(self.imagepath)
 
         # Converte l'immagine ad una scala di grigi
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -238,22 +269,29 @@ class ImageModifier(Screen):
             perimeter = cv2.arcLength(cnt, True)
             perimeter = round(perimeter, 4)
 
+            #areaTolerance = self.root.get_screen('image').ids.border_slider.value
+            #print(areaTolerance)
             # Se l'area è maggiore ad un determinato numero la disegna sull'immagine
-            if(area > 1000):
+            if(area > tollerance):
                 #print('Area:', area)
                 #print('Perimeter:', perimeter)
-                cv2.drawContours(img, [cnt], -1, (0,0,255), 1)
+                cv2.drawContours(img, [cnt], -1, (0,0,255), 2)
                 #x1, y1 = cnt[0,0]
 
         # Crea una nuova immagine che conterrà i bordi
-        pathTempImage = path + '.png'
+        #cache = TTLCache(maxsize=10, ttl=5)
+        #cache['pathTempImage'] = path + '.png'
+        pathTempImage = './pictures/imageMod.png'
         cv2.imwrite(pathTempImage, img)
-        wcApp.root.get_screen('image').ids.imageMod.source = pathTempImage
         
-        #cv2.imshow("Image", img)    
-        #cv2.waitKey(0)
-        #cv2.destroyAllWindows()
-        pass
+        #wcApp.root.get_screen('image').ids.imageMod.source = "./pictures/default.png"
+        #wcApp.root.get_screen('image').ids.imageMod.source = pathTempImage
+
+        self.ids.imageMod.source = pathTempImage
+        Logger.info(f'imageMod: {self.ids.imageMod.source}')
+        #wcApp.root.get_screen('image').ids.imageMod.reload()
+        self.ids.imageMod.reload()
+        #cache['pathTempImage'] = TTLCache.clear
 
 if __name__ == '__main__':
     WordCloudApp().run()
