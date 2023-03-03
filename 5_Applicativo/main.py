@@ -1,43 +1,27 @@
-import kivy
-import logging
 import os
 import cv2
-import gc
-import urllib.request
 import validators
-from bs4 import BeautifulSoup
+import filetype
 
-from kivy.properties import StringProperty
-from kivy.core.window import Window
-from pathlib import Path
+from bs4 import BeautifulSoup
 from kivy.config import Config
 from kivy.logger import Logger
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen
-from kivy.properties import ObjectProperty
-from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.textinput import TextInput
-from kivy.uix.widget import Widget
-from kivy.core.text import _default_font_paths
 from kivy.core.text import LabelBase
 from urllib.request import urlopen
 from collections import OrderedDict
-from cachetools import TTLCache
+
+#from kivy.properties import ObjectProperty
+#from kivy.lang import Builder
+#from kivy.core.text import _default_font_paths
+#from kivy.properties import StringProperty
+#from kivy.core.window import Window
 
 Config.read('./config.ini')
 
-'''class TestRead():   
-
-    def __init__(self, path):
-        logging.debug(path.__class__)
-
-        self.p = Path(path)
-
-    def printData(self):
-        logging.debug(f'{self.p.read_text()}')
-'''
 ########################DragNDrop############################
 '''class DragAndDrop():
     def build(self):
@@ -80,7 +64,10 @@ class WordCloudApp(App):
     words = ""
     excludedWords = open("./text/excludedWords.txt", "r").read().rsplit(",")
     isWordValid = True
-    wordsOrderByEmphasis = {} #dizionario
+    
+    # Dizionario
+    wordsOrderByEmphasis = {}
+    
     proxySetup = []
     isProxySetup = False
 
@@ -107,20 +94,19 @@ class WordCloudApp(App):
         self.path = self.root.get_screen('gui').ids.path.text
         self.path = self.path.strip()
         self.path = self.path.replace('"','')
-
-        #self.root.get_screen('gui').ids.path.text = self.path
-        
         
     def visualizer(self):
         # Memorizza la nuova path
         self.getPathFromTextInput()
-        if(not (os.path.exists(self.path) and os.path.isfile(self.path))):
+        if(not ((os.path.exists(self.path) and os.path.isfile(self.path) and filetype.is_image(self.path)))):
+            # Se la path non esiste carica l'immagine di default
             self.root.get_screen('gui').ids.image.source = "./pictures/default.png"
         else:
             # Se la path esiste la usa per l'immagine
             self.root.get_screen('gui').ids.image.source = self.path
 
     def downloadImage(self):
+        # Metodo per il download dell'immagine
         print("DOWNLOAD")
 
     def font_changed(self):
@@ -131,15 +117,19 @@ class WordCloudApp(App):
         self.root.get_screen('gui').ids.fontLabel.font_name = font
 
     def changeToImageModifier(self):
-        # Cambia scena impostanto quella dove si può scegliere cosa mantenere
-        # dell'immagine e cosa no
+        # Cambia scena impostanto quella dove si può modificare l'immagine base
         
-        #change current screen to "image"
+        # Imposta il current screen come "image"
         self.sm.current = "image"   
+        
+        # Memorizza la tolleranza
         tolerance = self.root.get_screen('image').ids.tolerance_slider.value
-        print(f'Tollerance: {tolerance}')
+        
+        #print(f'Tollerance: {tolerance}')
 
         #get current screen (read only) as Object (not name) and since it is an intance of ImageModifier it contains the updateImage method
+        
+        # Richiama il metodo in ImageModifier per aggiornare l'immagine
         self.sm.current_screen.updateImage(self.path, self, tolerance)
 
     def getInputType(self):
@@ -148,6 +138,7 @@ class WordCloudApp(App):
 
     def generateListWord(self, type):
         self.words = ""
+        
         # Controlla il tipo di input e in base a quello memorizza le parole
         if(type == "FILE"):
             self.getWordsFromFile()
@@ -158,10 +149,11 @@ class WordCloudApp(App):
         
         # Ciclo per escludere i carattero speciali
         for character in self.words:    
-            #isalpha accetta anche i caratteri speiali come "?", "!", "@"
-            #isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
+            # isalpha accetta anche i caratteri speiali come "?", "!", "@"
+            # isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
             if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
                 self.words = self.words.replace(character, " ")
+        
         # Se words contiene qualcosa 
         if(len(self.words) > 0):
             printer = ""
@@ -222,6 +214,7 @@ class WordCloudApp(App):
         return ' '.join(pageParsed.stripped_strings)
 
     def orderByEmphasis(self):
+        # Ordina le parole per la loro enfasi
         for word in self.words:
             self.wordsOrderByEmphasis[word] += 1
 
@@ -236,20 +229,20 @@ class DownloadScreen(Screen):
 
 class ImageModifier(Screen, BoxLayout):
     
-    def updateImage(self, path, wcApp, tollerance):
+    def updateImage(self, path, wcApp, tolerance):
         self.wcApp = wcApp
         self.setPath(path)
-        self.createBorderImage(tollerance)
+        self.createBorderImage(tolerance)
 
     def setPath(self, path):
         # TODO !!!ATTENZIONE CONTROLLARE SE IL FILE È UN IMMAGINE
-        if(not (os.path.exists(path) or os.path.isfile(path))):
-            self.imagepath = "./pictures/default.png"  
+        if(not (os.path.exists(path) and os.path.isfile(path) and filetype.is_image(path))):
+            self.imagepath = "./pictures/default.png"
         else:
             self.imagepath = path      
 
-    def createBorderImage(self, tollerance):
-        #Logger.info(f'createBorderImage with: {tollerance} on image {self.imagepath}')
+    def createBorderImage(self, tolerance):
+        #Logger.info(f'createBorderImage with: {tolerance} on image {self.imagepath}')
 
         # Legge l'immagine corrispondente alla path
         img = cv2.imread(self.imagepath)
@@ -272,7 +265,7 @@ class ImageModifier(Screen, BoxLayout):
             #areaTolerance = self.root.get_screen('image').ids.border_slider.value
             #print(areaTolerance)
             # Se l'area è maggiore ad un determinato numero la disegna sull'immagine
-            if(area > tollerance):
+            if(area > tolerance):
                 #print('Area:', area)
                 #print('Perimeter:', perimeter)
                 cv2.drawContours(img, [cnt], -1, (0,0,255), 2)
