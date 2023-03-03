@@ -1,33 +1,39 @@
-#:kivy 1.0.9
+#:kivy 2.1.0
     
 <CurialeGUI>:
-    canvas.before:
-        Color:
-            rgb: 0, 0, 0
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    BoxLayout:
-        TextInput:
-            id: path
-            hint_text:'Enter path image'
-            on_text: app.visualizer()
-        TextInput:
-            id: pathWords
-            hint_text:'Enter path file words'
-            on_text: app.generateListWord("FILE")
-        TextInput:
-            id: pathUri
-            hint_text:'Enter path URL words'
-            on_text: app.generateListWord("URL")
-        TextInput:
-            id: wordsList
-            hint_text:'Enter words list'
-            on_text: app.generateListWord("LIST")
-        Image:
-            id: image
-            source: app.path
+    cols: 3
+    GridLayout:
+        cols:2
+        rows: 5
+        size_hint_x:None
+        width:400
+        orientation: center
         Label:
-            id: result
+            size_hint_x:None
+            width:100
+            text: 'Input type:'
+        Button:
+            size_hint_y:None
+            height: '30sp'
+            text: 'Input type:'
+        Label:
+            size_hint_x:None
+            width:100
+            text: 'Input type:'
+        Button:
+            text: 'Input type:'
+        Label:
+            size_hint_x:None
+            width:100
+            text: 'Input type:'
+        Button:
+            text: 'Input type:'
+        
+    Image:
+        id: image
+        source: './pictures/prova.png'
 
-    
+    Button:
+        size_hint_x:None
+        width:100
+        text: 'Input type:'

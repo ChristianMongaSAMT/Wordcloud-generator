@@ -58,11 +58,11 @@ class WordCloudGUI(BoxLayout, Screen):
 
 
 class WordCloudApp(App):
-    path = "./pictures/default.png"
+    path = './pictures/default.png'
     sm = ScreenManager()
 
     words = ""
-    excludedWords = open("./text/excludedWords.txt", "r").read().rsplit(",")
+    excludedWords = open('./text/excludedWords.txt', 'r').read().rsplit(',')
     isWordValid = True
     
     # Dizionario
@@ -98,16 +98,17 @@ class WordCloudApp(App):
     def visualizer(self):
         # Memorizza la nuova path
         self.getPathFromTextInput()
+
         if(not ((os.path.exists(self.path) and os.path.isfile(self.path) and filetype.is_image(self.path)))):
             # Se la path non esiste carica l'immagine di default
-            self.root.get_screen('gui').ids.image.source = "./pictures/default.png"
+            self.root.get_screen('gui').ids.image.source = './pictures/default.png'
         else:
             # Se la path esiste la usa per l'immagine
             self.root.get_screen('gui').ids.image.source = self.path
 
     def downloadImage(self):
         # Metodo per il download dell'immagine
-        print("DOWNLOAD")
+        print('DOWNLOAD')
 
     def font_changed(self):
         # Memorizza il nuovo font
@@ -120,7 +121,7 @@ class WordCloudApp(App):
         # Cambia scena impostanto quella dove si può modificare l'immagine base
         
         # Imposta il current screen come "image"
-        self.sm.current = "image"   
+        self.sm.current = 'image' 
         
         # Memorizza la tolleranza
         tolerance = self.root.get_screen('image').ids.tolerance_slider.value
@@ -137,12 +138,12 @@ class WordCloudApp(App):
         return self.root.get_screen('gui').ids.inputType.text
 
     def generateListWord(self, type):
-        self.words = ""
+        self.words = ''
         
         # Controlla il tipo di input e in base a quello memorizza le parole
-        if(type == "FILE"):
+        if(type == 'FILE'):
             self.getWordsFromFile()
-        elif(type == "URL"):
+        elif(type == 'URL'):
             self.getWordsFromUrl()
         else:
             self.words =  self.root.get_screen('gui').ids.pathWords.text
@@ -152,23 +153,23 @@ class WordCloudApp(App):
             # isalpha accetta anche i caratteri speiali come "?", "!", "@"
             # isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
             if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
-                self.words = self.words.replace(character, " ")
+                self.words = self.words.replace(character, ' ')
         
         # Se words contiene qualcosa 
         if(len(self.words) > 0):
-            printer = ""
+            printer = ''
 
             # Separa le parole
             self.words = self.words.rsplit(" ")
 
             # Controlla singolarmente ogni parola
             for word in self.words:
-                if(word != ""):
+                if(word != ''):
                     for excludedWord in self.excludedWords:
                         if(word.lower() == excludedWord.lower()):
                             self.isWordValid = False
                     if(self.isWordValid):
-                        printer += word + "\n"
+                        printer += word + '\n'
                 self.isWordValid = True
                 self.wordsOrderByEmphasis[word] = 0
             
@@ -182,7 +183,7 @@ class WordCloudApp(App):
         # Controlla se la path è un file
         if(os.path.isfile(wordFile)):
             # Legge e salva le parole contenute nel file
-            self.words = open(wordFile, "r").read()
+            self.words = open(wordFile, 'r').read()
 
     def getWordsFromUrl(self):
         # Controlla se deve essere impostato un proxy
@@ -201,14 +202,14 @@ class WordCloudApp(App):
         # Se non ci sono le variabili d'ambiente del proxy le aggiunge
         if(not(self.isProxySetup)):
             for name, value in os.environ.items():
-                if(name.upper() == "HTTP_PROXY" or name.upper() == "HTTPS_PROXY"):
+                if(name.upper() == 'HTTP_PROXY' or name.upper() == 'HTTPS_PROXY'):
                     self.proxySetup.append(f"{name}: {value}")
             self.isProxySetup = True
             print(self.proxySetup)
 
     def removeTags(self, html):
         # Tramite BeautifulSoup vengono rimossi tutti i tag della pagina web e viene formattato il testo
-        pageParsed = BeautifulSoup(html, "html.parser")
+        pageParsed = BeautifulSoup(html, 'html.parser')
         for data in pageParsed(['style', 'script']):
             data.decompose()
         return ' '.join(pageParsed.stripped_strings)
@@ -220,8 +221,8 @@ class WordCloudApp(App):
 
         self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=True))
         
-        for indice in self.wordsOrderByEmphasis:
-            print(f"{indice}: {self.wordsOrderByEmphasis[indice]}")
+        for index in self.wordsOrderByEmphasis:
+            print(f"{index}: {self.wordsOrderByEmphasis[index]}")
         
 
 class DownloadScreen(Screen):
@@ -234,10 +235,14 @@ class ImageModifier(Screen, BoxLayout):
         self.setPath(path)
         self.createBorderImage(tolerance)
 
+        tolPer = int((self.ids.tolerance_slider.value / 2000) * 100)
+        tolValue = f'Tolerance: {str(tolPer)}%'
+        self.ids.tolerance_label.text = tolValue
+
     def setPath(self, path):
-        # TODO !!!ATTENZIONE CONTROLLARE SE IL FILE È UN IMMAGINE
+        # Controlla se è una path valida, se la path è un file e se è un'immagine
         if(not (os.path.exists(path) and os.path.isfile(path) and filetype.is_image(path))):
-            self.imagepath = "./pictures/default.png"
+            self.imagepath = './pictures/default.png'
         else:
             self.imagepath = path      
 
@@ -255,37 +260,27 @@ class ImageModifier(Screen, BoxLayout):
 
         # Trova il contorno usando l'immagine binaria
         contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-        #print("Number of contours in image:",len(contours))
+
         for cnt in contours:
             # Per ogni contorno calcola area e perimetro
             area = cv2.contourArea(cnt)
             perimeter = cv2.arcLength(cnt, True)
             perimeter = round(perimeter, 4)
 
-            #areaTolerance = self.root.get_screen('image').ids.border_slider.value
-            #print(areaTolerance)
             # Se l'area è maggiore ad un determinato numero la disegna sull'immagine
             if(area > tolerance):
-                #print('Area:', area)
-                #print('Perimeter:', perimeter)
                 cv2.drawContours(img, [cnt], -1, (0,0,255), 2)
-                #x1, y1 = cnt[0,0]
 
         # Crea una nuova immagine che conterrà i bordi
-        #cache = TTLCache(maxsize=10, ttl=5)
-        #cache['pathTempImage'] = path + '.png'
         pathTempImage = './pictures/imageMod.png'
         cv2.imwrite(pathTempImage, img)
-        
-        #wcApp.root.get_screen('image').ids.imageMod.source = "./pictures/default.png"
-        #wcApp.root.get_screen('image').ids.imageMod.source = pathTempImage
 
+        # Imposta la path nell'Image
         self.ids.imageMod.source = pathTempImage
         Logger.info(f'imageMod: {self.ids.imageMod.source}')
-        #wcApp.root.get_screen('image').ids.imageMod.reload()
+
+        # Ricarice l'immagine
         self.ids.imageMod.reload()
-        #cache['pathTempImage'] = TTLCache.clear
 
 if __name__ == '__main__':
     WordCloudApp().run()
-    
