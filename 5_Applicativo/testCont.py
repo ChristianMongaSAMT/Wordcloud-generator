@@ -65,7 +65,7 @@ class ConterGUI(BoxLayout):
                     y+=1                
                 x += 1
                 y = pxY - 5
-            print("Pura curiosità ", BORDO[4][1][0][1])
+            print("Pura curiosità ", BORDO[4][1][0][1]) #[bordo][pixel][0--> evitare il valore strano][coordinata]
             #self.highlightArea(img, pxX, pxY, imageDim)
             #path = "./pictures/provaEdo.png"
             cv2.imwrite(path, img)
