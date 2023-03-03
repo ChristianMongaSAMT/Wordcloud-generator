@@ -24,6 +24,11 @@ aprire un progetto tramite code (Worldcloud-generator\5_Applicativo)
 
 
 
+https://kivy.org/doc/stable/api-kivy.uix.image.html --> norm image size
+https://docs.opencv.org/4.x/d3/df2/tutorial_py_basic_ops.html --> lettura pixel
+
+
+
 
 
 
