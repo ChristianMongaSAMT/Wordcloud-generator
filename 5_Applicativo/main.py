@@ -18,7 +18,7 @@ from collections import OrderedDict
 #from kivy.lang import Builder
 #from kivy.core.text import _default_font_paths
 #from kivy.properties import StringProperty
-#from kivy.core.window import Window
+from kivy.core.window import Window
 
 Config.read('./config.ini')
 
@@ -137,17 +137,30 @@ class WordCloudApp(App):
         # Ritorna il tipo di input selezionato
         return self.root.get_screen('gui').ids.inputType.text
 
-    def generateListWord(self, type):
+    def generateListWord(self):
         self.words = ''
+        self.wordsOrderByEmphasis = {}
+        inputType = self.getInputType()
         
         # Controlla il tipo di input e in base a quello memorizza le parole
-        if(type == 'FILE'):
+        if(inputType == 'FILE'):
             self.getWordsFromFile()
-        elif(type == 'URL'):
+        elif(inputType == 'URL'):
             self.getWordsFromUrl()
         else:
-            self.words =  self.root.get_screen('gui').ids.pathWords.text
+            self.getWordsFromText()
         
+        # Controlla le parole
+        self.checkWords(self.words)
+        
+        # Memorizza l'enfasi delle parole
+        self.orderByEmphasis()
+
+        self.userEmphasis()
+          
+
+    def checkWords(self, wordsToCheck):
+        self.words = wordsToCheck
         # Ciclo per escludere i carattero speciali
         for character in self.words:    
             # isalpha accetta anche i caratteri speiali come "?", "!", "@"
@@ -157,25 +170,26 @@ class WordCloudApp(App):
         
         # Se words contiene qualcosa 
         if(len(self.words) > 0):
-            printer = ''
-
             # Separa le parole
             self.words = self.words.rsplit(" ")
 
             # Controlla singolarmente ogni parola
             for word in self.words:
                 if(word != ''):
+                    # Controlla se la parola scritta è contenuta nelle parole escluse
                     for excludedWord in self.excludedWords:
                         if(word.lower() == excludedWord.lower()):
                             self.isWordValid = False
+                    # Se la parola è valida la inserisce nell'array
                     if(self.isWordValid):
-                        printer += word + '\n'
+                        if (word not in self.wordsOrderByEmphasis):
+                            self.wordsOrderByEmphasis[word] = 0
                 self.isWordValid = True
-                self.wordsOrderByEmphasis[word] = 0
-            
-            # Memorizza l'enfasi delle parole
-            self.orderByEmphasis()  
-    
+                
+    def getWordsFromText(self):
+        # Prende le parole dal testo inserito
+        self.words =  self.root.get_screen('gui').ids.pathWords.text
+
     def getWordsFromFile(self):
         # Memorizza la path del file
         wordFile = self.root.get_screen('gui').ids.pathWords.text
@@ -217,13 +231,34 @@ class WordCloudApp(App):
     def orderByEmphasis(self):
         # Ordina le parole per la loro enfasi
         for word in self.words:
-            self.wordsOrderByEmphasis[word] += 1
+            if(word != ''):
+                self.wordsOrderByEmphasis[word] += 1
 
-        self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=True))
-        
+        self.sortEmphasisWords()
+    
+    def userEmphasis(self):
+        words = self.root.get_screen('gui').ids.importantWords.text
+        # Controlla le parole inserite dall'utente
+        self.checkWords(words)
+        # Inverte l'array mettendo alla prima posizione l'ultima parola scritta
+        self.words = self.words[::-1]
+        print(self.words)
+
+        for word in self.words:
+            if(word != ''):
+                # Prende il valore più alto e lo usa per impostare l'enfasi della parola inserita dall'utente che sarà più grande di 1
+                self.wordsOrderByEmphasis[word] = list(self.wordsOrderByEmphasis.values())[0] + 1
+
+                # Ordina l'array
+                self.sortEmphasisWords()
+
+        print("---")
         for index in self.wordsOrderByEmphasis:
             print(f"{index}: {self.wordsOrderByEmphasis[index]}")
+        print("---")
         
+    def sortEmphasisWords(self):
+        self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=True))
 
 class DownloadScreen(Screen):
     pass
@@ -283,4 +318,5 @@ class ImageModifier(Screen, BoxLayout):
         self.ids.imageMod.reload()
 
 if __name__ == '__main__':
+    Window.fullscreen = 'auto'
     WordCloudApp().run()
