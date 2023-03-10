@@ -22,7 +22,8 @@ from kivy.config import Config
 
 imageWidth = 0
 img = 0
-BORDO = 10
+BORDI = -1
+GERARCHIA = -2
 
 class ConterGUI(BoxLayout):
     pass 
@@ -34,7 +35,7 @@ class ConterGUI(BoxLayout):
         y = math.trunc(touch.pos[1])
 
         screenDim = self.ids.image.size
-        imageDim = self.ids.image.norm_image_size
+        self.imageDim = self.ids.image.norm_image_size
 
         
 
@@ -46,36 +47,75 @@ class ConterGUI(BoxLayout):
             y = screenDim[1]/2 + d
         
         print("pos", touch.pos)
-        print("img", imageDim)
+        print("img", self.imageDim)
         print("dim", screenDim, "\n")
         
-        pxY = int(y-(screenDim[1] - imageDim[1])/2)
-        pxX = int(x-(screenDim[0] - imageDim[0])/2)
+        pxY = int(y-(screenDim[1] - self.imageDim[1])/2)
+        pxX = int(x-(screenDim[0] - self.imageDim[0])/2)
         print("X --> ", pxX)
-        #print(BORDO)
-        if(self.isInArea(pxX,pxY,imageDim)):
+        #print(BORDI)
+        if(self.isInArea(pxX,pxY)):
             
             print("cpos",pxX, pxY, "????????????????????")
             img[pxX,pxY] = [255,255,0]
             x = pxX - 5
             y = pxY - 5
-            while(x < pxX + 5):
+            """while(x < pxX + 5):
                 while(y < pxY + 5):
-                    img[y, x] = [255,255,0]
+                    if(self.isInArea(y,x, imageDim)):
+                        img[y, x] = [255,255,0]
                     y+=1                
                 x += 1
-                y = pxY - 5
-            print("Pura curiosità ", BORDO[4][1][0][1]) #[bordo][pixel][0--> evitare il valore strano][coordinata]
-            #self.highlightArea(img, pxX, pxY, imageDim)
+                y = pxY - 5"""
+            print("Pura curiosità ", BORDI[4][1][0][1]) #[bordo][pixel][0--> evitare il valore strano][coordinata]
+            #print("atisoiruc aruP ", "\n",GERARCHIA)
+            self.highlightArea(img, pxX, pxY)
             #path = "./pictures/provaEdo.png"
             cv2.imwrite(path, img)
             self.ids.image.source = path
             self.ids.image.reload()
 
-    def highlightArea(self, img, x, y, imageDim):
-        
-        if(self.isInArea(x,y,imageDim)):
-            img[y, x] = [255,255,0]
+    def highlightArea(self, img, x, y):
+        if(self.isInArea(x, y)):
+            popList = []
+            img[y, x] = [0,255,0]
+            if(self.isInArea(x + 1,y)):
+                pixel = [x + 1, y, False]
+                popList.append(pixel)
+            if(self.isInArea(x - 1,y)):
+                pixel = [x - 1, y, False]
+                popList.append(pixel)
+            if(self.isInArea(x,y + 1)):
+                pixel = [x, y + 1, False]
+                popList.append(pixel)
+            if(self.isInArea(x,y - 1)):
+                pixel = [x, y - 1, False]
+                popList.append(pixel) 
+            while(False in popList):
+                if(self.isInArea(x + 1,y)):
+                    pixel = [x + 1, y, False]
+                    popList.append(pixel)
+                if(self.isInArea(x - 1,y)):
+                    pixel = [x - 1, y, False]
+                    popList.append(pixel)
+                if(self.isInArea(x,y + 1)):
+                    pixel = [x, y + 1, False]
+                    popList.append(pixel)
+                if(self.isInArea(x,y - 1)):
+                    pixel = [x, y - 1, False]
+                    popList.append(pixel) 
+
+        """if(self.isInArea(x,y) and  not self.isHighlightedPixel(x,y, img)):
+            img[y, x] = [0,255,0]
+            if(self.isInArea(x + 1,y)):
+                self.highlightArea(img, x + 1, y)
+            if(self.isInArea(x - 1,y)):
+                self.highlightArea(img, x - 1, y)
+            if(self.isInArea(x,y + 1)):
+                self.highlightArea(img, x, y + 1)
+            if(self.isInArea(x,y - 1)):
+                self.highlightArea(img, x, y - 1)
+
             if(self.isInBorder(x + 1, y)):
                 self.highlightArea(img, x + 1, y, imageDim)
             if(self.isInBorder(x - 1, y)):
@@ -83,29 +123,51 @@ class ConterGUI(BoxLayout):
             if(self.isInBorder(x, y + 1)):
                 self.highlightArea(img, x, y + 1, imageDim)
             if(self.isInBorder(x, y - 1)):
-                self.highlightArea(img, x, y - 1, imageDim)
-        
-        """while(x < 10):
-            while(y < 10):
-                img[y, x] = [255,255,0]
-                y+=1                
-            x += 1
-            y = 0"""
-    
+                self.highlightArea(img, x, y - 1, imageDim)"""
+
+    def popNewPixels(self, x, y):
+        if(self.isInArea(x + 1,y)):
+            pixel = [x + 1, y]
+            popList.append(pixel)
+            popCheckList.append(False)
+        if(self.isInArea(x - 1,y)):
+            pixel = [x - 1, y]
+            popList.append(pixel)
+            popCheckList.append(False)
+        if(self.isInArea(x,y + 1)):
+            pixel = [x, y + 1]
+            popList.append(pixel)
+            popCheckList.append(False)
+        if(self.isInArea(x,y - 1)):
+            pixel = [x, y - 1]
+            popList.append(pixel) 
+            popCheckList.append(False)
+    def isHighlightedPixel(self, x, y, img):
+        test = np.array([0,255,0])
+        isEqual = True
+        for key, bgr in enumerate(img[y,x]):
+            if(isEqual):
+                if(not (bgr == test[key])):
+                    isEqual = False
+        return isEqual
+
     def isInBorder(self, x, y):
-        for bor in BORDO:
-            for cell in b:
-                if(BORDO[bor][cell][0] == x and BORDO[i, j, 1] == y):
+        #[bordo][pixel][0--> evitare il valore strano][coordinata]
+        for bordo in BORDI:
+            for pixel in bordo:
+                if(pixel[0][0] == x  and pixel[0][1] == y):
                     return False
         return True
 
-    def isInArea(self, x, y, imageDim):
+    def isInArea(self, x, y):
         #print(x > 0, "x > 0")
         #print(y > 0, "y > 0")
         #print(x < imageDim[0], "x < 500 | x = ", x)
         #print(y < imageDim[1], "y < 500", "\n")
-        if(x > 0 and y > 0 and x < imageDim[0] and y < imageDim[1]):
+        if(x > 0 and y > 0 and x < self.imageDim[0] and y < self.imageDim[1]):
+            print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: True')
             return True
+        print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: False')
         return False
         
 class ConterApp(App):
@@ -116,7 +178,8 @@ class ConterApp(App):
         return self.gui
 
     def build_image(self):
-        global BORDO
+        global BORDI
+        global GERARCHIA
         img = cv2.imread(self.path)
 
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -125,7 +188,8 @@ class ConterApp(App):
 
         contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
         print("Number of contours in image:",len(contours))
-        BORDO = contours
+        BORDI = contours
+        GERARCHIA = hierarchy
         for cnt in contours:
             area = cv2.contourArea(cnt)
             perimeter = cv2.arcLength(cnt, True)
