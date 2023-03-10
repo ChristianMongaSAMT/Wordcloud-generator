@@ -2,6 +2,7 @@ import os
 import cv2
 import validators
 import filetype
+import array
 
 from bs4 import BeautifulSoup
 from kivy.config import Config
@@ -62,7 +63,8 @@ class WordCloudApp(App):
     sm = ScreenManager()
 
     words = ""
-    excludedWords = open('./text/excludedWords.txt', 'r').read().rsplit(',')
+    excludedWords = ""
+    userExcludedWords = ""
     isWordValid = True
     
     # Dizionario
@@ -140,6 +142,8 @@ class WordCloudApp(App):
     def generateListWord(self):
         self.words = ''
         self.wordsOrderByEmphasis = {}
+        self.excludedWords = list(open('./text/excludedWords.txt', 'r').read().rsplit(','))
+        self.initUserExcludedWords()
         inputType = self.getInputType()
         
         # Controlla il tipo di input e in base a quello memorizza le parole
@@ -158,15 +162,18 @@ class WordCloudApp(App):
 
         self.userEmphasis()
           
+    def areLetters(self, words):
+        for character in words:    
+            # isalpha accetta anche i caratteri speiali come "?", "!", "@"
+            # isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
+            if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
+                words = words.replace(character, ' ')
+        return words
 
     def checkWords(self, wordsToCheck):
         self.words = wordsToCheck
         # Ciclo per escludere i carattero speciali
-        for character in self.words:    
-            # isalpha accetta anche i caratteri speiali come "?", "!", "@"
-            # isalpha  or  (character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')
-            if(not(character >= 'a' and character <= 'z' or character >= 'A' and character <= 'Z')):
-                self.words = self.words.replace(character, ' ')
+        self.words = self.areLetters(self.words)
         
         # Se words contiene qualcosa 
         if(len(self.words) > 0):
@@ -231,7 +238,7 @@ class WordCloudApp(App):
     def orderByEmphasis(self):
         # Ordina le parole per la loro enfasi
         for word in self.words:
-            if(word != ''):
+            if(word != '' and word in self.wordsOrderByEmphasis):
                 self.wordsOrderByEmphasis[word] += 1
 
         self.sortEmphasisWords()
@@ -256,7 +263,15 @@ class WordCloudApp(App):
         for index in self.wordsOrderByEmphasis:
             print(f"{index}: {self.wordsOrderByEmphasis[index]}")
         print("---")
-        
+    
+    def initUserExcludedWords(self):
+        exWords = self.root.get_screen('gui').ids.excludedWords.text
+        exWords = self.areLetters(exWords)
+        exWords = exWords.rsplit(" ")
+
+        for word in exWords:
+            self.excludedWords.append(word)
+
     def sortEmphasisWords(self):
         self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=True))
 
