@@ -302,13 +302,15 @@ class ImageModifier(Screen, BoxLayout):
         if(not (os.path.exists(path) and os.path.isfile(path) and filetype.is_image(path))):
             self.imagepath = './pictures/default.png'
         else:
-            self.imagepath = path      
+            self.imagepath = path
+
     def printAllWords(self, img, font, pathTempImage, wordsOrderByEmphasis):
         img = Image.open(pathTempImage)
         fontSize = 20
-        k = 1.5 #moltiplicatore
+        # Moltiplicatore
+        k = 1.5 
         for key, word in enumerate(wordsOrderByEmphasis):
-            #creo un immagine da sovrappore trasparente
+            # Creo un immagine da sovrappore trasparente
             myFont = ImageFont.truetype(FONT_MAPPING[font] , int(fontSize * (key+1) * k))
             tim = Image.new('RGBA', (500,200), (0,0,0,0))
             I1 = ImageDraw.Draw(tim)
@@ -324,6 +326,7 @@ class ImageModifier(Screen, BoxLayout):
                 img.paste(tim, (28, key * 50), tim)
 
         img.save(pathTempImage)
+        
     def createBorderImage(self, tolerance, font, wordsOrderByEmphasis):
         #Logger.info(f'createBorderImage with: {tolerance} on image {self.imagepath}')
 
