@@ -5,6 +5,7 @@ import filetype
 import array
 
 from bs4 import BeautifulSoup
+import kivy
 from kivy.config import Config
 from kivy.logger import Logger
 from kivy.app import App
@@ -14,6 +15,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.text import LabelBase
 from urllib.request import urlopen
 from collections import OrderedDict
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
 
 #from kivy.properties import ObjectProperty
 #from kivy.lang import Builder
@@ -57,10 +61,20 @@ class WordCloudGUI(BoxLayout, Screen):
         pass
         
 
+FONT_MAPPING = {}
+FONT_MAPPING['Cartoon'] = './fonts/from-cartoon-blocks/From Cartoon Blocks.ttf'
+FONT_MAPPING['Borex'] = './fonts/borex/BOREX-Regular.otf'
+FONT_MAPPING['Krinkes'] = './fonts/krinkes/KrinkesRegularPERSONAL.ttf'
+FONT_MAPPING['Theaters'] = './fonts/theaters/THEATERS DEMO REGULAR.ttf'
+
+for font_name, font_path in FONT_MAPPING.items():
+    LabelBase.register(name=font_name, fn_regular=font_path)    
 
 class WordCloudApp(App):
     path = './pictures/default.png'
+    wordsOrderByEmphasis = {}
     sm = ScreenManager()
+    font = ""
 
     words = ""
     excludedWords = ""
@@ -68,14 +82,12 @@ class WordCloudApp(App):
     isWordValid = True
     
     # Dizionario
-    wordsOrderByEmphasis = {}
     
     proxySetup = []
     isProxySetup = False
 
     def build(self):
         self.createScenes()
-        self.registerFonts()
         return self.sm
 
     def createScenes(self):
@@ -84,12 +96,6 @@ class WordCloudApp(App):
         self.sm.add_widget(DownloadScreen(name='download'))
         self.sm.add_widget(ImageModifier(name='image'))
 
-    def registerFonts(self):
-        # Registrazione dei font
-        LabelBase.register(name='Cartoon', fn_regular='./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf')
-        LabelBase.register(name='Borex', fn_regular='./fonts/borex/BOREX-Regular.otf')
-        LabelBase.register(name='Krinkes', fn_regular='./fonts/krinkes/KrinkesRegularPERSONAL.ttf')
-        LabelBase.register(name='Theaters', fn_regular='./fonts/theaters/THEATERS DEMO REGULAR.ttf')
 
     def getPathFromTextInput(self):
         # Prende la path per l'immagine dal text input
@@ -114,10 +120,11 @@ class WordCloudApp(App):
 
     def font_changed(self):
         # Memorizza il nuovo font
-        font = self.root.get_screen('gui').ids.fontSpinner.text
+        self.font = self.root.get_screen('gui').ids.fontSpinner.text
 
         # (Test) Applica il font al label
-        self.root.get_screen('gui').ids.fontLabel.font_name = font
+        print(self.font)
+        self.root.get_screen('gui').ids.fontLabel.font_name = self.font
 
     def changeToImageModifier(self):
         # Cambia scena impostanto quella dove si può modificare l'immagine base
@@ -133,7 +140,7 @@ class WordCloudApp(App):
         #get current screen (read only) as Object (not name) and since it is an intance of ImageModifier it contains the updateImage method
         
         # Richiama il metodo in ImageModifier per aggiornare l'immagine
-        self.sm.current_screen.updateImage(self.path, self, tolerance)
+        self.sm.current_screen.updateImage(self.path, self, tolerance, self.font, self.wordsOrderByEmphasis)
 
     def getInputType(self):
         # Ritorna il tipo di input selezionato
@@ -144,6 +151,7 @@ class WordCloudApp(App):
         self.wordsOrderByEmphasis = {}
         self.excludedWords = list(open('./text/excludedWords.txt', 'r').read().rsplit(','))
         self.initUserExcludedWords()
+        print(self.excludedWords)
         inputType = self.getInputType()
         
         # Controlla il tipo di input e in base a quello memorizza le parole
@@ -273,17 +281,17 @@ class WordCloudApp(App):
             self.excludedWords.append(word)
 
     def sortEmphasisWords(self):
-        self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=True))
+        self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=False))#TRUE DAL PIÙ GRANDE AL PIÙ PICCOLO
 
 class DownloadScreen(Screen):
     pass
 
 class ImageModifier(Screen, BoxLayout):
     
-    def updateImage(self, path, wcApp, tolerance):
+    def updateImage(self, path, wcApp, tolerance, font,wordsOrderByEmphasis):
         self.wcApp = wcApp
         self.setPath(path)
-        self.createBorderImage(tolerance)
+        self.createBorderImage(tolerance, font, wordsOrderByEmphasis)
 
         tolPer = int((self.ids.tolerance_slider.value / 2000) * 100)
         tolValue = f'Tolerance: {str(tolPer)}%'
@@ -295,8 +303,28 @@ class ImageModifier(Screen, BoxLayout):
             self.imagepath = './pictures/default.png'
         else:
             self.imagepath = path      
+    def printAllWords(self, img, font, pathTempImage, wordsOrderByEmphasis):
+        img = Image.open(pathTempImage)
+        fontSize = 20
+        k = 1.5 #moltiplicatore
+        for key, word in enumerate(wordsOrderByEmphasis):
+            #creo un immagine da sovrappore trasparente
+            myFont = ImageFont.truetype(FONT_MAPPING[font] , int(fontSize * (key+1) * k))
+            tim = Image.new('RGBA', (500,200), (0,0,0,0))
+            I1 = ImageDraw.Draw(tim)
 
-    def createBorderImage(self, tolerance):
+            I1.text((0,0), word, font=myFont, fill=(0,0,255))
+            print("starei ruotando")
+            if(key % 2 == 0):
+                tim = tim.rotate(90,  expand=1)
+                img.paste(tim, (key * 28, 50), tim)
+
+            else:
+                tim = tim.rotate(0,  expand=1)
+                img.paste(tim, (28, key * 50), tim)
+
+        img.save(pathTempImage)
+    def createBorderImage(self, tolerance, font, wordsOrderByEmphasis):
         #Logger.info(f'createBorderImage with: {tolerance} on image {self.imagepath}')
 
         # Legge l'immagine corrispondente alla path
@@ -324,6 +352,8 @@ class ImageModifier(Screen, BoxLayout):
         # Crea una nuova immagine che conterrà i bordi
         pathTempImage = './pictures/imageMod.png'
         cv2.imwrite(pathTempImage, img)
+
+        self.printAllWords(img, font, pathTempImage, wordsOrderByEmphasis)
 
         # Imposta la path nell'Image
         self.ids.imageMod.source = pathTempImage
