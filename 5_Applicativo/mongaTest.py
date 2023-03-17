@@ -8,15 +8,13 @@ from urllib.request import urlopen
 from kivy.core.text import LabelBase
 
 from kivy.app import App
-from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
-from kivy.uix.textinput import TextInput
-from kivy.uix.checkbox import CheckBox
 from kivy.lang import Builder
 
 
-ROWS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
+TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
+IMAGE_OPTIONS = ["Image Path", "Border", "Tolerance"]
 
 FONT_MAPPING = {}
 FONT_MAPPING['Cartoon'] = './fonts/from-cartoon-blocks/From Cartoon Blocks.ttf'
@@ -30,16 +28,27 @@ for font_name, font_path in FONT_MAPPING.items():
 Builder.load_string("""
 
 <MongaGUI>:
-    ScrollView:
-        Table:
-            orientation: "vertical"
-            size_hint_y: None
-            height: self.minimum_height
-            spacing: 50
-    Image:
-        id: image
-        source: './pictures/stellina.jpg'
-
+    BoxLayout:
+        padding: [10, 10, 10, 10]
+        ScrollView:
+            TextOptions:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 50
+    BoxLayout:
+        padding: [10, 0, 0, 10]
+        Image:
+            id: image
+            source: './pictures/stellina.jpg'
+    BoxLayout:
+        padding: [10, 10, 10, 10]  
+        ScrollView:
+            ImageOptions:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 50
 
 <InputType>:
     size_hint_y: None
@@ -61,9 +70,11 @@ Builder.load_string("""
             TextInput:
                 id: pathWords
                 hint_text: "Insert input"
-            Button:
-                text: 'Send'
-                on_release: root.generateListWord()
+            BoxLayout:
+                padding: [self.width*0.60,1,0,0]
+                Button:
+                    text: 'Send'
+                    on_release: root.generateListWord()
 
 <ExcludedWords>:
     size_hint_y: None
@@ -92,25 +103,55 @@ Builder.load_string("""
     Label:
         text: 'Font Family'
         id: fontLabel
-        font_size: '20sp'
-        text_size: self.size
-        size_hint: 1, 0.3
     Spinner:
-        text_size: self.size
         text: 'Font'
         values: 'Cartoon','Borex','Krinkes','Theaters','Calibri','Roboto'
         id: fontSpinner
         on_text:
             root.font_changed()
+
+<ImagePath>:
+    size_hint_y: None
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Path'
+        TextInput:
+            id: path
+            hint_text:'Enter text'
+<Border>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Border'
+            Switch:
+
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Border Size'
+            Slider:
+                id: border_slider
+                max: 50
+                value: 10   
 """)
 
-class Table(BoxLayout):
+class TextOptions(BoxLayout):
     def __init__(self, **kwargs):
-        super(Table, self).__init__(**kwargs)
-        self.add_widget(InputType(ROWS[0]))
-        self.add_widget(ImportantWords(ROWS[1]))
-        self.add_widget(ExcludedWords(ROWS[2]))
-        self.add_widget(FontFamily(ROWS[3]))
+        super(TextOptions, self).__init__(**kwargs)
+        self.add_widget(InputType(TEXT_OPTIONS[0]))
+        self.add_widget(ImportantWords(TEXT_OPTIONS[1]))
+        self.add_widget(ExcludedWords(TEXT_OPTIONS[2]))
+        self.add_widget(FontFamily(TEXT_OPTIONS[3]))
+
+class ImageOptions(BoxLayout):
+    def __init__(self, **kwargs):
+        super(ImageOptions, self).__init__(**kwargs)
+        self.add_widget(ImagePath(IMAGE_OPTIONS[0]))
+        self.add_widget(Border(IMAGE_OPTIONS[1]))
+        self.add_widget(Tolerance(IMAGE_OPTIONS[2]))
 
 class InputType(BoxLayout):
     path = './pictures/default.png'
@@ -141,7 +182,7 @@ class InputType(BoxLayout):
         self.words = ''
         self.wordsOrderByEmphasis = {}
         self.excludedWords = list(open('./text/excludedWords.txt', 'r').read().rsplit(','))
-        self.initUserExcludedWords()
+        #self.initUserExcludedWords()
         print(self.excludedWords)
         inputType = self.getInputType()
         
@@ -236,7 +277,6 @@ class InputType(BoxLayout):
                             self.wordsOrderByEmphasis[word] = 0
                 self.isWordValid = True
 
-
 class ImportantWords(BoxLayout):
     txt = StringProperty()
     
@@ -265,6 +305,34 @@ class FontFamily(BoxLayout):
         # (Test) Applica il font al label
         print(self.font)
         self.ids.fontLabel.font_name = self.font
+
+class ImagePath(BoxLayout):
+    txt = StringProperty()
+    
+    def __init__(self, row, **kwargs):
+        super(ImagePath, self).__init__(**kwargs)
+        self.txt = row
+
+class Border(BoxLayout):
+    txt = StringProperty()
+    
+    def __init__(self, row, **kwargs):
+        super(Border, self).__init__(**kwargs)
+        self.txt = row
+
+class BorderSize(BoxLayout):
+    txt = StringProperty()
+    
+    def __init__(self, row, **kwargs):
+        super(BorderSize, self).__init__(**kwargs)
+        self.txt = row
+
+class Tolerance(BoxLayout):
+    txt = StringProperty()
+    
+    def __init__(self, row, **kwargs):
+        super(Tolerance, self).__init__(**kwargs)
+        self.txt = row
 
 class MongaGUI(BoxLayout):
     pass
