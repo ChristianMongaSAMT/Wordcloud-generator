@@ -2,10 +2,16 @@ import os
 import cv2
 import validators
 import filetype
+import tkinter as tk
+from tkinter import filedialog
 
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from kivy.core.text import LabelBase
+from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.button import Button
+
 
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -29,6 +35,7 @@ Builder.load_string("""
 
 <MongaGUI>:
     BoxLayout:
+        size_hint_x: 0.25
         padding: [10, 10, 10, 10]
         ScrollView:
             TextOptions:
@@ -37,12 +44,20 @@ Builder.load_string("""
                 height: self.minimum_height
                 spacing: 50
     BoxLayout:
+        size_hint_x: 0.5
         padding: [10, 0, 0, 10]
         Image:
             id: image
-            source: './pictures/stellina.jpg'
+            source: './pictures/8k.jpg'
     BoxLayout:
-        padding: [10, 10, 10, 10]  
+        size_hint_x: 0.25
+        canvas.before:
+            Color:
+                rgba: (2/255), (198/255), (201/255), 0.98
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        padding: [10, 10, 10, 10]
         ScrollView:
             ImageOptions:
                 orientation: "vertical"
@@ -65,17 +80,19 @@ Builder.load_string("""
                 valign: 'middle'
                 text: 'LIST'
                 values: 'FILE', 'LIST', 'URL'
-        BoxLayout:
-            orientation: 'vertical'
+                on_text: root.generateListWord()
+            Button:
+                text: "Send"
+                on_release: root.generateListWord()
+        ScrollView:
+            id: scrlv
             TextInput:
                 id: pathWords
-                hint_text: "Insert input"
-            BoxLayout:
-                padding: [self.width*0.60,1,0,0]
-                Button:
-                    text: 'Send'
-                    on_release: root.generateListWord()
-
+                hint_text: "Text"
+                size_hint: 1, None
+                height: max(self.minimum_height, scrlv.height)
+        
+        
 <ExcludedWords>:
     size_hint_y: None
     size_hint_x: 1
@@ -120,6 +137,7 @@ Builder.load_string("""
             id: path
             hint_text:'Enter text'
 <Border>:
+    size_hint_y: None
     BoxLayout:
         orientation: 'vertical'
         BoxLayout:
@@ -127,7 +145,6 @@ Builder.load_string("""
             Label:
                 text: 'Border'
             Switch:
-
         BoxLayout:
             orientation: 'horizontal'
             Label:
@@ -135,7 +152,7 @@ Builder.load_string("""
             Slider:
                 id: border_slider
                 max: 50
-                value: 10   
+
 """)
 
 class TextOptions(BoxLayout):
@@ -156,7 +173,7 @@ class ImageOptions(BoxLayout):
 class InputType(BoxLayout):
     path = './pictures/default.png'
     wordsOrderByEmphasis = {}
-    #sm = ScreenManager()
+    sm = ScreenManager()
     font = ""
 
     words = ""
@@ -188,6 +205,7 @@ class InputType(BoxLayout):
         
         # Controlla il tipo di input e in base a quello memorizza le parole
         if(inputType == 'FILE'):
+            self.ids.pathWords.text = self.get_path()
             self.getWordsFromFile()
         elif(inputType == 'URL'):
             self.getWordsFromUrl()
@@ -276,6 +294,12 @@ class InputType(BoxLayout):
                         if (word not in self.wordsOrderByEmphasis):
                             self.wordsOrderByEmphasis[word] = 0
                 self.isWordValid = True
+    @staticmethod
+    def get_path():
+        root = tk.Tk()
+        root.withdraw()
+
+        return( filedialog.askopenfilename() )
 
 class ImportantWords(BoxLayout):
     txt = StringProperty()
@@ -333,6 +357,9 @@ class Tolerance(BoxLayout):
     def __init__(self, row, **kwargs):
         super(Tolerance, self).__init__(**kwargs)
         self.txt = row
+    
+    def editTolerance(self):
+        print("prova tasto")
 
 class MongaGUI(BoxLayout):
     pass
