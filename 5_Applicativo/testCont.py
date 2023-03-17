@@ -19,11 +19,20 @@ import cv2
 import numpy as np
 import math
 from kivy.config import Config
+import panel as pn
+from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+pn.extension()
 
 imageWidth = 0
 img = 0
 BORDI = -1
 GERARCHIA = -2
+
+
+class colorPicker():
+    colorPicker = pn.widgets.ColorPicker(name='Color Picker', value='#99ef78')
 
 class ConterGUI(BoxLayout):
     pass 
@@ -69,8 +78,6 @@ class ConterGUI(BoxLayout):
            
             #print("Pura curiosità ", BORDI[4][1][0][1]) #[bordo][pixel][0--> evitare il valore strano][coordinata]
             self.highlightArea(img, pxX, pxY)
-            print(self.isBorder(pxX, pxY, img))
-            #path = "./pictures/provaEdo.png"
             cv2.imwrite(path, img)
             self.ids.image.source = path
             self.ids.image.reload()
@@ -139,11 +146,6 @@ class ConterGUI(BoxLayout):
                     isEqual = False
 
         return isEqual
-        #[bordo][pixel][0--> evitare il valore strano][coordinata]
-        color = img[y][x]
-        bColor = [0, 0,255]
-        if(color == bColor):
-            return True
         """inABorder = True
 
         for bordo in BORDI:
@@ -154,10 +156,6 @@ class ConterGUI(BoxLayout):
         return inABorder"""
 
     def isInArea(self, x, y):
-        #print(x > 0, "x > 0")
-        #print(y > 0, "y > 0")
-        #print(x < imageDim[0], "x < 500 | x = ", x)
-        #print(y < imageDim[1], "y < 500", "\n")
         if(x >= 0 and y >= 0 and x < self.imageDim[0] and y < self.imageDim[1]):
             #print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: True')
             return True
@@ -166,7 +164,9 @@ class ConterGUI(BoxLayout):
         
 class ConterApp(App):
     path = './pictures/heart.png'
-    def build(self):            
+    def build(self):
+        sm = ScreenManager()
+        self.sm.add_widget(ConterGUI(name='gui'))
         self.build_image()
         self.gui = ConterGUI()
         return self.gui
