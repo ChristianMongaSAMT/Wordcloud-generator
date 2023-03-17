@@ -1,5 +1,6 @@
 import os
 import cv2
+import numpy as np
 import validators
 import filetype
 import array
@@ -303,21 +304,28 @@ class ImageModifier(Screen, BoxLayout):
             self.imagepath = './pictures/default.png'
         else:
             self.imagepath = path
+    def getWordSize(self, font, word):
+        return font.getsize(word)
 
     def printAllWords(self, img, font, pathTempImage, wordsOrderByEmphasis):
         img = Image.open(pathTempImage)
+        imgRead = cv2.imread(self.imagepath)
         fontSize = 20
         # Moltiplicatore
         k = 1.5 
         for key, word in enumerate(wordsOrderByEmphasis):
-            # Creo un immagine da sovrappore trasparente
             myFont = ImageFont.truetype(FONT_MAPPING[font] , int(fontSize * (key+1) * k))
-            tim = Image.new('RGBA', (500,200), (0,0,0,0))
-            I1 = ImageDraw.Draw(tim)
+            sizeWord = self.getWordSize(myFont, word)
+            #print(f'size di \"{word}\" è: {sizeWord}')
+            # Creo un immagine da sovrappore trasparente
+            tim = Image.new('RGBA', (sizeWord[0] + 1, sizeWord[1]+1), (0,0,0,0))
+            temp = ImageDraw.Draw(tim)
+            while(isPositionTextValid()):
+                rectangle = [(0, 0), (sizeWord[0], sizeWord[1])]
+                
+            temp.rectangle(rectangle, outline="#F00")
 
-            I1.text((0,0), word, font=myFont, fill=(0,0,255))
-            print("starei ruotando")
-            if(key % 2 == 0):
+            if(key % 2 != 0):
                 tim = tim.rotate(90,  expand=1)
                 img.paste(tim, (key * 28, 50), tim)
 
@@ -325,8 +333,26 @@ class ImageModifier(Screen, BoxLayout):
                 tim = tim.rotate(0,  expand=1)
                 img.paste(tim, (28, key * 50), tim)
 
-        img.save(pathTempImage)
-        
+            print(imgRead[28,1][1])
+            """for y in range(key * 50 + 30):
+                for x in range(100):
+                    if(imgRead[y,x][1] == 255):
+                        print(f'x: {x}, y: {y}')"""
+            #print(f'color: {imgRead[28, key * 50]}')
+            temp.text((0,0), word, font=myFont, fill=(0,0,255))
+
+        img.save(pathTempImage)   
+
+    def isPositionTextValid(self, startX, startY, width, height, img):
+        white = np.array([255,255,255])
+        for x in range(width):
+            for y in range(height):
+                for key, bgr in enumerate(img[startY + y,startX + x]):
+                    if(not (bgr == white[key])):
+                        return False
+        return True
+
+
     def createBorderImage(self, tolerance, font, wordsOrderByEmphasis):
         #Logger.info(f'createBorderImage with: {tolerance} on image {self.imagepath}')
 
@@ -366,5 +392,5 @@ class ImageModifier(Screen, BoxLayout):
         self.ids.imageMod.reload()
 
 if __name__ == '__main__':
-    Window.fullscreen = 'auto'
+    Window.fullscreen = False
     WordCloudApp().run()

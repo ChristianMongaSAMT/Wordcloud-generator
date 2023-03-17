@@ -4,12 +4,14 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
+from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.core.window import Window
 from pathlib import Path
 from kivy.config import Config
 from kivy.core.window import Window
+from kivy.uix.scrollview import ScrollView
 
 
 import os
@@ -19,7 +21,7 @@ import validators
 
 Config.read('./config.ini')
 
-class CurialeGUI(GridLayout): 
+class CurialeGUI(BoxLayout, TabbedPanel): 
     pass
 
 class CurialeApp(App):

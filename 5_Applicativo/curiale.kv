@@ -1,39 +1,59 @@
 #:kivy 2.1.0
     
 <CurialeGUI>:
-    cols: 3
-    GridLayout:
-        cols:2
-        rows: 5
-        size_hint_x:None
-        width:400
-        orientation: center
-        Label:
-            size_hint_x:None
-            width:100
-            text: 'Input type:'
-        Button:
-            size_hint_y:None
-            height: '30sp'
-            text: 'Input type:'
-        Label:
-            size_hint_x:None
-            width:100
-            text: 'Input type:'
-        Button:
-            text: 'Input type:'
-        Label:
-            size_hint_x:None
-            width:100
-            text: 'Input type:'
-        Button:
-            text: 'Input type:'
+    do_default_tab: True
+    orientation: 'vertical'
+    TabbedPanelItem:
+        text: 'Text Controll'
+        BoxLayout:
+            orientation: 'horizontal'
+            TabbedPanelItem:
+                text: 'FILE'
+                BoxLayout:
+                    orientation: 'vertical'
+                    TextInput:
+                        id: pathWords
+                        hint_text:'Enter path file words'
+            TabbedPanelItem:
+                text: 'LIST'
+                BoxLayout:
+                    orientation: 'vertical'
+                    TextInput:
+                        id: pathWords
+                        hint_text:'Enter List words'
+            TabbedPanelItem:
+                text: 'URL'
+                BoxLayout:
+                    orientation: 'vertical'
+                    TextInput:
+                        id: pathWords
+                        hint_text:'Enter path url words'
         
-    Image:
-        id: image
-        source: './pictures/prova.png'
+        
 
-    Button:
-        size_hint_x:None
-        width:100
-        text: 'Input type:'
+    TabbedPanelItem:
+        text: 'Image Controll'
+
+        BoxLayout:
+            padding: 50, 50, 50, 50
+            orientation: 'horizontal'
+
+            BoxLayout:
+                spacing: 50
+                orientation: 'vertical'
+                Label:
+                    text: 'label'
+                Label:
+                    text: 'label'
+                Label:
+
+            BoxLayout:
+                spacing: 50
+                orientation: 'vertical'
+                TextInput:
+                    text: 'TextInput'
+                TextInput:
+                    text: 'TextInput'
+                Button:
+                    spacing: 100
+                    text: 'button'
