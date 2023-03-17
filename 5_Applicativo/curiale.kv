@@ -1,6 +1,7 @@
 #:kivy 2.1.0
     
 <CurialeGUI>:
+<<<<<<< HEAD
     do_default_tab: True
     orientation: 'vertical'
     TabbedPanelItem:
@@ -57,3 +58,62 @@
                 Button:
                     spacing: 100
                     text: 'button'
+=======
+    cols: 3
+    GridLayout:
+        cols:2
+        rows: 5
+        size_hint_x:None
+        width: '100dp'
+        ScrollView:
+            Table:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: 50, 50, 50, 50
+                Label:
+                    text: 'Input type:'
+                Button:
+                    text: 'Button'
+                Label:
+                    text: 'Input type:'
+                Button:
+                    text: 'Button'
+                Label:
+                    text: 'Input type:'
+                Button:
+                    text: 'Button'
+                
+                TabbedPanelItem:
+                    text: 'page1'
+    
+    GridLayout:
+        cols: 1
+        rows: 2
+        
+        Label:
+            text: "Path immagine"
+            size_hint_y: None
+            canvas.before:
+                Color:
+                    rgba: (2/255), (198/255), (201/255), 0.98
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+        Image:
+            id: image
+            source: './pictures/stellina.jpg'
+            canvas.before:
+                Color:
+                    rgba: (255/255), (0/255), (0/255), 0.98
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+    GridLayout:
+        cols: 2
+        rows: 5
+        width: '400dp'
+        size_hint_x:None
+        Button:
+            text: 'Input type:'
+>>>>>>> f2d637732ac4df8a54bcc7dd743709f0ee48a6b2

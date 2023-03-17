@@ -1,18 +1,18 @@
-import kivy
-
 from kivy.app import App
+<<<<<<< HEAD
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.tabbedpanel import TabbedPanel
+=======
+from kivy.uix.gridlayout import GridLayout
+>>>>>>> f2d637732ac4df8a54bcc7dd743709f0ee48a6b2
 from kivy.core.window import Window
-from pathlib import Path
 from kivy.config import Config
 from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
-
 
 import os
 from bs4 import BeautifulSoup
@@ -108,6 +108,8 @@ class CurialeApp(App):
         for indice in self.wordsOrderByEmphasis:
             print(f"{indice}: {self.wordsOrderByEmphasis[indice]}")
         #self.wordsOrderByEmphasis = sorted(self.wordsOrderByEmphasis)
+
+
 if __name__ == '__main__':
     Window.maximize()
     CurialeApp().run()
