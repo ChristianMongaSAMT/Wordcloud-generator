@@ -9,12 +9,15 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 
+import queue
+
 
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border", "Tolerance"]
 imageSource = "./pictures/default.png"
-Builder.load_string("""
+q = queue.Queue() #global messages
 
+Builder.load_string("""
 <WordCloudGUI>:
     BoxLayout:
         size_hint_x: 0.25
@@ -153,6 +156,7 @@ class ImageOptions(BoxLayout):
     def __init__(self, **kwargs):
         super(ImageOptions, self).__init__(**kwargs)
         self.add_widget(ImageSelector(IMAGE_OPTIONS[0]))
+        #self.add_widget(ImageSelector(IMAGE_OPTIONS[0]).setQueue(q))
         self.add_widget(Border(IMAGE_OPTIONS[1]))
         self.add_widget(Tolerance(IMAGE_OPTIONS[2]))
 

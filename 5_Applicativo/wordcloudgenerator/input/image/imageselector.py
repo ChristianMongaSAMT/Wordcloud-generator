@@ -3,7 +3,8 @@ import filetype
 import os
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
-#from guigenerator import imageSource
+
+
 class ImageSelector(BoxLayout):
     txt = StringProperty()
 
@@ -12,6 +13,7 @@ class ImageSelector(BoxLayout):
     def __init__(self, row, **kwargs):
         super(ImageSelector, self).__init__(**kwargs)
         self.txt = row
+
     def updateImage(self, path, wcApp, tolerance, font,wordsOrderByEmphasis):
         self.wcApp = wcApp
         self.setPath(path)
@@ -27,6 +29,7 @@ class ImageSelector(BoxLayout):
             self.imagepath = './pictures/default.png'
         else:
             self.imagepath = path
+
     
     def visualizer(self):
         # Memorizza la nuova path
