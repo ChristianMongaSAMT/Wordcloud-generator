@@ -1,0 +1,2 @@
+La maschera controlla il flooding
+L'immagine il contorno e l'area

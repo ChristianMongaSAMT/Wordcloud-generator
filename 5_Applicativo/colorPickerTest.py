@@ -10,7 +10,7 @@ from kivy.core.text import LabelBase
 from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.button import Button
-
+from kivy.uix.splitter import Splitter
 
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -21,9 +21,17 @@ from kivy.uix.colorpicker import ColorPicker
 
 import math
 
+BORDER_COLOR = (100,100,100)
+
 Builder.load_string('''
 <MongaGUI>:
     BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 0, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
         size: self.size
         ImageBox:
 
@@ -32,6 +40,12 @@ Builder.load_string('''
         id: image
         source: root.startPath
         size: self.size
+        canvas.before:
+            Color:
+                rgba: 0, 1, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
 
 ''')
 
@@ -39,59 +53,68 @@ class ImageBox(BoxLayout):
     def __init__(self, **kwargs):
         super(ImageBox, self).__init__(**kwargs)
         self.add_widget(ImageSelection())
+        self.add_widget(Splitter())
         colorPicker = ColorPicker()
-        colorPicker.padding = [10,10,10,10]
+        colorPicker.bind(color=self.on_color)
         self.add_widget(colorPicker)
+
+    def on_color(self, instance, value):
+        global BORDER_COLOR
+        #print("RGBA = ", str(value))  #  or instance.color
+        #print("HSV = ", str(instance.hsv))
+        #print("HEX = ", str(instance.hex_color))
+        BORDER_COLOR = (int(value[2] * 255), int(value[1] * 255), int(value[0] * 255))
+
 
 class ImageSelection(BoxLayout):
     startPath = './pictures/cerchio.png'
+    contours = -1
+
     def __init__(self, **kwargs):
         super(ImageSelection, self).__init__(**kwargs)
         self.buildImage()
     
     def buildImage(self):
-        global BORDI
-        global GERARCHIA
         img = cv2.imread(self.startPath)
+        print(img.shape,"albatros")
+        mask = np.zeros((img.shape[0],img.shape[1],1), np.uint8)
 
+        cv2.imwrite("./pictures/provaEdoBN.png", mask, [cv2.IMWRITE_PNG_BILEVEL, 1])
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         ret,thresh = cv2.threshold(gray,150,255,0)
-
-        contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-        print("Number of contours in image:",len(contours))
-        BORDI = contours
-        GERARCHIA = hierarchy
-        for cnt in contours:
+        #countour[4][1][0][1]) #[bordo][pixel][0--> evitare il valore strano][coordinata]
+        self.contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        #BORDERS = contours
+        for cnt in self.contours:
             area = cv2.contourArea(cnt)
             perimeter = cv2.arcLength(cnt, True)
             perimeter = round(perimeter, 3)
 
             if(area > 1000):
-                #print('Area:', area)
-                #print('Perimeter:', perimeter)
-                bordo = cv2.drawContours(img, [cnt], -1, (0,0,150), 1)
-                #self.gui.setBorder("ok")
+                cv2.drawContours(img, [cnt], -1, BORDER_COLOR, 1)
                 x1, y1 = cnt[0,0]
-
-        #cv2.imshow("Image", img)
-        
-        #self.path = "./pictures/cerchio.png"
         pathTempImage = "./pictures/provaEdo.png"
         cv2.imwrite(pathTempImage, img)
-        #self.root.ids.image.source = pathTempImage
-        #self.root.ids.image.reload()
     
     def on_touch_down(self, touch):
         path = './pictures/provaEdo.png'
         img = cv2.imread(path)
+        mask = cv2.imread('./pictures/provaEdoBN.png', cv2.IMREAD_UNCHANGED)
+        for cnt in self.contours:
+            area = cv2.contourArea(cnt)
+            perimeter = cv2.arcLength(cnt, True)
+            perimeter = round(perimeter, 3)
+
+            if(area > 1000):
+                cv2.drawContours(img, [cnt], -1, BORDER_COLOR, 1)
+                x1, y1 = cnt[0,0]
         x = math.trunc(touch.pos[0])
         
         y = math.trunc(touch.pos[1])
 
         screenDim = self.ids.image.size
         self.imageDim = self.ids.image.norm_image_size
-        self.popList = []
 
         if(y > screenDim[1]/2):
             d = y - screenDim[1]/2
@@ -119,19 +142,20 @@ class ImageSelection(BoxLayout):
                     y+=1                
                 x += 1
                 y = pxY - 5"""
-           
-            #print("Pura curiosità ", BORDI[4][1][0][1]) #[bordo][pixel][0--> evitare il valore strano][coordinata]
-            self.highlightArea(img, pxX, pxY)
-            cv2.imwrite(path, img)
+            self.highlightArea(img, mask, pxX, pxY)
+            cv2.imwrite('./pictures/provaEdoBN.png', mask, [cv2.IMWRITE_PNG_BILEVEL, 1])
             self.ids.image.source = path
             self.ids.image.reload()
 
-    def highlightArea(self, img, x, y):
+    def highlightArea(self, img, mask, x, y):
         queue = []
         queue.append([x, y])
         # Color the pixel with the new color
-        color = [0,255,0]
-        img[y][x] = color
+        #color = [0,255,0]
+        color = 1
+        #color = BORDER_COLOR
+
+        mask[y][x] = color
 
         while queue:
             
@@ -139,41 +163,39 @@ class ImageSelection(BoxLayout):
             
             posX = currPixel[0]
             posY = currPixel[1]
-            
-            if(self.isInArea(posX + 1, posY) and not self.isHighlightedPixel(posX + 1, posY, img) and not self.isBorder(posX + 1, posY, img)):
-                img[posY][posX + 1] = color
+            if(self.isInArea(posX + 1, posY) and not self.isHighlightedPixel(posX + 1, posY, mask) and not self.isBorder(posX + 1, posY, img)):
+                mask[posY][posX + 1] = color
                 queue.append([posX + 1, posY])
 
-            if(self.isInArea(posX - 1, posY) and not self.isHighlightedPixel(posX - 1, posY, img) and not self.isBorder(posX - 1, posY, img)):
-                img[posY][posX - 1] = color
+            if(self.isInArea(posX - 1, posY) and not self.isHighlightedPixel(posX - 1, posY, mask) and not self.isBorder(posX - 1, posY, img)):
+                mask[posY][posX - 1] = color
                 queue.append([posX - 1, posY])
             
-            if(self.isInArea(posX, posY + 1) and not self.isHighlightedPixel(posX, posY + 1, img) and not self.isBorder(posX, posY + 1, img)):
-                img[posY + 1][posX] = color
+            if(self.isInArea(posX, posY + 1) and not self.isHighlightedPixel(posX, posY + 1, mask) and not self.isBorder(posX, posY + 1, img)):
+                mask[posY + 1][posX] = color
                 queue.append([posX, posY + 1])
             
-            if( self.isInArea(posX, posY + 1) and not self.isHighlightedPixel(posX, posY - 1, img) and not self.isBorder(posX, posY - 1, img)):
-                img[posY - 1][posX] = color
+            if( self.isInArea(posX, posY + 1) and not self.isHighlightedPixel(posX, posY - 1, mask) and not self.isBorder(posX, posY - 1, img)):
+                mask[posY - 1][posX] = color
                 queue.append([posX, posY - 1])
 
     def isHighlightedPixel(self, x, y, img):
-        test = np.array([0,255,0])
-        isEqual = True
+        color = 1
+        return color == img[y,x]
+        """isEqual = True
         for key, bgr in enumerate(img[y,x]):
             if(isEqual):
-                if(not (bgr == test[key])):
-                    isEqual = False
+                if(not (bgr == color[key])):
+                    isEqual = False"""
 
         return isEqual
 
     def isBorder(self, x, y, img):
-        test = np.array([0, 0, 150])
         isEqual = True
         for key, bgr in enumerate(img[y,x]):
             if(isEqual):
-                if(not (bgr == test[key])):
+                if(not (bgr == BORDER_COLOR[key])):
                     isEqual = False
-
         return isEqual
 
     def isInArea(self, x, y):
