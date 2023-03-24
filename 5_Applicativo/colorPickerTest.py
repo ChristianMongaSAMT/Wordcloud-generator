@@ -1,53 +1,87 @@
-from kivy.uix.button import Button
-from kivy.core.text import LabelBase
-from kivy.lang import Builder
-from kivy.properties import StringProperty
-import logging
-import kivy
-from kivy.uix.widget import Widget
-from kivy.uix.behaviors import DragBehavior
-from kivy.lang import Builder
-from pathlib import Path
-from kivy.uix.label import Label
-from kivy.uix.boxlayout import BoxLayout
-from kivy.app import App
-from kivy.core.window import Window
-from kivy.core.text import _default_font_paths
-from kivy.graphics import *
-from kivy.uix.recycleview import RecycleView
+import os
 import cv2
+import validators
+import tkinter as tk
+from tkinter import filedialog
 import numpy as np
-import math
-from kivy.config import Config
-import panel as pn
+
+from urllib.request import urlopen
+from kivy.core.text import LabelBase
 from kivy.uix.screenmanager import Screen
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.colorpicker import ColorPicker
-from kivy.uix.popup import Popup
-import tkinter as tk
-from tkinter import ttk
-from tkinter.colorchooser import askcolor
-from tkinter import colorchooser
+from kivy.uix.button import Button
+
+
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import StringProperty
 from kivy.lang import Builder
 
-imageWidth = 0
-img = 0
-BORDI = -1
-GERARCHIA = -2
+from kivy.uix.colorpicker import ColorPicker
+
+import math
 
 Builder.load_string('''
-<ConterGUI>:
+<MongaGUI>:
     BoxLayout:
         size: self.size
-        Image:
-            id: image
-            source: app.path
-            size: self.size
+        ImageBox:
+
+<ImageSelection>:
+    Image:
+        id: image
+        source: root.startPath
+        size: self.size
+
 ''')
 
+class ImageBox(BoxLayout):
+    def __init__(self, **kwargs):
+        super(ImageBox, self).__init__(**kwargs)
+        self.add_widget(ImageSelection())
+        colorPicker = ColorPicker()
+        colorPicker.padding = [10,10,10,10]
+        self.add_widget(colorPicker)
+
+class ImageSelection(BoxLayout):
+    startPath = './pictures/cerchio.png'
+    def __init__(self, **kwargs):
+        super(ImageSelection, self).__init__(**kwargs)
+        self.buildImage()
     
-class ConterGUI(BoxLayout):
-    pass
+    def buildImage(self):
+        global BORDI
+        global GERARCHIA
+        img = cv2.imread(self.startPath)
+
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        ret,thresh = cv2.threshold(gray,150,255,0)
+
+        contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        print("Number of contours in image:",len(contours))
+        BORDI = contours
+        GERARCHIA = hierarchy
+        for cnt in contours:
+            area = cv2.contourArea(cnt)
+            perimeter = cv2.arcLength(cnt, True)
+            perimeter = round(perimeter, 3)
+
+            if(area > 1000):
+                #print('Area:', area)
+                #print('Perimeter:', perimeter)
+                bordo = cv2.drawContours(img, [cnt], -1, (0,0,150), 1)
+                #self.gui.setBorder("ok")
+                x1, y1 = cnt[0,0]
+
+        #cv2.imshow("Image", img)
+        
+        #self.path = "./pictures/cerchio.png"
+        pathTempImage = "./pictures/provaEdo.png"
+        cv2.imwrite(pathTempImage, img)
+        #self.root.ids.image.source = pathTempImage
+        #self.root.ids.image.reload()
+    
     def on_touch_down(self, touch):
         path = './pictures/provaEdo.png'
         img = cv2.imread(path)
@@ -149,55 +183,15 @@ class ConterGUI(BoxLayout):
         #print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: False')
         return False
 
-    
-class ConterApp(App):
-    path = './pictures/cerchio.png'
+class MongaGUI(BoxLayout):
+    pass
+
+class MongaApp(App):
     def build(self):
-
-        self.build_image()
-        self.gui = ConterGUI()
-        colorPicker = ColorPicker()
-        self.gui.add_widget(colorPicker)
-        return self.gui
-
-    
-
-    def build_image(self):
-        global BORDI
-        global GERARCHIA
-        img = cv2.imread(self.path)
-
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-        ret,thresh = cv2.threshold(gray,150,255,0)
-
-        contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-        print("Number of contours in image:",len(contours))
-        BORDI = contours
-        GERARCHIA = hierarchy
-        for cnt in contours:
-            area = cv2.contourArea(cnt)
-            perimeter = cv2.arcLength(cnt, True)
-            perimeter = round(perimeter, 3)
-
-            if(area > 1000):
-                #print('Area:', area)
-                #print('Perimeter:', perimeter)
-                bordo = cv2.drawContours(img, [cnt], -1, (0,0,150), 1)
-                #self.gui.setBorder("ok")
-                x1, y1 = cnt[0,0]
-
-        #cv2.imshow("Image", img)
-        
-        #self.path = "./pictures/cerchio.png"
-        pathTempImage = "./pictures/provaEdo.png"
-        cv2.imwrite(pathTempImage, img)
-        #self.root.ids.image.source = pathTempImage
-        #self.root.ids.image.reload()
+        mongaGUI = MongaGUI()
+        return mongaGUI
     
     
 
 if __name__ == '__main__':
-    ConterApp().run()
-    
-    
+    MongaApp().run()
