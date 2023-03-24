@@ -12,7 +12,7 @@ from kivy.lang import Builder
 
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border", "Tolerance"]
-
+imageSource = "./pictures/default.png"
 Builder.load_string("""
 
 <WordCloudGUI>:
@@ -110,6 +110,7 @@ Builder.load_string("""
         TextInput:
             id: path
             hint_text:'Enter text'
+            on_text: root.visualizer()
 <Border>:
     BoxLayout:
         orientation: 'vertical'
@@ -159,6 +160,12 @@ class ImageOptions(BoxLayout):
 
 class WordCloudGUI(BoxLayout):
     pass
+
+    def getPath(self):
+        return self.ids.image.source
+
+    def setPath(self, path):
+        self.ids.image.source = path
 
 class WordCloudApp(App):
     def build(self):
