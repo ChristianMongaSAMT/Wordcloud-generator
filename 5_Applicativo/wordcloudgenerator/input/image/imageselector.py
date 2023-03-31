@@ -12,7 +12,7 @@ from kivy.properties import StringProperty
 
 path = './pictures/stellina.jpg'
 q = queue.Queue() #global messages
-q.put('./pictures/default.png')
+q.put('./pictures/imageMod.png')
 
 def getQueue():
     val = None
@@ -45,14 +45,6 @@ class ImageSelector(BoxLayout, Widget):
         tolPer = int((self.ids.tolerance_slider.value / 2000) * 100)
         tolValue = f'Tolerance: {str(tolPer)}%'
         self.ids.tolerance_label.text = tolValue
-
-    '''def setPasfsdfth(self):
-        # Controlla se è una path valida, se la path è un file e se è un'immagine
-        
-        if(not (os.path.exists(path) and os.path.isfile(path) and FileType.is_image(path))):
-            self.imagepath = './pictures/default.png'
-        else:
-            self.imagepath = path'''
 
     def visualizer(self):
         global q
