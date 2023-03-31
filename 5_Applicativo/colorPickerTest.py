@@ -140,14 +140,7 @@ class ImageSelection(BoxLayout):
         ret,thresh = cv2.threshold(gray,150,255,0)
         #countour[4][1][0][1]) #[bordo][pixel][0--> evitare il valore strano][coordinata]
         self.contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-        for cnt in self.contours:
-            area = cv2.contourArea(cnt)
-            perimeter = cv2.arcLength(cnt, True)
-            perimeter = round(perimeter, 3)
-
-            if(area > 1000):
-                cv2.drawContours(img, [cnt], -1, BORDER_COLOR, 1)
-                x1, y1 = cnt[0,0]
+        
         cv2.imwrite(TEMP_PATH, img)
     
     def on_touch_down(self, touch):
@@ -155,13 +148,8 @@ class ImageSelection(BoxLayout):
         mask = cv2.imread(MASK_PATH, cv2.IMREAD_UNCHANGED)
         for cnt in self.contours:
             area = cv2.contourArea(cnt)
-            perimeter = cv2.arcLength(cnt, True)
-            perimeter = round(perimeter, 3)
-
             if(area > 1000):
                 cv2.drawContours(img, [cnt], -1, BORDER_COLOR, 1)
-                x1, y1 = cnt[0,0]
-
         x = math.trunc(touch.pos[0])
         y = math.trunc(touch.pos[1])
         screenDim = self.ids.image.size
