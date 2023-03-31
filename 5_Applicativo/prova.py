@@ -47,14 +47,6 @@ class fontfamilyApp(App):
         LabelBase.register(name='Theaters',
                    fn_regular='E:/306/Worldcloud-generatorData/fonts/theaters/THEATERS DEMO REGULAR.ttf')
         self.build_image
-        """with fontFam.canvas:
-            # Add a red color
-            Color(1., 0, 0)
-
-            # Add a rectangle
-            Ellipse(pos=(10,10), size=(500, 500))"""
-
-
         return fontFam
 
     def getText(self):

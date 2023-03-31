@@ -18,14 +18,19 @@ from kivy.properties import StringProperty
 from kivy.lang import Builder
 
 from kivy.uix.colorpicker import ColorPicker
+from PIL import Image
+import getpass
+import os.path
 
 import math
 
 BORDER_COLOR = (100,100,100)
+DOWNLOAD = -1
 
 Builder.load_string('''
 <MongaGUI>:
     BoxLayout:
+        
         canvas.before:
             Color:
                 rgba: 1, 0, 0, 0.5
@@ -33,6 +38,7 @@ Builder.load_string('''
                 size: self.size
                 pos: self.pos
         size: self.size
+        
         ImageBox:
 
 <ImageSelection>:
@@ -46,17 +52,36 @@ Builder.load_string('''
             Rectangle:
                 size: self.size
                 pos: self.pos
+<Download>:
+    BoxLayout:
+        padding: [50,50,50,50]
+        Button:
+            text:"Conferma"
+            id: download_button
+            on_release: app.download()        
+        Spinner:
+            size_hint: None, None
+            size: 100, 44
+            text: 'png'
+            values:'png','jpg','webp'
+            id: formatSpinner
+            on_text:
+                app.format_changed()           
 
 ''')
 
 class ImageBox(BoxLayout):
     def __init__(self, **kwargs):
+        global DOWNLOAD
         super(ImageBox, self).__init__(**kwargs)
         self.add_widget(ImageSelection())
+
         self.add_widget(Splitter())
         colorPicker = ColorPicker()
         colorPicker.bind(color=self.on_color)
         self.add_widget(colorPicker)
+        DOWNLOAD = Download()
+        self.add_widget(DOWNLOAD)
 
     def on_color(self, instance, value):
         global BORDER_COLOR
@@ -64,6 +89,10 @@ class ImageBox(BoxLayout):
         #print("HSV = ", str(instance.hsv))
         #print("HEX = ", str(instance.hex_color))
         BORDER_COLOR = (int(value[2] * 255), int(value[1] * 255), int(value[0] * 255))
+
+class Download(BoxLayout):
+     def __init__(self, **kwargs):
+        super(Download, self).__init__(**kwargs)
 
 
 class ImageSelection(BoxLayout):
@@ -209,6 +238,23 @@ class MongaGUI(BoxLayout):
     pass
 
 class MongaApp(App):
+    def download(self):
+        font = DOWNLOAD.ids.formatSpinner.text
+        homedir = os.path.expanduser("~")
+        homedir = homedir.replace("\\", "/")
+        path = f"{homedir}/Downloads/bellagianda.{font}"# da qui ho capitò che non usero mai piu python
+
+        image = Image.open("./pictures/provaEdoBN.png")
+        image.save(path)
+       
+        print(homedir)
+
+    def format_changed(self):
+        global DOWNLOAD
+        font = DOWNLOAD.ids.formatSpinner.text
+        #print(font)
+        #self.root.ids.fontLabel.font_name = font
+
     def build(self):
         mongaGUI = MongaGUI()
         return mongaGUI
