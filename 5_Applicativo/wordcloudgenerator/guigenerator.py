@@ -2,7 +2,9 @@ from input.text.inputselector import InputType
 from input.text.importantwords import ImportantWords
 from input.text.excludedwords import ExcludedWords
 from input.text.fontselector import FontFamily
+from input.image.imageselector import getPath
 from input.image.imageselector import ImageSelector
+
 from input.image.borderproperties import Border, Tolerance
 
 from kivy.app import App
@@ -14,7 +16,6 @@ import queue
 
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border", "Tolerance"]
-imageSource = "./pictures/default.png"
 q = queue.Queue() #global messages
 
 Builder.load_string("""
@@ -33,7 +34,7 @@ Builder.load_string("""
         padding: [10, 0, 0, 10]
         Image:
             id: image
-            source: './pictures/8k.jpg'
+            source: './pictures/stellina.jpg'
     BoxLayout:
         size_hint_x: 0.25
         padding: [10, 10, 10, 10]
@@ -155,7 +156,9 @@ class TextOptions(BoxLayout):
 class ImageOptions(BoxLayout):
     def __init__(self, **kwargs):
         super(ImageOptions, self).__init__(**kwargs)
-        self.add_widget(ImageSelector(IMAGE_OPTIONS[0]))
+        
+        imageSelector = ImageSelector(IMAGE_OPTIONS[0])
+        self.add_widget(imageSelector)
         #self.add_widget(ImageSelector(IMAGE_OPTIONS[0]).setQueue(q))
         self.add_widget(Border(IMAGE_OPTIONS[1]))
         self.add_widget(Tolerance(IMAGE_OPTIONS[2]))
@@ -163,13 +166,11 @@ class ImageOptions(BoxLayout):
 
 
 class WordCloudGUI(BoxLayout):
-    pass
-
     def getPath(self):
         return self.ids.image.source
 
     def setPath(self, path):
-        self.ids.image.source = path
+        self.ids.image.source = self.imageSourceTest
 
 class WordCloudApp(App):
     def build(self):
