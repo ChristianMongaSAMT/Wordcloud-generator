@@ -2,9 +2,10 @@ from input.text.inputselector import InputType
 from input.text.importantwords import ImportantWords
 from input.text.excludedwords import ExcludedWords
 from input.text.fontselector import FontFamily
-from input.image.imageselector import getQueue
 from input.image.imageselector import ImageSelector
 from input.image.borderproperties import Border
+from input.image.imagepartselector import ImageSelection
+from kivy.uix.colorpicker import ColorPicker
 
 from kivy.app import App
 from kivy.clock import Clock
@@ -29,9 +30,9 @@ Builder.load_string("""
     BoxLayout:
         size_hint_x: 0.5
         padding: [10, 0, 0, 10]
-        Image:
-            id: image
-            source: './pictures/imageMod.png'
+        ImageSelected:
+            orientation: "vertical"
+            spacing: 50
     BoxLayout:
         size_hint_x: 0.25
         padding: [10, 10, 10, 10]
@@ -40,6 +41,10 @@ Builder.load_string("""
             orientation: "vertical"
             spacing: 50
             
+<ImageSelection>:
+    Image:
+        id: image
+        source: './pictures/imageMod.png'
 
 <InputType>:
     size_hint_y: None
@@ -118,15 +123,20 @@ Builder.load_string("""
         BoxLayout:
             orientation: 'horizontal'
             Label:
-                text: 'Border'
+                text: 'Border ON' if switch.active else 'Border OFF'
             Switch:
+                id: switch
         BoxLayout:
             orientation: 'horizontal'
             Label:
                 text: 'Border Size'
             Slider:
                 id: border_slider
-                max: 50
+                step: 1
+                max: 10
+                min: 1
+                value: 1
+                on_touch_up: root.updateImage()
         BoxLayout:
             orientation: 'horizontal'
             Label:
@@ -155,6 +165,7 @@ class TextOptions(BoxLayout):
 
 imageSelector = ImageSelector(IMAGE_OPTIONS[0])
 border = Border(IMAGE_OPTIONS[1])
+imageSelection = ImageSelection()
 
 class ImageOptions(BoxLayout):
     def __init__(self, **kwargs):
@@ -162,18 +173,23 @@ class ImageOptions(BoxLayout):
         self.add_widget(imageSelector)
         #self.add_widget(ImageSelector(IMAGE_OPTIONS[0]).setQueue(q))
         self.add_widget(border)
+        colorPicker = ColorPicker()
+        colorPicker.bind(color=border.on_color)
+        self.add_widget(colorPicker)
+    
+class ImageSelected(BoxLayout):
+    def __init__(self, **kwargs):
+        super(ImageSelected, self).__init__(**kwargs)
+        self.add_widget(imageSelection)
+
 
 class WordCloudGUI(BoxLayout):
-    def getImagePath(self, deltatime):
-        path = getQueue()
-        # print(f'callback deltatime: {deltatime}, path: {path}')
-
-        if path:
-            border.savePath(path)
-            self.ids.image.source = path
     def reloadImage(self, deltatime):
         border.updateImage()
-        self.ids.image.reload()
+        imageSelection.ids.image.reload()
+
+    
+    
 
 class WordCloudApp(App):
     def build(self):

@@ -11,17 +11,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
 
 path = './pictures/stellina.jpg'
-q = queue.Queue() #global messages
-q.put('./pictures/imageMod.png')
-
-def getQueue():
-    val = None
-    try:
-        val = q.get_nowait()
-    except Exception as e:
-        pass
-    return val
-
 
 def getPath():
     return path
@@ -47,7 +36,6 @@ class ImageSelector(BoxLayout, Widget):
         self.ids.tolerance_label.text = tolValue
 
     def visualizer(self):
-        global q
         global path
         # Memorizza la nuova path
         self.getPathFromTextInput()
@@ -55,9 +43,7 @@ class ImageSelector(BoxLayout, Widget):
             # Se la path esiste la usa per l'immagine
             #imageSource = self.path
             print('valid path')
-            print(f'putting in queue: {path}')
-            q.put(path)
-            print(f'queue size: {q.qsize()}')
+
         else:
             # Se la path non esiste carica l'immagine di default
             path = './pictures/default.png'
