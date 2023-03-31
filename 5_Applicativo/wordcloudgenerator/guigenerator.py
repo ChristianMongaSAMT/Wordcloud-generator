@@ -2,21 +2,18 @@ from input.text.inputselector import InputType
 from input.text.importantwords import ImportantWords
 from input.text.excludedwords import ExcludedWords
 from input.text.fontselector import FontFamily
-from input.image.imageselector import getPath
+from input.image.imageselector import getQueue
 from input.image.imageselector import ImageSelector
-
 from input.image.borderproperties import Border, Tolerance
 
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 
-import queue
-
-
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border", "Tolerance"]
-q = queue.Queue() #global messages
+
 
 Builder.load_string("""
 <WordCloudGUI>:
@@ -34,7 +31,7 @@ Builder.load_string("""
         padding: [10, 0, 0, 10]
         Image:
             id: image
-            source: './pictures/stellina.jpg'
+            source: None
     BoxLayout:
         size_hint_x: 0.25
         padding: [10, 10, 10, 10]
@@ -156,9 +153,7 @@ class TextOptions(BoxLayout):
 class ImageOptions(BoxLayout):
     def __init__(self, **kwargs):
         super(ImageOptions, self).__init__(**kwargs)
-        
-        imageSelector = ImageSelector(IMAGE_OPTIONS[0])
-        self.add_widget(imageSelector)
+        self.add_widget(ImageSelector(IMAGE_OPTIONS[0]))
         #self.add_widget(ImageSelector(IMAGE_OPTIONS[0]).setQueue(q))
         self.add_widget(Border(IMAGE_OPTIONS[1]))
         self.add_widget(Tolerance(IMAGE_OPTIONS[2]))
@@ -166,15 +161,18 @@ class ImageOptions(BoxLayout):
 
 
 class WordCloudGUI(BoxLayout):
-    def getPath(self):
-        return self.ids.image.source
 
-    def setPath(self, path):
-        self.ids.image.source = self.imageSourceTest
+    def getImagePath(self, deltatime):
+        path = getQueue()
+        # print(f'callback deltatime: {deltatime}, path: {path}')
+        if path:
+            self.ids.image.source = path
 
 class WordCloudApp(App):
     def build(self):
-        return WordCloudGUI()
+        wcg = WordCloudGUI()
+        event = Clock.schedule_interval(wcg.getImagePath, 1 / 10.)
+        return wcg
     
 if __name__ == '__main__':
     WordCloudApp().run()
