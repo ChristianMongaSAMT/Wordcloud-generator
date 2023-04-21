@@ -2,12 +2,11 @@ import cv2
 import math
 import numpy as np
 
-from input.image.imageselector import getPath
+from input.image.borderproperties import getColor
 from input.image.borderproperties import getCountours
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 
-BORDER_COLOR = (100,100,100)
 FLOAD_COLOR = (0,0,0)
 DOWNLOAD = -1
 BORDERWINDOW = 4
@@ -27,7 +26,7 @@ class ImageSelection(BoxLayout):
         queue.append([x, y])
         # Color the pixel with the new color
         #color = [0,255,0]
-        color = 1
+        color = 0
         mask[y][x] = color
 
         while queue:
@@ -42,7 +41,7 @@ class ImageSelection(BoxLayout):
                 queue.append([posX + 1, posY])
             if(self.isInArea(posX - 1, posY) and not self.isHighlightedPixel(posX - 1, posY, mask) and not self.isBorder(posX - 1, posY, img)):
                 mask[posY][posX - 1] = color
-                imgDelta[posY][posX+1] = img[posY][posX-1]
+                imgDelta[posY][posX-1] = img[posY][posX-1]
                 queue.append([posX - 1, posY])
             
             if(self.isInArea(posX, posY + 1) and not self.isHighlightedPixel(posX, posY + 1, mask) and not self.isBorder(posX, posY + 1, img)):
@@ -57,14 +56,15 @@ class ImageSelection(BoxLayout):
             
 
     def isHighlightedPixel(self, x, y, img):
-        color = 1
+        color = 0
         return color == img[y][x]
 
     def isBorder(self, x, y, img):
         isEqual = True
         for key, bgr in enumerate(img[y,x]):
             if(isEqual):
-                if(not (bgr == BORDER_COLOR[key])):
+    
+                if(not (bgr == getColor()[key])):
                     isEqual = False
         return isEqual
 
@@ -82,21 +82,17 @@ class ImageSelection(BoxLayout):
         #print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: False')
         return False
     def updateMask(self, touch):
+    
         img = cv2.imread(TEMP_PATH)
         imgDelta = cv2.imread(MASK_PATH)
-
-        mask = np.zeros((img.shape[0],img.shape[1],1), np.uint8)
+        
+        mask = np.ones((img.shape[0],img.shape[1],1), np.uint8)
 
         cv2.imwrite(MASK_PATH, mask, [cv2.IMWRITE_PNG_BILEVEL, 1])
         countours = getCountours()
         #print(countours)
 
-        ''' CONTROLLARE '''
-        for cnt in countours:
-            area = cv2.contourArea(cnt)
-            if(area > 1000):
-                cv2.drawContours(img, [cnt], -1, BORDER_COLOR, 1)
-
+        
         x = math.trunc(touch.pos[0])
 
         y = math.trunc(touch.pos[1])

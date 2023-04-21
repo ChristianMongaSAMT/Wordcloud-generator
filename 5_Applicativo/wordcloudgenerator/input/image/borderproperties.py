@@ -8,7 +8,8 @@ from kivy.properties import StringProperty
 BORDER_COLOR = (0,255,100)
 FLOAD_COLOR = (0,0,0)
 contours = -1
-
+def getColor():
+    return BORDER_COLOR
 def getCountours():
     return contours
 
@@ -27,6 +28,7 @@ class Border(BoxLayout):
 
         # Colore del bordo
         BORDER_COLOR = (int(value[2] * 255), int(value[1] * 255), int(value[0] * 255))
+        print(BORDER_COLOR)
 
         # Colore dell'area selezionata
         FLOAD_COLOR = (255 - BORDER_COLOR[0],255 -BORDER_COLOR[1],255 - BORDER_COLOR[2])
@@ -59,9 +61,6 @@ class Border(BoxLayout):
         # Trova il contorno usando l'immagine binaria
         contours,hierarchy = cv2.findContours(thresh, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
-
-
-        ''' CONTROLLARE SE SI PUO TOGLIERE '''
         for cnt in contours:
             # Per ogni contorno calcola area e perimetro
             area = cv2.contourArea(cnt)
