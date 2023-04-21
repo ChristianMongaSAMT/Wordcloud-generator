@@ -1,22 +1,25 @@
 import cv2
 from kivy.uix.boxlayout import BoxLayout
 from input.image.imageselector import getPath
+from input.image.imageselector import getIsResult
 from kivy.properties import StringProperty
 
 
 
-BORDER_COLOR = (0,255,100)
+BORDER_COLOR = [0,0,0]
 FLOAD_COLOR = (0,0,0)
 contours = -1
-def getColor():
+borderSize = 1
+
+def getBorderColor():
     return BORDER_COLOR
 def getCountours():
     return contours
-
+def getBorderSize():
+    return borderSize
 class Border(BoxLayout):
     txt = StringProperty()
     tolerance = 100
-    borderSize = 1
     showBorder = True
     def __init__(self, row, **kwargs):
         super(Border, self).__init__(**kwargs)
@@ -27,22 +30,24 @@ class Border(BoxLayout):
         global FLOAD_COLOR
 
         # Colore del bordo
-        BORDER_COLOR = (int(value[2] * 255), int(value[1] * 255), int(value[0] * 255))
+        BORDER_COLOR = [int(value[2] * 255), int(value[1] * 255), int(value[0] * 255)]
         print(BORDER_COLOR)
 
         # Colore dell'area selezionata
         FLOAD_COLOR = (255 - BORDER_COLOR[0],255 -BORDER_COLOR[1],255 - BORDER_COLOR[2])
 
     def updateImage(self):
-        self.tolerance = self.ids.tolerance_slider.value
-        self.borderSize = self.ids.border_slider.value
-        self.showBorder = self.ids.switch.active
-        #print(self.showBorder)
-        self.createBorderImage()
+        if(not getIsResult()):
+            global borderSize
+            self.tolerance = self.ids.tolerance_slider.value
+            borderSize = self.ids.border_slider.value
+            self.showBorder = self.ids.switch.active
+            #print(self.showBorder)
+            self.createBorderImage()
 
-        tolPer = int((self.ids.tolerance_slider.value / 2000) * 100)
-        tolValue = f'Tolerance: {str(tolPer)}%'
-        self.ids.tolerance_label.text = tolValue
+            tolPer = int((self.ids.tolerance_slider.value / 2000) * 100)
+            tolValue = f'Tolerance: {str(tolPer)}%'
+            self.ids.tolerance_label.text = tolValue
 
     def createBorderImage(self):
         #Logger.info(f'createBorderImage with: {tolerance} on image {self.imagepath}')
@@ -70,7 +75,8 @@ class Border(BoxLayout):
             # Se l'area è maggiore ad un determinato numero la disegna sull'immagine
             if(area > self.tolerance):
                 # border size{ min:1 | max:10 } 
-                cv2.drawContours(img, [cnt], -1, BORDER_COLOR, self.borderSize)
+                global borderSize
+                cv2.drawContours(img, [cnt], -1, BORDER_COLOR, borderSize)
 
         # Crea una nuova immagine che conterrà i bordi
         pathTempImage = './pictures/imageMod.png'

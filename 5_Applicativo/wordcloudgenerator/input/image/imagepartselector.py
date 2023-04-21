@@ -2,8 +2,10 @@ import cv2
 import math
 import numpy as np
 
-from input.image.borderproperties import getColor
+from input.image.borderproperties import getBorderColor
 from input.image.borderproperties import getCountours
+from input.image.imageselector import setIsResult
+from generatecloud import generateCloud
 from kivy.uix.boxlayout import BoxLayout
 from kivy.core.window import Window
 
@@ -13,6 +15,7 @@ BORDERWINDOW = 4
 TEMP_PATH = "./pictures/imageMod.png"
 MASK_PATH = "./pictures/.mask.png"
 DELTA_PATH = "./pictures/.delta.png"
+RESULT_PATH = "./pictures/.result.png"
 
 class ImageSelection(BoxLayout):
     def __init__(self, **kwargs):
@@ -64,7 +67,7 @@ class ImageSelection(BoxLayout):
         for key, bgr in enumerate(img[y,x]):
             if(isEqual):
     
-                if(not (bgr == getColor()[key])):
+                if(not (bgr == getBorderColor()[key])):
                     isEqual = False
         return isEqual
 
@@ -122,7 +125,7 @@ class ImageSelection(BoxLayout):
             cv2.imwrite(MASK_PATH, mask, [cv2.IMWRITE_PNG_BILEVEL, 1])
             cv2.imwrite(TEMP_PATH, img)
             cv2.imwrite(DELTA_PATH, imgDelta)
-            self.ids.image.source = TEMP_PATH 
-            self.ids.image.reload()
+            generateCloud()
+            setIsResult(True)
 
         

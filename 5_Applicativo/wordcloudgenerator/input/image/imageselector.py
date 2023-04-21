@@ -3,12 +3,20 @@ import filetype
 import os
 import queue
 
+
 from kivy.uix.widget import Widget
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
 
 path = './pictures/stellina.jpg'
+
+isResult = False
+def setIsResult(newIsResult):
+    global isResult
+    isResult = newIsResult
+def getIsResult():
+    return isResult
 
 def getPath():
     return path
@@ -24,7 +32,7 @@ class ImageSelector(BoxLayout, Widget):
         super(ImageSelector, self).__init__(**kwargs)
         self.txt = row
 
-    def updateImage(self, wcApp, tolerance, font,wordsOrderByEmphasis):
+    def updateImage(self, wcApp, tolerance, font, wordsOrderByEmphasis):
         self.wcApp = wcApp
         self.setPath()
         self.createBorderImage(tolerance, font, wordsOrderByEmphasis)
@@ -37,6 +45,7 @@ class ImageSelector(BoxLayout, Widget):
         global path
         # Memorizza la nuova path
         self.getPathFromTextInput()
+        setIsResult(False)
         if((os.path.exists(getPath()) and os.path.isfile(getPath()) and filetype.is_image(getPath()))):
             # Se la path esiste la usa per l'immagine
             #imageSource = self.path
