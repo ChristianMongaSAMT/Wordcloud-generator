@@ -3,8 +3,6 @@ import filetype
 import os
 import queue
 
-from event import post_event
-
 from kivy.uix.widget import Widget
 
 from kivy.uix.boxlayout import BoxLayout

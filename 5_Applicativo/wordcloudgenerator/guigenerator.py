@@ -11,10 +11,12 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
+from kivy.config import Config
 from kivy.core.window import Window
 
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border"]
+Config.read("./config.ini")
 
 Builder.load_string("""
 <WordCloudGUI>:
