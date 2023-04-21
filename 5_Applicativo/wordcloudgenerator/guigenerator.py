@@ -11,10 +11,10 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
+from kivy.core.window import Window
 
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border"]
-
 
 Builder.load_string("""
 <WordCloudGUI>:
@@ -42,9 +42,17 @@ Builder.load_string("""
             spacing: 50
             
 <ImageSelection>:
-    Image:
-        id: image
-        source: './pictures/imageMod.png'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 0, 1, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Image:
+            id: image
+            source: './pictures/imageMod.png'
 
 <InputType>:
     size_hint_y: None
@@ -198,4 +206,5 @@ class WordCloudApp(App):
         return wcg
     
 if __name__ == '__main__':
+    Window.fullscreen = False
     WordCloudApp().run()

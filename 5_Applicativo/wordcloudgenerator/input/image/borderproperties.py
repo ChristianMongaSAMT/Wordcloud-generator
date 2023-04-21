@@ -35,7 +35,7 @@ class Border(BoxLayout):
         self.tolerance = self.ids.tolerance_slider.value
         self.borderSize = self.ids.border_slider.value
         self.showBorder = self.ids.switch.active
-        print(self.showBorder)
+        #print(self.showBorder)
         self.createBorderImage()
 
         tolPer = int((self.ids.tolerance_slider.value / 2000) * 100)
@@ -46,7 +46,7 @@ class Border(BoxLayout):
         #Logger.info(f'createBorderImage with: {tolerance} on image {self.imagepath}')
 
         # Legge l'immagine corrispondente alla path
-        print(f'pathDaModificare: {getPath()}')
+        #print(f'pathDaModificare: {getPath()}')
         img = cv2.imread(getPath())
 
         # Converte l'immagine ad una scala di grigi
