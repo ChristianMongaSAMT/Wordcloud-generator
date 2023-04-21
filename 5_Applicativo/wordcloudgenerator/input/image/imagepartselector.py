@@ -20,7 +20,9 @@ class ImageSelection(BoxLayout):
     
     def on_touch_down(self, touch):
         img = cv2.imread(TEMP_PATH)
-        mask = cv2.imread(TEMP_PATH, cv2.IMREAD_UNCHANGED)
+        mask = np.zeros((img.shape[0],img.shape[1],1), np.uint8)
+
+        cv2.imwrite(MASK_PATH, mask, [cv2.IMWRITE_PNG_BILEVEL, 1])
         countours = getCountours()
         #print(countours)
 
@@ -72,13 +74,10 @@ class ImageSelection(BoxLayout):
 
         while queue:
             currPixel = queue.pop()
-            print(currPixel)
             
             posX = currPixel[0]
             posY = currPixel[1]
-            if(self.isInArea(posX + 1, posY)):
-                print("isInArea")
-            """
+            
             if(self.isInArea(posX + 1, posY) and not self.isHighlightedPixel(posX + 1, posY, mask) and not self.isBorder(posX + 1, posY, img)):
                 mask[posY][posX + 1] = color
                 img[posY][posX + 1] = FLOAD_COLOR
@@ -97,7 +96,7 @@ class ImageSelection(BoxLayout):
                 mask[posY - 1][posX] = color
                 img[posY - 1][posX] = FLOAD_COLOR
                 queue.append([posX, posY - 1])
-            """
+            
 
     def isHighlightedPixel(self, x, y, img):
         color = 1
