@@ -1,0 +1,73 @@
+[INFO   ] Logger: Record log in C:\Users\christian.monga\.kivy\logs\kivy_23-04-28_70.txt
+[INFO   ] deps: Successfully imported "kivy_deps.angle" 0.3.3
+[INFO   ] deps: Successfully imported "kivy_deps.glew" 0.3.1
+[INFO   ] deps: Successfully imported "kivy_deps.sdl2" 0.4.5
+[INFO   ] Kivy: v2.1.0
+[INFO   ] Kivy: Installed at "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\__init__.py"
+[INFO   ] Python: v3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]
+[INFO   ] Python: Interpreter at "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\python.exe"
+[INFO   ] Logger: Purge log fired. Processing...
+[INFO   ] Logger: Purge finished!
+[INFO   ] Factory: 189 symbols loaded
+[INFO   ] Image: Providers: img_tex, img_dds, img_sdl2, img_pil (img_ffpyplayer ignored)
+[INFO   ] Window: Provider: sdl2
+[INFO   ] GL: Using the "OpenGL" graphics system
+[INFO   ] GL: GLEW initialization succeeded
+[INFO   ] GL: Backend used <glew>
+[INFO   ] GL: OpenGL version <b'4.6.0 NVIDIA 512.96'>
+[INFO   ] GL: OpenGL vendor <b'NVIDIA Corporation'>
+[INFO   ] GL: OpenGL renderer <b'NVIDIA GeForce RTX 2060/PCIe/SSE2'>
+[INFO   ] GL: OpenGL parsed version: 4, 6
+[INFO   ] GL: Shading version <b'4.60 NVIDIA'>
+[INFO   ] GL: Texture max size <32768>
+[INFO   ] GL: Texture max units <32>
+[INFO   ] Window: auto add sdl2 input provider
+[INFO   ] Window: virtual keyboard not allowed, single mode, not docked
+[INFO   ] Text: Provider: sdl2
+[ERROR  ] Unable to write the config <E:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\config\>
+Traceback (most recent call last):
+  File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\config.py", line 574, in write
+    with open(self.filename, 'w') as fd:
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\Professionale\\Progetto\\GIT\\Wordcloud-generator\\5_Applicativo\\config\\'
+[WARNING] stderr: --- Logging error ---
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\config.py", line 574, in write
+[WARNING] stderr:     with open(self.filename, 'w') as fd:
+[WARNING] stderr: FileNotFoundError: [Errno 2] No such file or directory: 'E:\\Professionale\\Progetto\\GIT\\Wordcloud-generator\\5_Applicativo\\config\\'
+[WARNING] stderr: 
+[WARNING] stderr: During handling of the above exception, another exception occurred:
+[WARNING] stderr: 
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\logging\__init__.py", line 1100, in emit
+[WARNING] stderr:     msg = self.format(record)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\logging\__init__.py", line 943, in format
+[WARNING] stderr:     return fmt.format(record)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\logger.py", line 291, in format
+[WARNING] stderr:     record = copy.deepcopy(record)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 172, in deepcopy
+[WARNING] stderr:     y = _reconstruct(x, memo, *rv)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 271, in _reconstruct
+[WARNING] stderr:     state = deepcopy(state, memo)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 146, in deepcopy
+[WARNING] stderr:     y = copier(x, memo)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 231, in _deepcopy_dict
+[WARNING] stderr:     y[deepcopy(key, memo)] = deepcopy(value, memo)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 146, in deepcopy
+[WARNING] stderr:     y = copier(x, memo)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 211, in _deepcopy_tuple
+[WARNING] stderr:     y = [deepcopy(a, memo) for a in x]
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 211, in <listcomp>
+[WARNING] stderr:     y = [deepcopy(a, memo) for a in x]
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\lib\copy.py", line 161, in deepcopy
+[WARNING] stderr:     rv = reductor(4)
+[WARNING] stderr: TypeError: cannot pickle 'traceback' object
+[WARNING] stderr: Call stack:
+[WARNING] stderr:   File "e:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\wordcloudgenerator\guigenerator.py", line 29, in <module>
+[WARNING] stderr:     Config.write()
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\config.py", line 577, in write
+[WARNING] stderr:     Logger.exception('Unable to write the config <%s>' % self.filename)
+[WARNING] stderr: Message: 'Unable to write the config <E:\\Professionale\\Progetto\\GIT\\Wordcloud-generator\\5_Applicativo\\config\\>'
+[WARNING] stderr: Arguments: ()
+[INFO   ] GL: NPOT texture support is available
+[INFO   ] Base: Start application main loop
+[INFO   ] Base: Leaving application in progress...

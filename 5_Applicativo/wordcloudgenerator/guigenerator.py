@@ -1,4 +1,6 @@
 import os
+
+
 import logging
 import logmanager
 
@@ -21,12 +23,9 @@ from kivy.core.window import Window
 
 logmanager.get_configured_logger()
 
+TODO: os.environ['KIVY_HOME'] = "E:\\Professionale\\Progetto\\GIT\\Wordcloud-generator\\5_Applicativo\\config\\.kivy\\" #--------------------------
+Config.read("./config.ini")
 
-os.environ["KIVY_HOME"] = "E:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\config"
-
-Config.read("config.ini")
-Config.set('graphics', 'resizable', 1)
-Config.write()
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border"]
 

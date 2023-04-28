@@ -9,7 +9,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
 
-path = './pictures/lungo.jpg'
+path = './pictures/default.png'
 
 isResult = False
 def setIsResult(newIsResult):

@@ -1,0 +1,73 @@
+[INFO   ] Logger: Record log in C:\Users\christian.monga\.kivy\logs\kivy_23-04-28_7.txt
+[INFO   ] deps: Successfully imported "kivy_deps.angle" 0.3.3
+[INFO   ] deps: Successfully imported "kivy_deps.glew" 0.3.1
+[INFO   ] deps: Successfully imported "kivy_deps.sdl2" 0.4.5
+[INFO   ] Kivy: v2.1.0
+[INFO   ] Kivy: Installed at "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\__init__.py"
+[INFO   ] Python: v3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]
+[INFO   ] Python: Interpreter at "C:\Users\christian.monga\AppData\Local\Programs\Python\Python310\python.exe"
+[INFO   ] Logger: Purge log fired. Processing...
+[INFO   ] Logger: Purge finished!
+[INFO   ] Factory: 189 symbols loaded
+[INFO   ] Image: Providers: img_tex, img_dds, img_sdl2, img_pil (img_ffpyplayer ignored)
+[INFO   ] Window: Provider: sdl2
+[INFO   ] GL: Using the "OpenGL" graphics system
+[INFO   ] GL: GLEW initialization succeeded
+[INFO   ] GL: Backend used <glew>
+[INFO   ] GL: OpenGL version <b'4.6.0 NVIDIA 512.96'>
+[INFO   ] GL: OpenGL vendor <b'NVIDIA Corporation'>
+[INFO   ] GL: OpenGL renderer <b'NVIDIA GeForce RTX 2060/PCIe/SSE2'>
+[INFO   ] GL: OpenGL parsed version: 4, 6
+[INFO   ] GL: Shading version <b'4.60 NVIDIA'>
+[INFO   ] GL: Texture max size <32768>
+[INFO   ] GL: Texture max units <32>
+[INFO   ] Window: auto add sdl2 input provider
+[INFO   ] Window: virtual keyboard not allowed, single mode, not docked
+[INFO   ] Text: Provider: sdl2
+[INFO   ] GL: NPOT texture support is available
+[INFO   ] Base: Start application main loop
+[INFO   ] Base: Leaving application in progress...
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "e:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\wordcloudgenerator\guigenerator.py", line 226, in <module>
+[WARNING] stderr:     WordCloudApp().run()
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\app.py", line 955, in run
+[WARNING] stderr:     runTouchApp()
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\base.py", line 574, in runTouchApp
+[WARNING] stderr:     EventLoop.mainloop()
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\base.py", line 339, in mainloop
+[WARNING] stderr:     self.idle()
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\base.py", line 383, in idle
+[WARNING] stderr:     self.dispatch_input()
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\base.py", line 334, in dispatch_input
+[WARNING] stderr:     post_dispatch_input(*pop(0))
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\base.py", line 263, in post_dispatch_input
+[WARNING] stderr:     listener.dispatch('on_motion', etype, me)
+[WARNING] stderr:   File "kivy\_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\core\window\__init__.py", line 1660, in on_motion
+[WARNING] stderr:     self.dispatch('on_touch_down', me)
+[WARNING] stderr:   File "kivy\_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\core\window\__init__.py", line 1677, in on_touch_down
+[WARNING] stderr:     if w.dispatch('on_touch_down', touch):
+[WARNING] stderr:   File "kivy\_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\uix\widget.py", line 589, in on_touch_down
+[WARNING] stderr:     if child.dispatch('on_touch_down', touch):
+[WARNING] stderr:   File "kivy\_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\uix\widget.py", line 589, in on_touch_down
+[WARNING] stderr:     if child.dispatch('on_touch_down', touch):
+[WARNING] stderr:   File "kivy\_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\kivy\uix\widget.py", line 589, in on_touch_down
+[WARNING] stderr:     if child.dispatch('on_touch_down', touch):
+[WARNING] stderr:   File "kivy\_event.pyx", line 731, in kivy._event.EventDispatcher.dispatch
+[WARNING] stderr:   File "e:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\wordcloudgenerator\input\image\imagepartselector.py", line 25, in on_touch_down
+[WARNING] stderr:     self.updateMask(touch)
+[WARNING] stderr:   File "e:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\wordcloudgenerator\input\image\imagepartselector.py", line 129, in updateMask
+[WARNING] stderr:     generateCloud(img.shape)
+[WARNING] stderr:   File "e:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\wordcloudgenerator\generatecloud.py", line 31, in generateCloud
+[WARNING] stderr:     ).generate(text)    
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\wordcloud\wordcloud.py", line 639, in generate
+[WARNING] stderr:     return self.generate_from_text(text)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\wordcloud\wordcloud.py", line 621, in generate_from_text
+[WARNING] stderr:     self.generate_from_frequencies(words)
+[WARNING] stderr:   File "C:\Users\christian.monga\AppData\Roaming\Python\Python310\site-packages\wordcloud\wordcloud.py", line 410, in generate_from_frequencies
+[WARNING] stderr:     raise ValueError("We need at least 1 word to plot a word cloud, "
+[WARNING] stderr: ValueError: We need at least 1 word to plot a word cloud, got 0.
