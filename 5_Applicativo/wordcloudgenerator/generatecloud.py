@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import PIL.Image 
 from input.image.borderproperties import getBorderColor
 from input.image.borderproperties import getBorderSize
+from input.text.fontselector import getFont
 
 #text = open('file.txt', 'r').read()
 def generateCloud():
@@ -19,6 +20,7 @@ def generateCloud():
 
     borderColor = (getBorderColor()[2], getBorderColor()[1], getBorderColor()[0])
     wc = WordCloud(
+                    font_path=getFont(),
                     stopwords=STOPWORDS,    # Parole vietate
                     mask=python_mask,           # Maschera su cui deve lavorare
                     background_color="white",   # Colore del background

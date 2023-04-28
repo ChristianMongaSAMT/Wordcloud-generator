@@ -8,6 +8,9 @@ FONT_MAPPING['Borex'] = './fonts/borex/BOREX-Regular.otf'
 FONT_MAPPING['Krinkes'] = './fonts/krinkes/KrinkesRegularPERSONAL.ttf'
 FONT_MAPPING['Theaters'] = './fonts/theaters/THEATERS DEMO REGULAR.ttf'
 
+font = "./fonts/borex/BOREX-Regular.otf"
+def getFont():
+    return font;
 for font_name, font_path in FONT_MAPPING.items():
     LabelBase.register(name=font_name, fn_regular=font_path)  
 
@@ -20,8 +23,9 @@ class FontFamily(BoxLayout):
     
     def font_changed(self):
         # Memorizza il nuovo font
-        self.font = self.ids.fontSpinner.text
-
+        global font
+        font = self.ids.fontSpinner.text
+        font = FONT_MAPPING[font]
         # (Test) Applica il font al label
-        print(self.font)
-        self.ids.fontLabel.font_name = self.font
+        print(font)
+        self.ids.fontLabel.font_name = font
