@@ -1,4 +1,7 @@
 import os
+import logging
+import logmanager
+
 from input.text.inputselector import InputType
 from input.text.importantwords import ImportantWords
 from input.text.excludedwords import ExcludedWords
@@ -6,15 +9,17 @@ from input.text.fontselector import FontFamily
 from input.image.imageselector import ImageSelector
 from input.image.borderproperties import Border
 from input.image.imagepartselector import ImageSelection
+
 from kivy.uix.colorpicker import ColorPicker
 from kivy.uix.boxlayout import BoxLayout
-
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.config import Config
 from kivy.core.window import Window
-import logging
+
+logmanager.get_configured_logger()
+
 
 os.environ["KIVY_HOME"] = "E:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\config"
 Config.read("config.ini")
@@ -207,4 +212,5 @@ class WordCloudApp(App):
     
 if __name__ == '__main__':
     Window.maximize()
+    logging.debug(f'Window Maximize')
     WordCloudApp().run()
