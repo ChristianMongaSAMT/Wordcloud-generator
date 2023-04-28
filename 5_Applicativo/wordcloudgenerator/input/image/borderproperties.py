@@ -10,13 +10,16 @@ BORDER_COLOR = [0,0,0]
 FLOAD_COLOR = (0,0,0)
 contours = -1
 borderSize = 1
+border = True
 
 def getBorderColor():
     return BORDER_COLOR
 def getCountours():
     return contours
 def getBorderSize():
-    return borderSize
+    if(border):
+        return borderSize
+    return 0
 class Border(BoxLayout):
     txt = StringProperty()
     tolerance = 100
@@ -31,7 +34,6 @@ class Border(BoxLayout):
 
         # Colore del bordo
         BORDER_COLOR = [int(value[2] * 255), int(value[1] * 255), int(value[0] * 255)]
-        print(BORDER_COLOR)
 
         # Colore dell'area selezionata
         FLOAD_COLOR = (255 - BORDER_COLOR[0],255 -BORDER_COLOR[1],255 - BORDER_COLOR[2])
@@ -39,7 +41,9 @@ class Border(BoxLayout):
     def updateImage(self):
         if(not getIsResult()):
             global borderSize
+            global border
             self.tolerance = self.ids.tolerance_slider.value
+            border = self.ids.switch.active
             borderSize = self.ids.border_slider.value
             self.showBorder = self.ids.switch.active
             #print(self.showBorder)

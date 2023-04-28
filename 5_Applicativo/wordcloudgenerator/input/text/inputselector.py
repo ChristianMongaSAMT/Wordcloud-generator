@@ -81,7 +81,6 @@ class InputType(BoxLayout):
         for index in self.wordsOrderByEmphasis:
             text = index + " "
             outputText += text * self.wordsOrderByEmphasis[index]
-        
         open(self.wordsFile, 'w').write(outputText)
         print(outputText)
 

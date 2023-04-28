@@ -7,9 +7,15 @@ from input.image.borderproperties import getBorderSize
 from input.text.fontselector import getFont
 
 #text = open('file.txt', 'r').read()
-def generateCloud():
+wc = ""
+def getWC():
+    return wc
+def generateCloud(size):
     #text = ["ciao", "come", "va"]
     text = open('./text/.userwords.txt', 'r').read()
+    if(not text.strip()):
+        text = open('./text/.example.txt', 'r').read()
+    open('./text/.userwords.txt', 'w').write("")
     excludedWords = "ciao"
 
     #print(STOPWORDS)
@@ -19,8 +25,13 @@ def generateCloud():
     colormap = ImageColorGenerator(python_mask)
 
     borderColor = (getBorderColor()[2], getBorderColor()[1], getBorderColor()[0])
+    print(f'width: {size[0]}')
+    print(f'height: {size[1]}')
+    global wc 
     wc = WordCloud(
-                    font_path=getFont(),
+                    width=size[1],
+                    height=size[0],
+                    font_path=getFont(),  
                     stopwords=STOPWORDS,    # Parole vietate
                     mask=python_mask,           # Maschera su cui deve lavorare
                     background_color="white",   # Colore del background

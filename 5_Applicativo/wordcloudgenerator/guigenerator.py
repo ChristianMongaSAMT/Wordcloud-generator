@@ -9,6 +9,7 @@ from input.text.fontselector import FontFamily
 from input.image.imageselector import ImageSelector
 from input.image.borderproperties import Border
 from input.image.imagepartselector import ImageSelection
+from output.download import Download
 
 from kivy.uix.colorpicker import ColorPicker
 from kivy.uix.boxlayout import BoxLayout
@@ -22,6 +23,7 @@ logmanager.get_configured_logger()
 
 
 os.environ["KIVY_HOME"] = "E:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\config"
+
 Config.read("config.ini")
 Config.set('graphics', 'resizable', 1)
 Config.write()
@@ -59,6 +61,7 @@ Builder.load_string("""
             id: image
             source: './pictures/imageMod.png'
 
+
 <InputType>:
     size_hint_y: None
     BoxLayout:
@@ -85,6 +88,7 @@ Builder.load_string("""
                 hint_text: "Text"
                 size_hint: 1, None
                 height: max(self.minimum_height, scrlv.height)
+
         
         
 <ExcludedWords>:
@@ -120,6 +124,14 @@ Builder.load_string("""
         id: fontSpinner
         on_text:
             root.font_changed()
+
+<Download>:
+    size_hint_y: None
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            text: "Download"
+            on_release: root.downloadFormat()
 
 <ImageSelector>:
     BoxLayout:
@@ -162,8 +174,8 @@ Builder.load_string("""
                 min: 100
                 value: 100
                 on_touch_up: root.updateImage()
-""")
 
+""")
 class TextOptions(BoxLayout):
     def __init__(self, **kwargs):
         super(TextOptions, self).__init__(**kwargs)
@@ -171,10 +183,12 @@ class TextOptions(BoxLayout):
         importantWords = ImportantWords(TEXT_OPTIONS[1])
         excludedWords = ExcludedWords(TEXT_OPTIONS[2])
         fontFamily = FontFamily(TEXT_OPTIONS[3])
+        download = Download()
         self.add_widget(InputType(importantWords, excludedWords, fontFamily, TEXT_OPTIONS[0]))
         self.add_widget(excludedWords)
         self.add_widget(importantWords)
         self.add_widget(fontFamily)
+        self.add_widget(download)
 
 imageSelector = ImageSelector(IMAGE_OPTIONS[0])
 border = Border(IMAGE_OPTIONS[1])
@@ -195,7 +209,6 @@ class ImageSelected(BoxLayout):
         super(ImageSelected, self).__init__(**kwargs)
         self.add_widget(imageSelection)
 
-
 class WordCloudGUI(BoxLayout):
     def reloadImage(self, deltatime):
         border.updateImage()
@@ -212,5 +225,6 @@ class WordCloudApp(App):
     
 if __name__ == '__main__':
     Window.maximize()
+    open('./text/.userwords.txt', 'w').write("")
     logging.debug(f'Window Maximize')
     WordCloudApp().run()

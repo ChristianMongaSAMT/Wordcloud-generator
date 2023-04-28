@@ -72,13 +72,6 @@ class ImageSelection(BoxLayout):
         return isEqual
 
     def isInArea(self, x, y):
-        '''if(x - (self.boxDim[0] - self.imageDim[0])/2 >= 0 and y - (self.boxDim[1] - self.imageDim[1])/2 >= 0 and x < self.imageDim[0] - (self.boxDim[0] - self.imageDim[0])/2 and y < self.imageDim[1] - (self.boxDim[1] - self.imageDim[1])/2):
-            print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: True')
-            return True
-            #print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: False')
-        return False'''
-
-
         if(x >= 0 and y >= 0 and x < self.imageDim[0] and y < self.imageDim[1]):
             #print(f'x: {x}, y: {y}, w: {self.imageDim[0]}, h: {self.imageDim[1]}, in: True')
             return True
@@ -87,11 +80,13 @@ class ImageSelection(BoxLayout):
     def updateMask(self, touch):
     
         img = cv2.imread(TEMP_PATH)
-        imgDelta = cv2.imread(MASK_PATH)
         
+        
+        #dimensione immagine originale
         mask = np.ones((img.shape[0],img.shape[1],1), np.uint8)
 
         cv2.imwrite(MASK_PATH, mask, [cv2.IMWRITE_PNG_BILEVEL, 1])
+        imgDelta = cv2.imread(MASK_PATH)
         countours = getCountours()
         #print(countours)
 
@@ -108,14 +103,14 @@ class ImageSelection(BoxLayout):
         else:
             d = self.boxDim[1]/2 - y
             y = self.boxDim[1]/2 + d
-        print("window size", Window.size[0])
-        print("Start", (Window.size[0] - self.boxDim[0])/2)
+        #print("window size", Window.size[0])
+        #print("Start", (Window.size[0] - self.boxDim[0])/2)
         x = x - (Window.size[0] - self.boxDim[0])/2 - BORDERWINDOW
 
         
-        print("pos", touch.pos)
-        print("img", self.imageDim)
-        print("dim", self.boxDim)
+        #print("pos", touch.pos)
+        #print("img", self.imageDim)
+        #print("dim", self.boxDim)
         
         pxY = int(y-(self.boxDim[1] - self.imageDim[1])/2)
         pxX = int(x-(self.boxDim[0] - self.imageDim[0])/2)
@@ -125,7 +120,7 @@ class ImageSelection(BoxLayout):
             cv2.imwrite(MASK_PATH, mask, [cv2.IMWRITE_PNG_BILEVEL, 1])
             cv2.imwrite(TEMP_PATH, img)
             cv2.imwrite(DELTA_PATH, imgDelta)
-            generateCloud()
+            generateCloud(img.shape)
             setIsResult(True)
 
         
