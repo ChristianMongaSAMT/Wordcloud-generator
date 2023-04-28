@@ -10,7 +10,7 @@ class ExcludedWords(BoxLayout, object):
 
     
     def initUserExcludedWords(self, excludedWords):
-        print(self)
+        #print(self)
         userExWords = self.ids.excludedWords.text
         userExWords = self.areLetters(userExWords)
         userExWords = userExWords.rsplit(" ")

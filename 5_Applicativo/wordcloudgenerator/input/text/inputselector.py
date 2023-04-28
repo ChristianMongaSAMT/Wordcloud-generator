@@ -14,6 +14,7 @@ from input.text.helpertextinput import helperTextInput
 
 class InputType(BoxLayout):
     path = './pictures/default.png'
+    wordsFile = "./text/.userwords.txt"
     wordsOrderByEmphasis = {}
     sm = ScreenManager()
     font = ""
@@ -47,7 +48,7 @@ class InputType(BoxLayout):
         self.wordsOrderByEmphasis = {}
         self.excludedWords = list(open('./text/excludedWords.txt', 'r').read().rsplit(','))
         self.excludedWords = self.excluded.initUserExcludedWords(self.excludedWords)
-        print(self.excludedWords)
+        #print(self.excludedWords)
         inputType = self.getInputType()
         
         # Controlla il tipo di input e in base a quello memorizza le parole
@@ -62,15 +63,31 @@ class InputType(BoxLayout):
         # Controlla le parole
         self.checkWords(self.words)
 
-        print(self.words)
+        #print(self.words)
         
         # Memorizza l'enfasi delle parole
         self.wordsOrderByEmphasis = self.important.orderByEmphasis(self.words, self.wordsOrderByEmphasis)
+        self.removeExcludedWords()
 
         # Controlla le parole dell'enfasi inserite dall'utente
         self.words = self.important.ids.importantWords.text
         self.checkWords(self.words)
         self.wordsOrderByEmphasis = self.important.userEmphasis(self.words)
+        self.writeWordsIntoFile()
+
+    def writeWordsIntoFile(self):
+        text = ""
+        outputText = ""
+        for index in self.wordsOrderByEmphasis:
+            text = index + " "
+            outputText += text * self.wordsOrderByEmphasis[index]
+        
+        open(self.wordsFile, 'w').write(outputText)
+        print(outputText)
+
+    def removeExcludedWords(self):
+        for excludedWord in self.excludedWords:
+            self.wordsOrderByEmphasis.pop(excludedWord, None)
 
     def getWordsFromText(self):
         # Prende le parole dal testo inserito
