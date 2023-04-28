@@ -1,3 +1,4 @@
+import os
 from input.text.inputselector import InputType
 from input.text.importantwords import ImportantWords
 from input.text.excludedwords import ExcludedWords
@@ -6,17 +7,22 @@ from input.image.imageselector import ImageSelector
 from input.image.borderproperties import Border
 from input.image.imagepartselector import ImageSelection
 from kivy.uix.colorpicker import ColorPicker
+from kivy.uix.boxlayout import BoxLayout
 
 from kivy.app import App
 from kivy.clock import Clock
-from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.config import Config
 from kivy.core.window import Window
+import logging
 
+os.environ["KIVY_HOME"] = "E:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\config"
+Config.read("config.ini")
+Config.set('graphics', 'resizable', 1)
+Config.write()
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border"]
-Config.read("./config.ini")
+
 Builder.load_string("""
 <WordCloudGUI>:
     BoxLayout:
@@ -200,5 +206,5 @@ class WordCloudApp(App):
         return wcg
     
 if __name__ == '__main__':
-    Window.fullscreen = False
+    Window.maximize()
     WordCloudApp().run()
