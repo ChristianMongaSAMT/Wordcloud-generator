@@ -5,7 +5,6 @@ def get_configured_logger(name=None):
     if (len(logger.handlers) == 0):
         # This logger has no handlers, so we can assume it hasn't yet been configured
         # Create RotatingFileHandler
-        import os
         formatter = "%(asctime)s %(levelname)s %(process)s %(thread)s %(filename)s %(funcName)s():%(lineno)d %(message)s"
         fhandler = logging.handlers.RotatingFileHandler('app.log', maxBytes = 1024*1024*10, backupCount = 6)
         fhandler.setFormatter(logging.Formatter(formatter))
