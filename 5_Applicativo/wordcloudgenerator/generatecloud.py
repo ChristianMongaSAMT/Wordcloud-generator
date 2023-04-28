@@ -1,4 +1,4 @@
-from wordcloud import WordCloud, ImageColorGenerator#, STOPWORDS
+from wordcloud import WordCloud, ImageColorGenerator, STOPWORDS
 import numpy as np
 import matplotlib.pyplot as plt
 import PIL.Image 
@@ -7,7 +7,8 @@ from input.image.borderproperties import getBorderSize
 
 #text = open('file.txt', 'r').read()
 def generateCloud():
-    text = "ciao come stai EDOARDO GAY LI PIACE IL CAZZO soono bello ok brutto ad sef saf4d as f a sdjbd  dfgb dg  da dq qwe qe"
+    #text = ["ciao", "come", "va"]
+    text = open('./text/.userwords.txt', 'r').read()
     excludedWords = "ciao"
 
     #print(STOPWORDS)
@@ -18,7 +19,7 @@ def generateCloud():
 
     borderColor = (getBorderColor()[2], getBorderColor()[1], getBorderColor()[0])
     wc = WordCloud(
-                    stopwords=excludedWords,    # Parole vietate
+                    stopwords=STOPWORDS,    # Parole vietate
                     mask=python_mask,           # Maschera su cui deve lavorare
                     background_color="white",   # Colore del background
                     contour_color=borderColor,      # Colore del contorno

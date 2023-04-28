@@ -3,7 +3,6 @@ from kivy.properties import StringProperty
 from kivy.uix.boxlayout import BoxLayout
 
 
-
 class ImportantWords(BoxLayout):
     txt = StringProperty()
     wordsOrderByEmphasis = {}
@@ -31,14 +30,14 @@ class ImportantWords(BoxLayout):
         for word in self.words:
             if(word != ''):
                 # Prende il valore più alto e lo usa per impostare l'enfasi della parola inserita dall'utente che sarà più grande di 1
-                self.wordsOrderByEmphasis[word] = list(self.wordsOrderByEmphasis.values())[0] + 1
+                self.wordsOrderByEmphasis[word] = list(self.wordsOrderByEmphasis.values())[-1] + 1 #[-1]  parte dalla fine
 
                 # Ordina l'array
                 self.sortEmphasisWords()
-        print("---")
+        '''print("---")
         for index in self.wordsOrderByEmphasis:
             print(f"{index}: {self.wordsOrderByEmphasis[index]}")
-        print("---")
+        print("---")'''
         return self.wordsOrderByEmphasis
 
     def sortEmphasisWords(self):
