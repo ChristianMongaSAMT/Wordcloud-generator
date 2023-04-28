@@ -44,13 +44,6 @@ Builder.load_string("""
             
 <ImageSelection>:
     BoxLayout:
-        canvas.before:
-            Color:
-                rgba: 0, 1, 0, 0.5
-            Rectangle:
-                size: self.size
-                pos: self.pos
-
         Image:
             id: image
             source: './pictures/imageMod.png'

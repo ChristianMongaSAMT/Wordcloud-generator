@@ -2,6 +2,8 @@ from collections import OrderedDict
 from kivy.properties import StringProperty
 from kivy.uix.boxlayout import BoxLayout
 
+
+
 class ImportantWords(BoxLayout):
     txt = StringProperty()
     wordsOrderByEmphasis = {}
