@@ -1,4 +1,0 @@
-[INFO   ] Logger: Record log in E:\Professionale\Progetto\GIT\Wordcloud-generator\5_Applicativo\config\.kivy\logs\kivy_23-04-28_74.txt
-[INFO   ] GL: NPOT texture support is available
-[INFO   ] Base: Start application main loop
-[INFO   ] Base: Leaving application in progress...

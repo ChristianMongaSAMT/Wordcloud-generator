@@ -1,8 +1,8 @@
 import os
+os.environ['KIVY_HOME'] = "./config/.kivy"
 
-
-import logging
-import logmanager
+#import logging
+#import logmanager
 
 from input.text.inputselector import InputType
 from input.text.importantwords import ImportantWords
@@ -18,13 +18,22 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.lang import Builder
-from kivy.config import Config
+
 from kivy.core.window import Window
 
-logmanager.get_configured_logger()
 
-TODO: os.environ['KIVY_HOME'] = "E:\\Professionale\\Progetto\\GIT\\Wordcloud-generator\\5_Applicativo\\config\\.kivy\\" #--------------------------
-Config.read("./config.ini")
+#Logger.setLevel(LOG_LEVELS["debug"])
+
+#logmanager.get_configured_logger()
+
+
+
+from kivy.config import Config
+from kivy.logger import Logger, LOG_LEVELS
+config_path = os.path.join( os.environ.get('KIVY_HOME'), "config.ini")
+Logger.info(f'config path {config_path}')
+Config.read("config.ini")
+Logger.info(f'resizable: {Config.getint("graphics", "resizable")}')
 
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border"]
@@ -225,5 +234,5 @@ class WordCloudApp(App):
 if __name__ == '__main__':
     Window.maximize()
     open('./text/.userwords.txt', 'w').write("")
-    logging.debug(f'Window Maximize')
+    Logger.debug(f'Window Maximize')
     WordCloudApp().run()

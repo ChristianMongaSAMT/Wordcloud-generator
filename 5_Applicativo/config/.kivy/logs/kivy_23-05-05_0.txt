@@ -1,0 +1,7 @@
+[INFO   ] Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_0.txt
+[INFO   ] resizable: 0
+[INFO   ] GL: NPOT texture support is available
+[WARNING] stderr: Traceback (most recent call last):
+[WARNING] stderr:   File "e:\I3BB\M306\Wordcloud-generator\5_Applicativo\wordcloudgenerator\guigenerator.py", line 237, in <module>
+[WARNING] stderr:     logging.debug(f'Window Maximize')
+[WARNING] stderr: NameError: name 'logging' is not defined
