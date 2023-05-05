@@ -1,0 +1,146 @@
+[INFO   ] 2023-05-05 11:25:49,059 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_0.txt
+[INFO   ] 2023-05-05 11:25:49,095 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 11:25:49,133 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 11:25:49,134 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 11:25:49,134 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 11:25:49,134 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 11:25:49,135 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 11:25:49,135 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 11:25:49,136 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 11:25:49,137 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 11:25:49,167 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 11:25:49,168 Base: Start application main loop
+[INFO   ] 2023-05-05 11:25:53,440 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:25:53,444 [imagepartselector.py] posizione non valida:(-139, -234)
+[INFO   ] 2023-05-05 11:26:02,202 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:26:02,209 [imagepartselector.py] posizione non valida:(-105, -53)
+[INFO   ] 2023-05-05 11:26:05,478 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:26:05,482 [imagepartselector.py] posizione non valida:(-41, 234)
+[INFO   ] 2023-05-05 11:26:08,575 [fontselector.py] selezionato font: ./fonts/theaters/THEATERS DEMO REGULAR.ttf
+[INFO   ] 2023-05-05 11:26:09,531 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:26:09,535 [imagepartselector.py] posizione non valida:(-165, 254)
+[INFO   ] 2023-05-05 11:26:10,934 [fontselector.py] selezionato font: ./fonts/krinkes/KrinkesRegularPERSONAL.ttf
+[INFO   ] 2023-05-05 11:26:11,630 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:26:11,634 [imagepartselector.py] posizione non valida:(-130, 231)
+[INFO   ] 2023-05-05 11:26:12,811 [fontselector.py] selezionato font: ./fonts/borex/BOREX-Regular.otf
+[WARNING] 2023-05-05 11:26:15,200 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:17,029 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:20,317 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:20,690 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:21,319 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:21,513 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:21,594 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:21,822 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:22,011 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:22,094 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:22,192 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:22,396 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:23,002 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:23,136 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:23,213 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:23,312 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:23,653 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:23,766 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:23,942 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:24,118 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:24,209 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:24,957 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:25,408 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 11:26:25,629 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 11:26:25,662 [imageselector.py] presa nuova path valida per immagine da elaborare: ./pictures/stellina.jpg
+[INFO   ] 2023-05-05 11:26:30,920 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:26:30,924 [imagepartselector.py] posizione non valida:(1135, 775)
+[INFO   ] 2023-05-05 11:26:40,474 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 11:26:43,391 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 11:26:43,392 [imagepartselector.py] posizione valida :(211, 318)
+[INFO   ] 2023-05-05 11:27:09,510 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:27:09,620 [imagepartselector.py] posizione non valida:(-372, -275)
+[INFO   ] 2023-05-05 11:27:31,075 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:27:31,083 [imagepartselector.py] posizione non valida:(-446, -207)
+[INFO   ] 2023-05-05 11:27:31,183 [excludedwords.py] prese parole da escludere:['']
+[INFO   ] 2023-05-05 11:27:31,184 [inputselector.py] selezionato spinner su LIST
+[INFO   ] 2023-05-05 11:27:31,184 [inputselector.py] Verificate parole valide
+[INFO   ] 2023-05-05 11:27:31,185 [importantwords.py] ordinata variabile per enfasi contenente le parole
+[WARNING] 2023-05-05 11:27:31,185 [inputselector.py] rimossa: cazzo, parola non valida
+[WARNING] 2023-05-05 11:27:31,186 [inputselector.py] rimossa: dio, parola non valida
+[WARNING] 2023-05-05 11:27:31,186 [inputselector.py] rimossa: madonna, parola non valida
+[WARNING] 2023-05-05 11:27:31,186 [inputselector.py] rimossa: merda, parola non valida
+[WARNING] 2023-05-05 11:27:31,187 [inputselector.py] rimossa: minchia, parola non valida
+[WARNING] 2023-05-05 11:27:31,187 [inputselector.py] rimossa: culo, parola non valida
+[WARNING] 2023-05-05 11:27:31,187 [inputselector.py] rimossa: stronzo, parola non valida
+[WARNING] 2023-05-05 11:27:31,187 [inputselector.py] rimossa: porco, parola non valida
+[WARNING] 2023-05-05 11:27:31,188 [inputselector.py] rimossa: vaffanculo, parola non valida
+[WARNING] 2023-05-05 11:27:31,188 [inputselector.py] rimossa: fanculo, parola non valida
+[WARNING] 2023-05-05 11:27:31,188 [inputselector.py] rimossa: cacare, parola non valida
+[WARNING] 2023-05-05 11:27:31,188 [inputselector.py] rimossa: cagare, parola non valida
+[WARNING] 2023-05-05 11:27:31,189 [inputselector.py] rimossa: coglioni, parola non valida
+[WARNING] 2023-05-05 11:27:31,189 [inputselector.py] rimossa: figa, parola non valida
+[WARNING] 2023-05-05 11:27:31,189 [inputselector.py] rimossa: troia, parola non valida
+[WARNING] 2023-05-05 11:27:31,189 [inputselector.py] rimossa: bastardo, parola non valida
+[WARNING] 2023-05-05 11:27:31,190 [inputselector.py] rimossa: fottere, parola non valida
+[WARNING] 2023-05-05 11:27:31,190 [inputselector.py] rimossa: cazzata, parola non valida
+[WARNING] 2023-05-05 11:27:31,190 [inputselector.py] rimossa: stronzata, parola non valida
+[WARNING] 2023-05-05 11:27:31,190 [inputselector.py] rimossa: casso, parola non valida
+[WARNING] 2023-05-05 11:27:31,191 [inputselector.py] rimossa: figata, parola non valida
+[WARNING] 2023-05-05 11:27:31,191 [inputselector.py] rimossa: tette, parola non valida
+[WARNING] 2023-05-05 11:27:31,191 [inputselector.py] rimossa: puttana, parola non valida
+[WARNING] 2023-05-05 11:27:31,191 [inputselector.py] rimossa: cacca, parola non valida
+[WARNING] 2023-05-05 11:27:31,191 [inputselector.py] rimossa: fesso, parola non valida
+[WARNING] 2023-05-05 11:27:31,192 [inputselector.py] rimossa: cretino, parola non valida
+[WARNING] 2023-05-05 11:27:31,192 [inputselector.py] rimossa: cristo, parola non valida
+[WARNING] 2023-05-05 11:27:31,192 [inputselector.py] rimossa: scopare, parola non valida
+[WARNING] 2023-05-05 11:27:31,192 [inputselector.py] rimossa: deficiente, parola non valida
+[WARNING] 2023-05-05 11:27:31,192 [inputselector.py] rimossa: negro, parola non valida
+[WARNING] 2023-05-05 11:27:31,193 [inputselector.py] rimossa: bordello, parola non valida
+[WARNING] 2023-05-05 11:27:31,193 [inputselector.py] rimossa: scazzi, parola non valida
+[WARNING] 2023-05-05 11:27:31,193 [inputselector.py] rimossa: scazzare, parola non valida
+[WARNING] 2023-05-05 11:27:31,193 [inputselector.py] rimossa: scoreggia, parola non valida
+[WARNING] 2023-05-05 11:27:31,193 [inputselector.py] rimossa: rompicazzo, parola non valida
+[WARNING] 2023-05-05 11:27:31,194 [inputselector.py] rimossa: gesÃ¹, parola non valida
+[WARNING] 2023-05-05 11:27:31,194 [inputselector.py] rimossa: vacca, parola non valida
+[WARNING] 2023-05-05 11:27:31,194 [inputselector.py] rimossa: smerdare, parola non valida
+[WARNING] 2023-05-05 11:27:31,194 [inputselector.py] rimossa: sputtanare, parola non valida
+[WARNING] 2023-05-05 11:27:31,194 [inputselector.py] rimossa: rompicoglioni, parola non valida
+[WARNING] 2023-05-05 11:27:31,194 [inputselector.py] rimossa: figo, parola non valida
+[WARNING] 2023-05-05 11:27:31,195 [inputselector.py] rimossa: fico, parola non valida
+[WARNING] 2023-05-05 11:27:31,195 [inputselector.py] rimossa: imbecille, parola non valida
+[WARNING] 2023-05-05 11:27:31,195 [inputselector.py] rimossa: pirla, parola non valida
+[WARNING] 2023-05-05 11:27:31,195 [inputselector.py] rimossa: sega, parola non valida
+[WARNING] 2023-05-05 11:27:31,196 [inputselector.py] rimossa: frocio, parola non valida
+[WARNING] 2023-05-05 11:27:31,196 [inputselector.py] rimossa: trombata, parola non valida
+[WARNING] 2023-05-05 11:27:31,196 [inputselector.py] rimossa: baldracca, parola non valida
+[WARNING] 2023-05-05 11:27:31,196 [inputselector.py] rimossa: stocazzo, parola non valida
+[WARNING] 2023-05-05 11:27:31,196 [inputselector.py] rimossa: piscia, parola non valida
+[WARNING] 2023-05-05 11:27:31,197 [inputselector.py] rimossa: inculare, parola non valida
+[WARNING] 2023-05-05 11:27:31,197 [inputselector.py] rimossa: vucumprÃ , parola non valida
+[WARNING] 2023-05-05 11:27:31,197 [inputselector.py] rimossa: puttanata, parola non valida
+[WARNING] 2023-05-05 11:27:31,197 [inputselector.py] rimossa: culona, parola non valida
+[WARNING] 2023-05-05 11:27:31,197 [inputselector.py] rimossa: pippa, parola non valida
+[WARNING] 2023-05-05 11:27:31,198 [inputselector.py] rimossa: belin, parola non valida
+[WARNING] 2023-05-05 11:27:31,198 [inputselector.py] rimossa: rompimaroni, parola non valida
+[WARNING] 2023-05-05 11:27:31,198 [inputselector.py] rimossa: terrone, parola non valida
+[WARNING] 2023-05-05 11:27:31,198 [inputselector.py] rimossa: mignotta, parola non valida
+[WARNING] 2023-05-05 11:27:31,199 [inputselector.py] rimossa: scoglionato, parola non valida
+[WARNING] 2023-05-05 11:27:31,199 [inputselector.py] rimossa: fregna, parola non valida
+[WARNING] 2023-05-05 11:27:31,199 [inputselector.py] rimossa: pugnetta, parola non valida
+[WARNING] 2023-05-05 11:27:31,199 [inputselector.py] rimossa: infame, parola non valida
+[WARNING] 2023-05-05 11:27:31,199 [inputselector.py] rimossa: suca, parola non valida
+[WARNING] 2023-05-05 11:27:31,200 [inputselector.py] rimossa: cornuta, parola non valida
+[WARNING] 2023-05-05 11:27:31,200 [inputselector.py] rimossa: cornuto, parola non valida
+[WARNING] 2023-05-05 11:27:31,200 [inputselector.py] rimossa: mortacci, parola non valida
+[WARNING] 2023-05-05 11:27:31,200 [inputselector.py] rimossa: bernarda, parola non valida
+[WARNING] 2023-05-05 11:27:31,201 [inputselector.py] rimossa: pompino, parola non valida
+[WARNING] 2023-05-05 11:27:31,201 [inputselector.py] rimossa: bischero, parola non valida
+[WARNING] 2023-05-05 11:27:31,201 [inputselector.py] rimossa: culattone, parola non valida
+[WARNING] 2023-05-05 11:27:31,201 [inputselector.py] rimossa: rompiballe, parola non valida
+[WARNING] 2023-05-05 11:27:31,201 [inputselector.py] rimossa: , parola non valida
+[INFO   ] 2023-05-05 11:27:31,201 [inputselector.py] Verificate parole valide
+[INFO   ] 2023-05-05 11:27:31,202 [inputselector.py] scritte parole da tenere in un file ordinati per enfasi
+[WARNING] 2023-05-05 11:27:32,690 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 11:27:32,847 [imageselector.py] presa nuova path valida per immagine da elaborare: ./pictures/stellina.jpg
+[INFO   ] 2023-05-05 11:27:35,204 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 11:27:37,784 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 11:27:37,785 [imagepartselector.py] posizione valida :(478, 280)
+[INFO   ] 2023-05-05 11:27:51,184 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 11:27:51,288 [imagepartselector.py] posizione non valida:(436, -136)
+[INFO   ] 2023-05-05 11:27:51,549 Base: Leaving application in progress...

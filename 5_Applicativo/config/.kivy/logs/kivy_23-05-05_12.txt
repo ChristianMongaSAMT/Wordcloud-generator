@@ -1,0 +1,16 @@
+[INFO   ] 2023-05-05 13:11:18,337 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_12.txt
+[INFO   ] 2023-05-05 13:11:18,373 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 13:11:18,402 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 13:11:18,403 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 13:11:18,404 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 13:11:18,404 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 13:11:18,404 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 13:11:18,405 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 13:11:18,406 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 13:11:18,407 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 13:11:18,435 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 13:11:18,436 Base: Start application main loop
+[INFO   ] 2023-05-05 13:11:19,196 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:11:25,864 'str' object has no attribute 'items'
+[INFO   ] 2023-05-05 13:11:25,865 [imagepartselector.py] posizione valida :(274, 79)
+[INFO   ] 2023-05-05 13:11:39,445 Base: Leaving application in progress...

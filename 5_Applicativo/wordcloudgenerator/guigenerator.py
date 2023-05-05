@@ -129,7 +129,7 @@ Builder.load_string("""
         id: fontLabel
     Spinner:
         text: 'Font'
-        values: 'Cartoon','Borex','Krinkes','Theaters','Calibri','Roboto'
+        values: 'Calibri','Cartoon','Christmas','Guilty','Love','Keisya','Resgold'
         id: fontSpinner
         on_text:
             root.font_changed()

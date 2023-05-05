@@ -1,0 +1,56 @@
+[INFO   ] 2023-05-05 13:28:09,913 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_25.txt
+[INFO   ] 2023-05-05 13:28:09,948 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 13:28:09,978 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 13:28:09,978 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 13:28:09,979 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 13:28:09,979 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 13:28:09,980 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 13:28:09,980 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 13:28:09,981 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 13:28:09,982 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 13:28:10,010 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 13:28:10,011 Base: Start application main loop
+[INFO   ] 2023-05-05 13:28:10,066 GL: Unpack subimage support is available
+[INFO   ] 2023-05-05 13:29:06,478 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:29:06,483 [imagepartselector.py] posizione non valida:(-98, 234)
+[INFO   ] 2023-05-05 13:29:08,055 [fontselector.py] selezionato font: ./fonts/borex/BOREX-Regular.otf
+[INFO   ] 2023-05-05 13:29:08,929 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:29:16,203 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:29:16,204 [imagepartselector.py] posizione valida :(218, 242)
+[WARNING] 2023-05-05 13:29:38,143 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 13:29:38,543 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 13:29:39,920 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:29:39,924 [imagepartselector.py] posizione non valida:(-207, 225)
+[INFO   ] 2023-05-05 13:29:43,446 [fontselector.py] selezionato font: ./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf
+[INFO   ] 2023-05-05 13:29:43,998 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:29:51,505 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:29:51,506 [imagepartselector.py] posizione valida :(138, 226)
+[WARNING] 2023-05-05 13:29:55,753 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 13:29:56,064 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 13:29:57,271 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:29:57,275 [imagepartselector.py] posizione non valida:(-125, 241)
+[INFO   ] 2023-05-05 13:29:58,608 [fontselector.py] selezionato font: ./fonts/krinkes/KrinkesRegularPERSONAL.ttf
+[INFO   ] 2023-05-05 13:29:59,102 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:30:06,307 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:30:06,308 [imagepartselector.py] posizione valida :(207, 300)
+[WARNING] 2023-05-05 13:30:21,083 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 13:30:21,543 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 13:30:22,511 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:30:22,515 [imagepartselector.py] posizione non valida:(-128, 246)
+[INFO   ] 2023-05-05 13:30:23,773 [fontselector.py] selezionato font: ./fonts/theaters/THEATERS DEMO REGULAR.ttf
+[INFO   ] 2023-05-05 13:30:24,503 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:30:31,761 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:30:31,762 [imagepartselector.py] posizione valida :(159, 241)
+[INFO   ] 2023-05-05 13:30:48,885 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:30:48,991 [imagepartselector.py] posizione non valida:(-238, 184)
+[INFO   ] 2023-05-05 13:30:55,829 [fontselector.py] selezionato font: ./data/fonts/Roboto-Regular.ttf
+[WARNING] 2023-05-05 13:30:57,880 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 13:30:58,703 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 13:30:59,916 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:30:59,920 [imagepartselector.py] posizione non valida:(951, 126)
+[INFO   ] 2023-05-05 13:31:13,467 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:31:20,372 cannot open resource
+[INFO   ] 2023-05-05 13:31:20,373 [imagepartselector.py] posizione valida :(789, 177)
+[INFO   ] 2023-05-05 13:31:21,654 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:31:21,761 [imagepartselector.py] posizione non valida:(894, -223)
+[INFO   ] 2023-05-05 13:31:22,480 Base: Leaving application in progress...

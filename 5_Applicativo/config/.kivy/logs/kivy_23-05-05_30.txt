@@ -1,0 +1,69 @@
+[INFO   ] 2023-05-05 13:56:11,278 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_30.txt
+[INFO   ] 2023-05-05 13:56:11,311 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 13:56:11,326 GL: Unpack subimage support is available
+[INFO   ] 2023-05-05 13:56:11,347 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 13:56:11,347 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 13:56:11,348 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 13:56:11,348 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 13:56:11,349 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 13:56:11,350 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 13:56:11,351 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 13:56:11,351 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 13:56:11,380 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 13:56:11,381 Base: Start application main loop
+[INFO   ] 2023-05-05 13:56:13,340 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:13,344 [imagepartselector.py] posizione non valida:(-108, 210)
+[INFO   ] 2023-05-05 13:56:14,470 [fontselector.py] selezionato font: ./fonts/calibri/Calibri.ttf
+[INFO   ] 2023-05-05 13:56:15,100 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:15,104 [imagepartselector.py] posizione non valida:(-133, 261)
+[INFO   ] 2023-05-05 13:56:15,811 [fontselector.py] selezionato font: ./fonts/from-cartoon-blocks/From Cartoon Blocks.ttf
+[INFO   ] 2023-05-05 13:56:16,401 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:16,405 [imagepartselector.py] posizione non valida:(-104, 266)
+[INFO   ] 2023-05-05 13:56:17,412 [fontselector.py] selezionato font: ./fonts/christmas-sundaylab/Christmas Sundaylab.otf
+[INFO   ] 2023-05-05 13:56:17,824 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:17,828 [imagepartselector.py] posizione non valida:(-133, 245)
+[INFO   ] 2023-05-05 13:56:18,618 [fontselector.py] selezionato font: ./fonts/guilty-chaos/Guilty Chaos.otf
+[INFO   ] 2023-05-05 13:56:19,026 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:19,030 [imagepartselector.py] posizione non valida:(-159, 265)
+[INFO   ] 2023-05-05 13:56:19,838 [fontselector.py] selezionato font: ./fonts/love-sunday/Love Sunday.ttf
+[INFO   ] 2023-05-05 13:56:20,427 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:20,432 [imagepartselector.py] posizione non valida:(-111, 237)
+[INFO   ] 2023-05-05 13:56:21,627 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:21,631 [imagepartselector.py] posizione non valida:(-123, 237)
+[INFO   ] 2023-05-05 13:56:24,290 [fontselector.py] selezionato font: ./fonts/baby-keisya/Baby Keisya.ttf
+[INFO   ] 2023-05-05 13:56:28,565 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:28,569 [imagepartselector.py] posizione non valida:(-122, 213)
+[INFO   ] 2023-05-05 13:56:30,548 [fontselector.py] selezionato font: ./fonts/guilty-chaos/Guilty Chaos.otf
+[INFO   ] 2023-05-05 13:56:31,373 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:31,377 [imagepartselector.py] posizione non valida:(-215, 120)
+[INFO   ] 2023-05-05 13:56:31,658 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:31,662 [imagepartselector.py] posizione non valida:(-181, 220)
+[INFO   ] 2023-05-05 13:56:32,509 [fontselector.py] selezionato font: ./fonts/resgold-willgets/Resgold Willgets Serif OTF.otf
+[INFO   ] 2023-05-05 13:56:33,566 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:33,571 [imagepartselector.py] posizione non valida:(-158, 241)
+[INFO   ] 2023-05-05 13:56:34,279 [fontselector.py] selezionato font: ./fonts/baby-keisya/Baby Keisya.ttf
+[INFO   ] 2023-05-05 13:56:35,116 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:35,121 [imagepartselector.py] posizione non valida:(-172, 258)
+[INFO   ] 2023-05-05 13:56:35,769 [fontselector.py] selezionato font: ./fonts/love-sunday/Love Sunday.ttf
+[INFO   ] 2023-05-05 13:56:36,370 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:56:36,375 [imagepartselector.py] posizione non valida:(-158, 282)
+[INFO   ] 2023-05-05 13:56:39,970 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:56:47,209 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:56:47,211 [imagepartselector.py] posizione valida :(224, 96)
+[INFO   ] 2023-05-05 13:57:01,120 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:57:01,226 [imagepartselector.py] posizione non valida:(-255, 202)
+[INFO   ] 2023-05-05 13:57:13,349 [fontselector.py] selezionato font: ./fonts/baby-keisya/Baby Keisya.ttf
+[WARNING] 2023-05-05 13:57:15,506 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 13:57:16,280 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:57:23,409 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:57:23,410 [imagepartselector.py] posizione valida :(795, 106)
+[INFO   ] 2023-05-05 13:57:24,132 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:57:24,366 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:57:24,367 [imagepartselector.py] posizione valida :(368, 216)
+[WARNING] 2023-05-05 13:57:26,887 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 13:57:27,985 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:57:35,178 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:57:35,179 [imagepartselector.py] posizione valida :(760, 93)
+[INFO   ] 2023-05-05 13:57:42,266 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:57:42,371 [imagepartselector.py] posizione non valida:(700, -304)
+[INFO   ] 2023-05-05 13:57:46,694 Base: Leaving application in progress...

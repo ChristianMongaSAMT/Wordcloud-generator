@@ -1,0 +1,58 @@
+[INFO   ] 2023-05-05 13:05:17,068 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_10.txt
+[INFO   ] 2023-05-05 13:05:17,104 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 13:05:17,134 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 13:05:17,134 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 13:05:17,135 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 13:05:17,135 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 13:05:17,135 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 13:05:17,136 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 13:05:17,137 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 13:05:17,138 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 13:05:17,166 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 13:05:17,167 Base: Start application main loop
+[INFO   ] 2023-05-05 13:05:18,031 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 13:05:25,064 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 13:05:25,066 [imagepartselector.py] posizione valida :(230, 68)
+[INFO   ] 2023-05-05 13:05:30,492 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:30,631 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:30,631 [imagepartselector.py] posizione valida :(339, 408)
+[INFO   ] 2023-05-05 13:05:30,637 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:30,774 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:30,775 [imagepartselector.py] posizione valida :(339, 406)
+[INFO   ] 2023-05-05 13:05:30,787 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:30,923 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:30,923 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:30,937 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:31,072 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:31,073 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:31,079 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:31,214 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:31,214 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:31,227 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:31,362 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:31,363 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:31,420 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:31,556 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:31,556 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:31,570 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:31,706 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:31,707 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:31,713 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:31,848 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:31,848 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:31,855 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:31,989 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:31,990 [imagepartselector.py] posizione valida :(330, 353)
+[INFO   ] 2023-05-05 13:05:34,193 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:34,438 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:34,438 [imagepartselector.py] posizione valida :(324, 381)
+[INFO   ] 2023-05-05 13:05:34,452 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:34,587 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:34,587 [imagepartselector.py] posizione valida :(324, 381)
+[INFO   ] 2023-05-05 13:05:34,593 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:34,728 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:34,728 [imagepartselector.py] posizione valida :(324, 381)
+[INFO   ] 2023-05-05 13:05:34,735 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 13:05:34,869 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 13:05:34,870 [imagepartselector.py] posizione valida :(324, 381)
+[INFO   ] 2023-05-05 13:05:43,093 Base: Leaving application in progress...

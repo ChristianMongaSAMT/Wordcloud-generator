@@ -5,16 +5,16 @@ from kivy.core.text import LabelBase
 from kivy.logger import Logger
 
 
-#TO DO: da mettere i font nella cartella
 FONT_MAPPING = {}
-FONT_MAPPING['Cartoon'] = './fonts/from-cartoon-blocks/From Cartoon Blocks.ttf'
-FONT_MAPPING['Borex'] = './fonts/borex/BOREX-Regular.otf'
-FONT_MAPPING['Krinkes'] = './fonts/krinkes/KrinkesRegularPERSONAL.ttf'
-FONT_MAPPING['Theaters'] = './fonts/theaters/THEATERS DEMO REGULAR.ttf'
 FONT_MAPPING['Calibri'] = './fonts/calibri/Calibri.ttf'
-FONT_MAPPING['Roboto'] = './data/fonts/Roboto-Regular.ttf'
+FONT_MAPPING['Cartoon'] = './fonts/from-cartoon-blocks/From Cartoon Blocks.ttf'
+FONT_MAPPING['Christmas'] = './fonts/christmas-sundaylab/Christmas Sundaylab.otf'
+FONT_MAPPING['Guilty'] = './fonts/guilty-chaos/Guilty Chaos.otf'
+FONT_MAPPING['Love'] = './fonts/love-sunday/Love Sunday.ttf'
+FONT_MAPPING['Keisya'] = './fonts/baby-keisya/Baby Keisya.ttf'
+FONT_MAPPING['Resgold'] = './fonts/resgold-willgets/Resgold Willgets Serif OTF.otf'
 
-font = "./fonts/borex/BOREX-Regular.otf"
+font = "./fonts/baby-keisya/Baby Keisya.ttf"
 def getFont():
     return font
 for font_name, font_path in FONT_MAPPING.items():

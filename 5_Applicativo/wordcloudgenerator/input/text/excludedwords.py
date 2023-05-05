@@ -14,7 +14,7 @@ class ExcludedWords(BoxLayout, object):
     def initUserExcludedWords(self, excludedWords):
         #print(self)
         userExWords = self.ids.excludedWords.text
-        userExWords = self.areLetters(userExWords)
+        #userExWords = self.areLetters(userExWords)
         userExWords = userExWords.rsplit(" ")
         Logger.info(f'[excludedwords.py] prese parole da escludere:{userExWords}')
         for word in userExWords:

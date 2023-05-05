@@ -1,0 +1,13 @@
+[INFO   ] 2023-05-05 13:12:10,879 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_14.txt
+[INFO   ] 2023-05-05 13:12:10,915 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 13:12:10,950 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 13:12:10,951 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 13:12:10,951 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 13:12:10,952 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 13:12:10,952 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 13:12:10,953 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 13:12:10,954 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 13:12:10,955 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 13:12:10,983 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 13:12:10,984 Base: Start application main loop
+[INFO   ] 2023-05-05 13:13:26,779 Base: Leaving application in progress...

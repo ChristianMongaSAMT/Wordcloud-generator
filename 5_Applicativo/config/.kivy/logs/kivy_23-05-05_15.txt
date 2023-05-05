@@ -1,0 +1,46 @@
+[INFO   ] 2023-05-05 13:13:30,748 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_15.txt
+[INFO   ] 2023-05-05 13:13:30,807 GL: NPOT texture support is available
+[WARNING] 2023-05-05 13:13:30,818 stderr: Traceback (most recent call last):
+[WARNING] 2023-05-05 13:13:30,818 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\lang\builder.py", line 704, in _apply_rule
+[WARNING] 2023-05-05 13:13:30,819 stderr:     setattr(widget_set, key, value)
+[WARNING] 2023-05-05 13:13:30,819 stderr:   File "kivy\weakproxy.pyx", line 35, in kivy.weakproxy.WeakProxy.__setattr__
+[WARNING] 2023-05-05 13:13:30,820 stderr:   File "kivy\properties.pyx", line 520, in kivy.properties.Property.__set__
+[WARNING] 2023-05-05 13:13:30,821 stderr:   File "kivy\properties.pyx", line 938, in kivy.properties.ListProperty.set
+[WARNING] 2023-05-05 13:13:30,821 stderr:   File "kivy\properties.pyx", line 815, in kivy.properties.ObservableList.__init__
+[WARNING] 2023-05-05 13:13:30,822 stderr: TypeError: 'int' object is not iterable
+[WARNING] 2023-05-05 13:13:30,822 stderr: 
+[WARNING] 2023-05-05 13:13:30,822 stderr: During handling of the above exception, another exception occurred:
+[WARNING] 2023-05-05 13:13:30,822 stderr: 
+[WARNING] 2023-05-05 13:13:30,823 stderr: Traceback (most recent call last):
+[WARNING] 2023-05-05 13:13:30,823 stderr:   File "e:\I3BB\M306\Wordcloud-generator\5_Applicativo\wordcloudgenerator\guigenerator.py", line 208, in <module>
+[WARNING] 2023-05-05 13:13:30,823 stderr:     imageSelector = ImageSelector(IMAGE_OPTIONS[0])
+[WARNING] 2023-05-05 13:13:30,823 stderr:   File "e:\I3BB\M306\Wordcloud-generator\5_Applicativo\wordcloudgenerator\input\image\imageselector.py", line 31, in __init__
+[WARNING] 2023-05-05 13:13:30,824 stderr:     super(ImageSelector, self).__init__(**kwargs)
+[WARNING] 2023-05-05 13:13:30,824 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\uix\boxlayout.py", line 145, in __init__
+[WARNING] 2023-05-05 13:13:30,830 stderr:     super(BoxLayout, self).__init__(**kwargs)
+[WARNING] 2023-05-05 13:13:30,830 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\uix\layout.py", line 76, in __init__
+[WARNING] 2023-05-05 13:13:30,835 stderr:     super(Layout, self).__init__(**kwargs)
+[WARNING] 2023-05-05 13:13:30,835 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\uix\widget.py", line 366, in __init__
+[WARNING] 2023-05-05 13:13:30,841 stderr:     self.apply_class_lang_rules(
+[WARNING] 2023-05-05 13:13:30,842 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\uix\widget.py", line 470, in apply_class_lang_rules
+[WARNING] 2023-05-05 13:13:30,842 stderr:     Builder.apply(
+[WARNING] 2023-05-05 13:13:30,842 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\lang\builder.py", line 540, in apply
+[WARNING] 2023-05-05 13:13:30,843 stderr:     self._apply_rule(
+[WARNING] 2023-05-05 13:13:30,843 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\lang\builder.py", line 709, in _apply_rule
+[WARNING] 2023-05-05 13:13:30,843 stderr:     raise BuilderException(rule.ctx, rule.line,
+[WARNING] 2023-05-05 13:13:30,844 stderr: kivy.lang.builder.BuilderException: Parser: File "<inline>", line 109:
+[WARNING] 2023-05-05 13:13:30,844 stderr: ...
+[WARNING] 2023-05-05 13:13:30,844 stderr:     107:        Label:
+[WARNING] 2023-05-05 13:13:30,844 stderr:     108:            text: 'Path'
+[WARNING] 2023-05-05 13:13:30,844 stderr: >>  109:            text_size: 6
+[WARNING] 2023-05-05 13:13:30,845 stderr:     110:        TextInput:
+[WARNING] 2023-05-05 13:13:30,845 stderr:     111:            id: path
+[WARNING] 2023-05-05 13:13:30,845 stderr: ...
+[WARNING] 2023-05-05 13:13:30,845 stderr: TypeError: 'int' object is not iterable
+[WARNING] 2023-05-05 13:13:30,845 stderr:   File "E:\I3BB\M306\Wordcloud-generator\5_Applicativo\venv\lib\site-packages\kivy\lang\builder.py", line 704, in _apply_rule
+[WARNING] 2023-05-05 13:13:30,846 stderr:     setattr(widget_set, key, value)
+[WARNING] 2023-05-05 13:13:30,846 stderr:   File "kivy\weakproxy.pyx", line 35, in kivy.weakproxy.WeakProxy.__setattr__
+[WARNING] 2023-05-05 13:13:30,846 stderr:   File "kivy\properties.pyx", line 520, in kivy.properties.Property.__set__
+[WARNING] 2023-05-05 13:13:30,846 stderr:   File "kivy\properties.pyx", line 938, in kivy.properties.ListProperty.set
+[WARNING] 2023-05-05 13:13:30,846 stderr:   File "kivy\properties.pyx", line 815, in kivy.properties.ObservableList.__init__
+[WARNING] 2023-05-05 13:13:30,846 stderr: 

@@ -16,12 +16,11 @@ def generateCloud(size):
     if(not text.strip()):
         text = open('./text/.example.txt', 'r').read()
     open('./text/.userwords.txt', 'w').write("")
-
+    text = "This is a sample text with some numbers: 1, 2, 3, 1, 14, 15, 14"
 
     python_mask = np.array(PIL.Image.open("./pictures/.delta.png"))
 
     colormap = ImageColorGenerator(python_mask)
-
     borderColor = (getBorderColor()[2], getBorderColor()[1], getBorderColor()[0])
     global wc 
     try:
@@ -33,10 +32,11 @@ def generateCloud(size):
                     mask=python_mask,           # Maschera su cui deve lavorare
                     background_color="white",   # Colore del background
                     contour_color=borderColor,      # Colore del contorno
-                    contour_width=getBorderSize()           # Size del contorno
-                ).generate(text)    
+                    contour_width=getBorderSize(),           # Size del contorno
+                    include_numbers=True            
+                ).generate_from_text(text)
         wc.recolor(color_func=colormap)
-        plt.imshow(wc)
+        plt.imshow(wc, interpolation = "bilinear")
         plt.axis("off")
         plt.savefig("./pictures/imageMod.png", format="png", metadata=None,
             transparent=True, pil_kwargs=None)

@@ -1,0 +1,21 @@
+[INFO   ] 2023-05-05 13:54:30,322 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_29.txt
+[INFO   ] 2023-05-05 13:54:30,362 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 13:54:30,377 GL: Unpack subimage support is available
+[INFO   ] 2023-05-05 13:54:30,398 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 13:54:30,398 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 13:54:30,398 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 13:54:30,398 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 13:54:30,399 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 13:54:30,400 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 13:54:30,401 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 13:54:30,401 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 13:54:30,430 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 13:54:30,431 Base: Start application main loop
+[INFO   ] 2023-05-05 13:54:34,160 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:54:34,165 [imagepartselector.py] posizione non valida:(-274, 394)
+[INFO   ] 2023-05-05 13:54:35,903 [download.py] annullato scaricamento
+[INFO   ] 2023-05-05 13:54:37,918 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:54:37,923 [imagepartselector.py] posizione non valida:(-137, 237)
+[INFO   ] 2023-05-05 13:54:38,859 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 13:54:38,863 [imagepartselector.py] posizione non valida:(-137, 237)
+[INFO   ] 2023-05-05 13:54:44,186 Base: Leaving application in progress...

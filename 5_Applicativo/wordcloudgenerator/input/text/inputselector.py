@@ -123,7 +123,7 @@ class InputType(BoxLayout):
     def checkWords(self, wordsToCheck):
         self.words = wordsToCheck
         # Ciclo per escludere i carattero speciali
-        self.words = self.excluded.areLetters(self.words)
+        #self.words = self.excluded.areLetters(self.words)
         
         # Se words contiene qualcosa 
         if(len(self.words) > 0):
