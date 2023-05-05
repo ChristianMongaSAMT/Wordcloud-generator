@@ -1,0 +1,76 @@
+[INFO   ] 2023-05-05 10:57:28,155 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_4.txt
+[INFO   ] 2023-05-05 10:57:28,207 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 10:57:28,237 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 10:57:28,238 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 10:57:28,238 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 10:57:28,239 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 10:57:28,239 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 10:57:28,240 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 10:57:28,241 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 10:57:28,242 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 10:57:28,270 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 10:57:28,271 Base: Start application main loop
+[INFO   ] 2023-05-05 10:57:28,780 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 10:57:36,273 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 10:57:36,275 [imagepartselector.py] posizione valida :(789, 348)
+[INFO   ] 2023-05-05 10:57:36,321 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:36,324 [imagepartselector.py] posizione non valida:(173, -53)
+[INFO   ] 2023-05-05 10:57:36,329 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:36,459 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:36,460 [imagepartselector.py] posizione valida :(550, 341)
+[INFO   ] 2023-05-05 10:57:36,467 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 10:57:37,232 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 10:57:37,233 [imagepartselector.py] posizione valida :(259, 205)
+[INFO   ] 2023-05-05 10:57:37,250 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:37,392 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:37,393 [imagepartselector.py] posizione valida :(379, 289)
+[INFO   ] 2023-05-05 10:57:37,396 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:37,521 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:37,521 [imagepartselector.py] posizione valida :(563, 353)
+[INFO   ] 2023-05-05 10:57:37,528 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:37,652 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:37,652 [imagepartselector.py] posizione valida :(494, 153)
+[INFO   ] 2023-05-05 10:57:37,659 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:37,782 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:37,783 [imagepartselector.py] posizione valida :(518, 93)
+[INFO   ] 2023-05-05 10:57:37,789 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,792 [imagepartselector.py] posizione non valida:(696, -100)
+[INFO   ] 2023-05-05 10:57:37,795 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,798 [imagepartselector.py] posizione non valida:(975, -304)
+[INFO   ] 2023-05-05 10:57:37,801 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,804 [imagepartselector.py] posizione non valida:(1060, -304)
+[INFO   ] 2023-05-05 10:57:37,807 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,810 [imagepartselector.py] posizione non valida:(640, -208)
+[INFO   ] 2023-05-05 10:57:37,813 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,816 [imagepartselector.py] posizione non valida:(7, -304)
+[INFO   ] 2023-05-05 10:57:37,818 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,821 [imagepartselector.py] posizione non valida:(-300, -304)
+[INFO   ] 2023-05-05 10:57:37,824 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,827 [imagepartselector.py] posizione non valida:(-315, -303)
+[INFO   ] 2023-05-05 10:57:37,830 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:37,833 [imagepartselector.py] posizione non valida:(-3, -269)
+[INFO   ] 2023-05-05 10:57:37,836 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:37,961 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:37,962 [imagepartselector.py] posizione valida :(61, 137)
+[INFO   ] 2023-05-05 10:57:37,965 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:38,091 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:38,091 [imagepartselector.py] posizione valida :(56, 308)
+[INFO   ] 2023-05-05 10:57:38,097 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:38,222 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:38,223 [imagepartselector.py] posizione valida :(127, 289)
+[INFO   ] 2023-05-05 10:57:38,229 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:38,354 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:38,355 [imagepartselector.py] posizione valida :(221, 247)
+[INFO   ] 2023-05-05 10:57:38,361 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:38,485 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:38,486 [imagepartselector.py] posizione valida :(221, 247)
+[INFO   ] 2023-05-05 10:57:38,489 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[ERROR  ] 2023-05-05 10:57:38,612 Couldn't find space to draw. Either the Canvas size is too small or too much of the image is masked out.
+[INFO   ] 2023-05-05 10:57:38,613 [imagepartselector.py] posizione valida :(253, 252)
+[INFO   ] 2023-05-05 10:57:38,620 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:38,623 [imagepartselector.py] posizione non valida:(-90, 351)
+[INFO   ] 2023-05-05 10:57:38,626 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:38,629 [imagepartselector.py] posizione non valida:(-459, 367)
+[INFO   ] 2023-05-05 10:57:40,612 [download.py] annullato scaricamento
+[INFO   ] 2023-05-05 10:57:40,615 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 10:57:40,725 [imagepartselector.py] posizione non valida:(-339, 367)

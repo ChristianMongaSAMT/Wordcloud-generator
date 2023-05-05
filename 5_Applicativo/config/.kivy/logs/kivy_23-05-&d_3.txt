@@ -1,4 +1,4 @@
-[INFO   ] Logger: Record log in ./config/.kivy\logs\kivy_23-05-&d_0.txt
+[INFO   ] Logger: Record log in ./config/.kivy\logs\kivy_23-05-&d_3.txt
 [INFO   ] deps: Successfully imported "kivy_deps.angle" 0.3.3
 [INFO   ] deps: Successfully imported "kivy_deps.glew" 0.3.1
 [INFO   ] deps: Successfully imported "kivy_deps.sdl2" 0.4.5
@@ -24,4 +24,4 @@
 [INFO   ] Window: auto add sdl2 input provider
 [INFO   ] Window: virtual keyboard not allowed, single mode, not docked
 [INFO   ] Text: Provider: sdl2
-[INFO   ] 2023-05-05 10:53:08,008 config path: ./config/.kivy\config.ini
+[INFO   ] 2023-05-05 10:56:28,957 config path: ./config/.kivy\config.ini

@@ -11,6 +11,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
 
 from input.text.helpertextinput import helperTextInput
+from kivy.logger import Logger
 
 class InputType(BoxLayout):
     path = './pictures/default.png'
@@ -54,15 +55,18 @@ class InputType(BoxLayout):
         # Controlla il tipo di input e in base a quello memorizza le parole
         if(inputType == 'FILE'):
             self.ids.pathWords.text = self.get_path()
+            Logger.info(f'[inputselector.py] selezionato spinner su FILE')
             self.getWordsFromFile()
         elif(inputType == 'URL'):
+            Logger.info(f'[inputselector.py] selezionato spinner su URL')
             self.getWordsFromUrl()
         else:
+            Logger.info(f'[inputselector.py] selezionato spinner su LIST')
             self.getWordsFromText()
         
         # Controlla le parole
+        
         self.checkWords(self.words)
-
         #print(self.words)
         
         # Memorizza l'enfasi delle parole
@@ -82,11 +86,13 @@ class InputType(BoxLayout):
             text = index + " "
             outputText += text * self.wordsOrderByEmphasis[index]
         open(self.wordsFile, 'w').write(outputText)
+        Logger.info(f'[inputselector.py] scritte parole da tenere in un file ordinati per enfasi')
         print(outputText)
 
     def removeExcludedWords(self):
         for excludedWord in self.excludedWords:
             self.wordsOrderByEmphasis.pop(excludedWord, None)
+            Logger.warning(f'[inputselector.py] rimossa: {excludedWord}, parola non valida')
 
     def getWordsFromText(self):
         # Prende le parole dal testo inserito
@@ -103,13 +109,13 @@ class InputType(BoxLayout):
 
     def getWordsFromUrl(self):
         # Controlla se deve essere impostato un proxy
-        self.hp.setProxyIfExist()
-
+        self.hp.setProxyIfExist()   
         # Salva il link 
         link = self.ids.pathWords.text
 
         # Se il link è valido salva le parole della pagina web
         if(validators.url(link)):
+            Logger.info(f'[inputselector.py] url valido: {link}')
             webPage = urlopen(link)
             textFromWebPage = webPage.read()
             self.words = str(self.hp.removeTags(textFromWebPage))
@@ -136,6 +142,7 @@ class InputType(BoxLayout):
                         if (word not in self.wordsOrderByEmphasis):
                             self.wordsOrderByEmphasis[word] = 0
                 self.isWordValid = True
+        Logger.info(f'[inputselector.py] Verificate parole valide')
 
     @staticmethod
     def get_path():

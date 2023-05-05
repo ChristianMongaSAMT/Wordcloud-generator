@@ -1,8 +1,6 @@
 import os
 os.environ['KIVY_HOME'] = "./config/.kivy"
 
-#import logging
-#import logmanager
 
 from input.text.inputselector import InputType
 from input.text.importantwords import ImportantWords
@@ -22,18 +20,21 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 
 
-#Logger.setLevel(LOG_LEVELS["debug"])
 
-#logmanager.get_configured_logger()
-
-
-
+import logging
 from kivy.config import Config
-from kivy.logger import Logger, LOG_LEVELS
+from kivy.logger import Logger, ColoredFormatter
+# Add timestamp to log file
+Logger.handlers[1].setFormatter(
+    logging.Formatter('%(asctime)s %(message)s'))
+# Add timestampt to console output
+Logger.handlers[2].setFormatter(
+    ColoredFormatter('[%(levelname)-18s] %(asctime)s %(message)s'))
+
 config_path = os.path.join( os.environ.get('KIVY_HOME'), "config.ini")
-Logger.info(f'config path {config_path}')
+
+Logger.info(f'config path: {config_path}')
 Config.read("config.ini")
-Logger.info(f'resizable: {Config.getint("graphics", "resizable")}')
 
 TEXT_OPTIONS = ["Input Type", "Important Words", "Excluded Words", "Font Family"]
 IMAGE_OPTIONS = ["Image Path", "Border"]
@@ -193,10 +194,15 @@ class TextOptions(BoxLayout):
         fontFamily = FontFamily(TEXT_OPTIONS[3])
         download = Download()
         self.add_widget(InputType(importantWords, excludedWords, fontFamily, TEXT_OPTIONS[0]))
+        Logger.info(f'[guigenerator.py] Aggiunta sezione text InputType')
         self.add_widget(excludedWords)
+        Logger.info(f'[guigenerator.py] Aggiunti elementi excludedWords con successo')
         self.add_widget(importantWords)
+        Logger.info(f'[guigenerator.py] Aggiunti elementi importantWords con successo')
         self.add_widget(fontFamily)
+        Logger.info(f'[guigenerator.py] Aggiunti elementi fontFamily con successo')
         self.add_widget(download)
+        Logger.info(f'[guigenerator.py] Aggiunti elementi download con successo')
 
 imageSelector = ImageSelector(IMAGE_OPTIONS[0])
 border = Border(IMAGE_OPTIONS[1])
@@ -206,22 +212,24 @@ class ImageOptions(BoxLayout):
     def __init__(self, **kwargs):
         super(ImageOptions, self).__init__(**kwargs)
         self.add_widget(imageSelector)
-        #self.add_widget(ImageSelector(IMAGE_OPTIONS[0]).setQueue(q))
+        Logger.info(f'[guigenerator.py] Aggiunta sezione image options con successo')
         self.add_widget(border)
+        Logger.info(f'[guigenerator.py] Aggiunti elementi border con successo')
         colorPicker = ColorPicker()
         colorPicker.bind(color=border.on_color)
         self.add_widget(colorPicker)
+        Logger.info(f'[guigenerator.py] Aggiunto elemento color picker con successo')
     
 class ImageSelected(BoxLayout):
     def __init__(self, **kwargs):
         super(ImageSelected, self).__init__(**kwargs)
         self.add_widget(imageSelection)
+        Logger.info(f'[guigenerator.py] Aggiunta sezione image con successo')
 
 class WordCloudGUI(BoxLayout):
     def reloadImage(self, deltatime):
         border.updateImage()
         imageSelection.ids.image.reload()
-
     
     
 
@@ -232,7 +240,5 @@ class WordCloudApp(App):
         return wcg
     
 if __name__ == '__main__':
-    Window.maximize()
     open('./text/.userwords.txt', 'w').write("")
-    Logger.debug(f'Window Maximize')
     WordCloudApp().run()

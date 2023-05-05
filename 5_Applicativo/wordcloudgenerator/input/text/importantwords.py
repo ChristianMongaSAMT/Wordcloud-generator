@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from kivy.properties import StringProperty
 from kivy.uix.boxlayout import BoxLayout
-
+from kivy.logger import Logger
 
 class ImportantWords(BoxLayout):
     txt = StringProperty()
@@ -18,6 +18,7 @@ class ImportantWords(BoxLayout):
         for word in self.words:
             if(word != '' and word in self.wordsOrderByEmphasis):
                 self.wordsOrderByEmphasis[word] += 1
+
         self.sortEmphasisWords()
         return self.wordsOrderByEmphasis
     
@@ -34,11 +35,8 @@ class ImportantWords(BoxLayout):
 
                 # Ordina l'array
                 self.sortEmphasisWords()
-        '''print("---")
-        for index in self.wordsOrderByEmphasis:
-            print(f"{index}: {self.wordsOrderByEmphasis[index]}")
-        print("---")'''
         return self.wordsOrderByEmphasis
 
     def sortEmphasisWords(self):
         self.wordsOrderByEmphasis = OrderedDict(sorted(self.wordsOrderByEmphasis.items(), key=lambda x: x[1], reverse=False))#TRUE DAL PIÙ GRANDE AL PIÙ PICCOLO
+        Logger.info(f'[importantwords.py] ordinata variabile per enfasi contenente le parole')

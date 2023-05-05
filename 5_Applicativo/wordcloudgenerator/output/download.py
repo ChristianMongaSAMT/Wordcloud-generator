@@ -4,15 +4,14 @@ from tkinter import filedialog
 from kivy.uix.boxlayout import BoxLayout
 from generatecloud import getWC
 import matplotlib.pyplot as plt
+
+from kivy.logger import Logger
 class Download(BoxLayout):
     
     def __init__(self, **kwargs):
         super(Download, self).__init__(**kwargs)
-    def downloadFile(self):
-        print("ECCO")
     @staticmethod
     def downloadFormat():
-        print("DIO NON VA")
         root = tk.Tk()
         root.withdraw()
         file = filedialog.asksaveasfile(
@@ -27,4 +26,8 @@ class Download(BoxLayout):
                 )
             )
         img = cv2.imread("./pictures/imageMod.png")
-        return cv2.imwrite(file.name, img)
+        if (file is None):
+            Logger.info(f'[download.py] annullato scaricamento')
+        else:
+            Logger.info(f'[download.py] Immagine scaricata in: {file.name}')
+            return cv2.imwrite(file.name, img)

@@ -24,4 +24,4 @@
 [INFO   ] Window: auto add sdl2 input provider
 [INFO   ] Window: virtual keyboard not allowed, single mode, not docked
 [INFO   ] Text: Provider: sdl2
-[INFO   ] config path ./config/.kivy\config.ini
+[INFO   ] 2023-05-05 10:54:19,251 config path: ./config/.kivy\config.ini

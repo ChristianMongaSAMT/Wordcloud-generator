@@ -4,7 +4,7 @@ from input.image.imageselector import getPath
 from input.image.imageselector import getIsResult
 from kivy.properties import StringProperty
 
-
+from kivy.logger import Logger
 
 BORDER_COLOR = [0,0,0]
 FLOAD_COLOR = (0,0,0)
@@ -54,8 +54,6 @@ class Border(BoxLayout):
             self.ids.tolerance_label.text = tolValue
 
     def createBorderImage(self):
-        #Logger.info(f'createBorderImage with: {tolerance} on image {self.imagepath}')
-
         # Legge l'immagine corrispondente alla path
         #print(f'pathDaModificare: {getPath()}')
         img = cv2.imread(getPath())
@@ -85,12 +83,4 @@ class Border(BoxLayout):
         # Crea una nuova immagine che conterrà i bordi
         pathTempImage = './pictures/imageMod.png'
         cv2.imwrite(pathTempImage, img)
-
-        #self.printAllWords(img, font, pathTempImage, wordsOrderByEmphasis)
-
-        # Imposta la path nell'Image
-        #self.ids.imageMod.source = pathTempImage
-        #Logger.info(f'imageMod: {self.ids.imageMod.source}')
-
-        # Ricarice l'immagine
-        #self.ids.imageMod.reload()
+        

@@ -1,8 +1,7 @@
-from argparse import FileType
+from kivy.logger import Logger
+
 import filetype
 import os
-import queue
-
 
 from kivy.uix.widget import Widget
 
@@ -47,17 +46,11 @@ class ImageSelector(BoxLayout, Widget):
         self.getPathFromTextInput()
         setIsResult(False)
         if((os.path.exists(getPath()) and os.path.isfile(getPath()) and filetype.is_image(getPath()))):
-            # Se la path esiste la usa per l'immagine
-            #imageSource = self.path
-            print('valid path')
-
+            Logger.info(f'[imageselector.py] presa nuova path valida per immagine da elaborare: {path}')
         else:
             # Se la path non esiste carica l'immagine di default
             path = './pictures/default.png'
-        
-        
-
-        #print(q.get())
+            Logger.warning(f'[imageselector.py] nessuana path valida, usata quella di default: {path}')
         
     def getPathFromTextInput(self):
         # Prende la path per l'immagine dal text input

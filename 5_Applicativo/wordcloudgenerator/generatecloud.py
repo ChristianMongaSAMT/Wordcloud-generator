@@ -6,29 +6,26 @@ from input.image.borderproperties import getBorderColor
 from input.image.borderproperties import getBorderSize
 from input.text.fontselector import getFont
 
-#text = open('file.txt', 'r').read()
+from kivy.logger import Logger
+
 wc = ""
 def getWC():
     return wc
 def generateCloud(size):
-    #text = ["ciao", "come", "va"]
     text = open('./text/.userwords.txt', 'r').read()
     if(not text.strip()):
         text = open('./text/.example.txt', 'r').read()
     open('./text/.userwords.txt', 'w').write("")
-    excludedWords = "ciao"
 
-    #print(STOPWORDS)
 
     python_mask = np.array(PIL.Image.open("./pictures/.delta.png"))
 
     colormap = ImageColorGenerator(python_mask)
 
     borderColor = (getBorderColor()[2], getBorderColor()[1], getBorderColor()[0])
-    print(f'width: {size[0]}')
-    print(f'height: {size[1]}')
     global wc 
-    wc = WordCloud(
+    try:
+        wc = WordCloud(
                     width=size[1],
                     height=size[0],
                     font_path=getFont(),  
@@ -38,8 +35,12 @@ def generateCloud(size):
                     contour_color=borderColor,      # Colore del contorno
                     contour_width=getBorderSize()           # Size del contorno
                 ).generate(text)    
-    wc.recolor(color_func=colormap)
-    plt.imshow(wc)
-    plt.axis("off")
-    plt.savefig("./pictures/imageMod.png", format="png", metadata=None,
+        wc.recolor(color_func=colormap)
+        plt.imshow(wc)
+        plt.axis("off")
+        plt.savefig("./pictures/imageMod.png", format="png", metadata=None,
             transparent=True, pil_kwargs=None)
+        Logger.info(f'[generateclud.py] sovrascritta immagine visualizzata')
+    except Exception as exc:
+        Logger.error(f'{exc}')
+    

@@ -2,6 +2,9 @@
 import os
 
 from bs4 import BeautifulSoup
+
+from kivy.logger import Logger
+
 class helperTextInput():
     # Lista
     proxySetup = []
@@ -15,7 +18,7 @@ class helperTextInput():
                 if(name.upper() == 'HTTP_PROXY' or name.upper() == 'HTTPS_PROXY'):
                     self.proxySetup.append(f"{name}: {value}")
             self.isProxySetup = True
-            print(self.proxySetup)
+            Logger.info(f'[helpertextinput.py] settato proxy')
 
 
 
@@ -24,6 +27,7 @@ class helperTextInput():
         pageParsed = BeautifulSoup(html, 'html.parser')
         for data in pageParsed(['style', 'script']):
             data.decompose()
+        Logger.info(f'[helpertextinput.py] sanificato text page')
         return ' '.join(pageParsed.stripped_strings)
 
 
