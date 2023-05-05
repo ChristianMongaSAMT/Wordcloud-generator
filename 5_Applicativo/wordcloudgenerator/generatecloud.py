@@ -16,7 +16,6 @@ def generateCloud(size):
     if(not text.strip()):
         text = open('./text/.example.txt', 'r').read()
     open('./text/.userwords.txt', 'w').write("")
-    text = "This is a sample text with some numbers: 1, 2, 3, 1, 14, 15, 14"
 
     python_mask = np.array(PIL.Image.open("./pictures/.delta.png"))
 
