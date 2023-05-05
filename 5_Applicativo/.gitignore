@@ -39,7 +39,7 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-
+./config/.kivy/logs/*
 # Unit test / coverage reports
 htmlcov/
 .tox/
