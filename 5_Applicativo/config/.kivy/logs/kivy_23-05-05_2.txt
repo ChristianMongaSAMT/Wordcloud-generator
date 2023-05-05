@@ -1,0 +1,32 @@
+[INFO   ] 2023-05-05 14:15:40,774 Logger: Record log in ./config/.kivy\logs\kivy_23-05-05_2.txt
+[INFO   ] 2023-05-05 14:15:40,805 GL: NPOT texture support is available
+[INFO   ] 2023-05-05 14:15:40,821 GL: Unpack subimage support is available
+[INFO   ] 2023-05-05 14:15:40,842 [guigenerator.py] Aggiunta sezione text InputType
+[INFO   ] 2023-05-05 14:15:40,842 [guigenerator.py] Aggiunti elementi excludedWords con successo
+[INFO   ] 2023-05-05 14:15:40,843 [guigenerator.py] Aggiunti elementi importantWords con successo
+[INFO   ] 2023-05-05 14:15:40,843 [guigenerator.py] Aggiunti elementi fontFamily con successo
+[INFO   ] 2023-05-05 14:15:40,843 [guigenerator.py] Aggiunti elementi download con successo
+[INFO   ] 2023-05-05 14:15:40,844 [guigenerator.py] Aggiunta sezione image con successo
+[INFO   ] 2023-05-05 14:15:40,845 [guigenerator.py] Aggiunta sezione image options con successo
+[INFO   ] 2023-05-05 14:15:40,846 [guigenerator.py] Aggiunti elementi border con successo
+[INFO   ] 2023-05-05 14:15:40,873 [guigenerator.py] Aggiunto elemento color picker con successo
+[INFO   ] 2023-05-05 14:15:40,874 Base: Start application main loop
+[INFO   ] 2023-05-05 14:15:41,843 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 14:15:41,848 [imagepartselector.py] posizione non valida:(-173, 249)
+[INFO   ] 2023-05-05 14:15:43,259 [fontselector.py] selezionato font: ./fonts/love-sunday/Love Sunday.ttf
+[INFO   ] 2023-05-05 14:15:44,714 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 14:15:52,121 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 14:15:52,121 [imagepartselector.py] posizione valida :(218, 222)
+[INFO   ] 2023-05-05 14:15:56,935 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 14:15:56,947 [imagepartselector.py] posizione non valida:(-277, 196)
+[INFO   ] 2023-05-05 14:15:58,773 [fontselector.py] selezionato font: ./fonts/christmas-sundaylab/Christmas Sundaylab.otf
+[WARNING] 2023-05-05 14:16:00,346 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 14:16:00,717 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 14:16:01,761 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[INFO   ] 2023-05-05 14:16:08,776 [generateclud.py] sovrascritta immagine visualizzata
+[INFO   ] 2023-05-05 14:16:08,777 [imagepartselector.py] posizione valida :(580, 100)
+[WARNING] 2023-05-05 14:16:41,065 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[WARNING] 2023-05-05 14:16:41,259 [imageselector.py] nessuana path valida, usata quella di default: ./pictures/default.png
+[INFO   ] 2023-05-05 14:16:43,671 [imagepartselector.py] letta immagine da elaborare: ./pictures/imageMod.png
+[WARNING] 2023-05-05 14:16:43,676 [imagepartselector.py] posizione non valida:(819, -119)
+[INFO   ] 2023-05-05 14:16:54,888 Base: Leaving application in progress...
